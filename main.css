@@ -1,0 +1,25 @@
+body {
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    border: 10px;
+    background-color: darkseagreen;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h1 {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-color: black;
+    border-radius: 10px;
+    border-style:dashed;
+}
+
+#template{
+    display:flex;
+    border-color: black;
+    border-radius: 10px;
+    width:90%;
+}
