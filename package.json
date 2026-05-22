@@ -1,0 +1,24 @@
+{
+  "name": "2026.1-t03-brooks",
+  "version": "1.0.0",
+  "description": "Objetivos",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FGA0138-MDS-Ajax/2026.1-T03-Brooks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FGA0138-MDS-Ajax/2026.1-T03-Brooks/issues"
+  },
+  "homepage": "https://github.com/FGA0138-MDS-Ajax/2026.1-T03-Brooks#readme"
+}
