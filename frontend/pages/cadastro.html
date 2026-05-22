@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Piggyme Login</title>
+  <title>Piggyme Cadastro</title>
 
   <link rel="stylesheet" href="../css/login_cadastro.css">
 
@@ -13,7 +13,6 @@
 <body>
 
   <nav>
-
     <div class="logo-area">
       <img src="../images/piggyme_logo2.png" alt="Piggyme">
     </div>
@@ -21,10 +20,10 @@
     <div class="nav-right">
 
       <div class="create-account">
-        <span>Não tem uma conta?</span>
+        <span>Já possui uma conta?</span>
 
-        <button onclick="window.location.href='cadastro.html'">
-          Criar conta
+        <button onclick="window.location.href='login.html'">
+          Fazer login
         </button>
       </div>
 
@@ -54,7 +53,6 @@
     <div class="auth-container">
 
       <div class="auth-box">
-
         <div class="avatar-circle">
 
           <svg viewBox="0 0 24 24">
@@ -62,6 +60,18 @@
           </svg>
 
         </div>
+
+        <input
+          type="text"
+          class="input-field"
+          placeholder="Nome completo"
+        >
+
+        <input
+          type="email"
+          class="input-field"
+          placeholder="E-mail"
+        >
 
         <input
           type="text"
@@ -74,13 +84,14 @@
           class="input-field"
           placeholder="Senha"
         >
-
-        <a href="#" class="forgot">
-          Esqueceu sua senha?
-        </a>
+        <input
+          type="password"
+          class="input-field"
+          placeholder="Confirmar senha"
+        >
 
         <button class="btn-main">
-          Login
+          Criar conta
         </button>
 
       </div>
