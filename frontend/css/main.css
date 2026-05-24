@@ -1,0 +1,93 @@
+body {
+    background-color: #dcf0d0;
+    overflow-x: hidden;
+}
+
+h1 {
+    margin-top: 0px;
+    padding: 30px;
+    text-align: center;
+    border-radius: 15px;
+    position: absolute;
+    right: 330px;
+    z-index: 3;
+    color: #670627;
+}
+
+h2 {
+    font-weight: 100;
+    font-size: 90px;
+    margin-top: 180px;
+    left: 220px;
+    position: absolute;
+    z-index: 7;
+    color: #670627;
+}
+
+.botao-login{
+    background-color: #dcf0d0;
+    top: 40px;
+    right: 150px;
+    width: 160px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 15px;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: #670627;
+    color: #670627;
+    position: absolute;
+    z-index: 8;
+}
+
+.botao-login:hover{
+    background-color: #670627;
+}
+
+.botao-cadastro{
+    background-color: #670627;
+    top: 750px;
+    left: 250px;
+    width: 400px;
+    height: 60px;
+    font-weight: 500;
+    font-size: 25px;
+    border-color: #670627;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 30px;
+    color: #ffffff;
+    position: absolute;
+    z-index: 6;
+}
+
+.botao-cadastro:hover{
+    background-color: #dcf0d0;
+}
+
+.porco-fundo{
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.porco-logo{
+    top: -10px;
+    left: 60px;
+    width: 315px;
+    height: 180px;
+    position: absolute;
+    z-index: 2;
+}
+
+.porco-pc{
+    top: 30px;
+    left: 600px;
+    width: 1660px;
+    height: 950px;
+    position: absolute;
+    z-index: 5;
+}
