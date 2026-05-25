@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/FGA0138-MDS-Ajax/2026.1-T03-Brooks/issues"
   },
-  "homepage": "https://github.com/FGA0138-MDS-Ajax/2026.1-T03-Brooks#readme"
+  "homepage": "https://github.com/FGA0138-MDS-Ajax/2026.1-T03-Brooks#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }

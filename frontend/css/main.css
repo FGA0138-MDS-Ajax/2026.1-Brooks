@@ -37,7 +37,7 @@ h2 {
     border-radius: 20px;
     border-color: #670627;
     color: #670627;
-    position: absolute;
+    position:absolute;
     z-index: 8;
 }
 
@@ -75,6 +75,7 @@ h2 {
 }
 
 .porco-logo{
+    align-items: center;
     top: -10px;
     left: 60px;
     width: 315px;
@@ -84,6 +85,8 @@ h2 {
 }
 
 .porco-pc{
+    align-items: center;
+
     top: 30px;
     left: 600px;
     width: 1660px;
