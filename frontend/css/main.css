@@ -1,9 +1,12 @@
-body {
+
+body{
     background-color: #dcf0d0;
     overflow-x: hidden;
 }
 
-h1 {
+
+
+h1{
     margin-top: 0px;
     padding: 30px;
     text-align: center;
@@ -23,6 +26,7 @@ h2 {
     z-index: 7;
     color: #670627;
 }
+
 
 .botao-login{
     background-color: #dcf0d0;
@@ -64,15 +68,17 @@ h2 {
 
 .botao-cadastro:hover{
     background-color: #dcf0d0;
+    
 }
-
-.porco-fundo{
-    top: 0px;
-    right: 0px;
-    width: 100%;
-    position: absolute;
-    z-index: 1;
+.botao-inicio{
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 100px;
+    height: 60px;
+   
 }
+    
 
 .porco-logo{
     align-items: center;
