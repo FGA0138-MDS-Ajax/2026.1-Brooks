@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PiggyMe - Add Receita</title>
+
+    <link rel="stylesheet"
+          href="../css/menu.css">
+
+    <style>
+        .form-receita {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            height: 100%;
+            padding: 60px 0;
+        }
+
+        .form-receita h2 {
+            font-size: 38px;
+            color: #73002f;
+        }
+
+        .campos {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .campo-grupo {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .campo-grupo label {
+            font-size: 24px;
+            font-weight: bold;
+            color: #73002f;
+        }
+
+        .campo-grupo input {
+            height: 70px;
+            border-radius: 40px;
+            border: 4px solid #333;
+            background-color: white;
+            font-size: 24px;
+            padding: 0 28px;
+            color: #333;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: 0.2s;
+        }
+
+        .campo-grupo input:focus {
+            border-color: #73002f;
+            background-color: #f9fdf6;
+        }
+
+        .campo-grupo input::placeholder {
+            color: #bbb;
+        }
+
+        .botoes-form {
+            display: flex;
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .btn-cancelar {
+            width: 200px;
+            height: 70px;
+            border-radius: 40px;
+            border: 4px solid #333;
+            background-color: white;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-cancelar:hover {
+            transform: scale(1.03);
+            background-color: #f0f0f0;
+        }
+
+        .btn-salvar {
+            width: 200px;
+            height: 70px;
+            border-radius: 40px;
+            border: 4px solid #73002f;
+            background-color: #73002f;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-salvar:hover {
+            transform: scale(1.03);
+            background-color: #5c0f27;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <img src="../images/piggyme_logo2.png"
+             class="porco-logo"
+             alt="Logo PiggyMe">
+
+        <div class="menu-direita">
+
+            <div class="botao-inicio">
+
+                <button onclick="window.location.href='menu.html'">
+                    <strong>Início</strong>
+                </button>
+
+            </div>
+
+            <div class="icone_conta">
+
+                <img src="../images/icone_conta.png"
+                     alt="Ícone da conta">
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <main class="dashboard">
+
+        <aside class="botoes-resto">
+
+            <button>Categoria</button>
+
+            <button>Categoria</button>
+
+            <button>Categoria</button>
+
+            <button>Categoria</button>
+
+            <button onclick="window.location.href='add_gastos.html'">Informar gasto -</button>
+
+            <button onclick="window.location.href='add_receita.html'">Adicionar entrada +</button>
+
+        </aside>
+
+        <section class="conteudo">
+
+            <div class="card">
+
+                <div class="form-receita">
+
+                    <h2>Adicionar Entrada</h2>
+
+                    <div class="campos">
+
+                        <div class="campo-grupo">
+                            <label for="descricao">Descrição</label>
+                            <input type="text"
+                                   id="descricao"
+                                   placeholder="Ex: Salário, Freelance…"
+                                   maxlength="100">
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="valor">Valor (R$)</label>
+                            <input type="number"
+                                   id="valor"
+                                   placeholder="0,00"
+                                   min="0"
+                                   step="0.01">
+                        </div>
+
+                    </div>
+
+                    <div class="botoes-form">
+
+                        <a class="btn-cancelar"
+                           href="menu.html">Cancelar</a>
+
+                        <button class="btn-salvar"
+                                onclick="salvar()">Salvar</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+
+        function salvar() {
+            const desc  = document.getElementById('descricao').value.trim();
+            const valor = parseFloat(document.getElementById('valor').value);
+            if (!desc)           { alert('Informe uma descrição.'); return; }
+            if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
+
+            alert('Entrada adicionada!\n\n' + desc + ' — R$ ' + valor.toFixed(2).replace('.', ','));
+
+            window.location.href = 'menu.html'; 
+        }
+
+    </script>
+
+</body>
+
+</html>
