@@ -17,4 +17,16 @@ app.get('/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/cadastro.html'));
 });
 
+app.get('/menu', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/menu.html'));
+});
+
+app.get('/add_gastos', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/add_gastos.html'));
+});
+
+app.get('/add_receita', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/add_receita.html'));
+});
+
 module.exports = app;

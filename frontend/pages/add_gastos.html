@@ -150,7 +150,7 @@
 
             <div class="botao-inicio">
 
-                <button onclick="window.location.href='menu.html'">
+                <button onclick="window.location.href='menu'">
                     <strong>Início</strong>
                 </button>
 
@@ -173,9 +173,9 @@
 
             <button>Categoria</button>
 
-            <button onclick="window.location.href='add_gastos.html'">Informar gasto -</button>
+            <button onclick="window.location.href='add_gastos'">Informar gasto -</button>
 
-            <button onclick="window.location.href='add_receita.html'">Adicionar entrada +</button>
+            <button onclick="window.location.href='add_receita'">Adicionar entrada +</button>
 
         </aside>
 
@@ -222,7 +222,7 @@
                     <div class="botoes-form">
 
                         <a class="btn-cancelar"
-                           href="menu.html">Cancelar</a>
+                           href="menu">Cancelar</a>
 
                         <button class="btn-salvar"
                                 onclick="salvar()">Salvar</button>
@@ -247,7 +247,7 @@
             if (!categoria)           { alert('Selecione uma categoria.'); return; }
             alert('Gasto registrado!\n\n' + desc + ' (' + categoria + ') — R$ ' + valor.toFixed(2).replace('.', ','));
 
-            window.location.href = 'menu.html';
+            window.location.href = 'menu';
         }
 
     </script>
