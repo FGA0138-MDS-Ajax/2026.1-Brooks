@@ -27,6 +27,7 @@
 
         <div class="menu-direita">
 
+            <h2>Olá,seu zé</h2>
             <div class="botao-inicio">
 
                 <button>
@@ -52,17 +53,13 @@
 
         <aside class="botoes-resto">
 
-            <button>Categoria</button>
+            <button>Dashboard</button>
 
-            <button>Categoria</button>
+            <button onclick="window.location.href='receita'">Receita</button>
 
-            <button>Categoria</button>
+            <button>Metas</button>
 
-            <button>Categoria</button>
-
-            <button onclick="window.location.href='add_gastos'">Informar gasto -</button>
-
-            <button onclick="window.location.href='add_receita'">Adicionar entrada +</button>
+            <button>Relatórios</button>
 
         </aside>
 
@@ -74,16 +71,17 @@
                         <h1>Seu dinheiro sob controle</h1>
 
                         <h2>Sem complicação</h2>
-
+                        <aside class="botoes-header2">
+                            <button  onclick="window.location.href='add_gastos'">Adicionar gasto</button>
+                            <button  onclick="window.location.href='add_receita'">Adicionar Receita</button>
+                        </aside>
+                        
                     </div>
+                    
                 <img class="pig-background" src="../images/pig_background.png">
             </div>
 
             <div class="cards-area">
-
-                
-
-                <div class="coluna-esquerda">
 
                     <div class="card saldo-card">
 
@@ -129,7 +127,7 @@
 
                         <div class="objetivos-topo">
 
-                            <h2>Seus objetivos</h2>
+                            <h2>Seu Progresso financeiro</h2>
 
                             <span>+</span>
 
@@ -137,37 +135,51 @@
 
                         <div class="objetivo">
 
-                            <p>• XXXXXXXXXXXX</p>
+                            <p>casa</p>
 
-                            <span>0 / 1000</span>
+                            <span>70%</span>
 
                         </div>
 
                         <div class="objetivo">
 
-                            <p>• XXXXXXXXXXXX</p>
+                            <p>automovel</p>
 
-                            <span>0 / 1000</span>
+                            <span>20%</span>
 
+                        </div>
+                        <div class="consquistas"> 
+                            <span class="valor-dias">33</span>
+                            <span>Dias em sequencia</span>
                         </div>
 
                     </div>
 
-                </div>
-
-                <div class="coluna-direita">
+               >
 
                     <div class="card resumo-card">
 
-                        <h2>Resumo do seu mês</h2>
+                        <h2>Gastos por categoria</h2>
 
-                        <div class="resumo-box"></div>
+                        <div class="resumo-box">
 
-                        <div class="grafico-pizza"></div>
+                            <div class="grafico-pizza"></div>
+
+                            <div class="legenda">
+                                <div class="item-legenda">
+                                    <span>Alimentação</span>
+                                    <span>R$ 250,00</span>
+                                </div>
+
+                                <div class="item-legenda">
+                                    <span>Transporte</span>
+                                    <span>R$ 84,00</span>
+                                </div>
+                            </div>
 
                     </div>
 
-                </div>
+                
 
             </div>
 
