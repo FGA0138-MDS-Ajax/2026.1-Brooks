@@ -4,7 +4,6 @@ class UserController {
     async cadastrar(req, res) {
         const { nome, email, senha, confirmarSenha } = req.body;
 
-    
         if (!nome || !email || !senha) {
             return res.status(400).json({ erro: 'Por favor, preencha todos os campos' });
         }
@@ -16,13 +15,11 @@ class UserController {
         }
 
         try {
-            
             const emailExiste = await UserModel.emailExiste(email);
             if (emailExiste) {
                 return res.status(409).json({ erro: 'Esse email já possui cadastro' });
             }
 
-            
             const novoUsuario = await UserModel.criar(nome, email, senha);
 
             res.status(201).json({
@@ -33,6 +30,13 @@ class UserController {
             console.error(err);
             res.status(500).json({ erro: 'Erro no servidor' });
         }
+    }
+
+    async perfil(req, res) {
+        return res.status(200).json({
+            mensagem: 'Perfil acessado com sucesso',
+            usuario: req.usuario
+        });
     }
 }
 

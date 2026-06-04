@@ -1,4 +1,4 @@
-const db = require('../config/database');
+const db = require('../database/config');
 const bcrypt = require('bcrypt');
 
 class UserModel {
@@ -21,6 +21,13 @@ class UserModel {
             email
         };
     }
+
+    static async buscarPorEmail(email) {
+    const [rows] = await db.query('SELECT * FROM usuarios WHERE email = ?', [email]);
+    return rows[0] || null;
+}
+
+
 }
 
 module.exports = UserModel;
