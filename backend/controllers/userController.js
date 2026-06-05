@@ -4,6 +4,7 @@ class UserController {
     async cadastrar(req, res) {
         const { nome, email, senha, confirmarSenha } = req.body;
 
+        console.log(req.body);
         if (!nome || !email || !senha) {
             return res.status(400).json({ erro: 'Por favor, preencha todos os campos' });
         }
