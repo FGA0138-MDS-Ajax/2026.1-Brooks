@@ -2,79 +2,46 @@
 <html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PiggyMe</title>
-
-    <link rel="stylesheet"
-          href="../css/menu.css">
-    <link rel="stylesheet"
-          href="../css/add_receita.css">
-
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/add_receita.css">
 </head>
 
 <body>
 
-
-
     <header>
-
-        <img src="../images/piggyme_logo2.png"
-             class="porco-logo"
-             alt="Logo PiggyMe">
-
+        <img src="../images/piggyme_logo2.png" class="porco-logo" alt="Logo PiggyMe">
         <div class="menu-direita">
-
-            <h2>Olá,seu zé</h2>
+            <h2 id="saudacao">Olá!</h2>
             <div class="botao-inicio">
-
-                <button>
+                <button onclick="window.location.href='menu'">
                     <strong>Início</strong>
                 </button>
-
             </div>
-
             <div class="icone_conta">
-
-                <img src="../images/icone_conta.png"
-                     alt="Ícone da conta">
-
+                <img src="../images/icone_conta.png" alt="Ícone da conta">
             </div>
-
         </div>
-
     </header>
-
-
 
     <main class="dashboard">
 
         <aside class="botoes-resto">
-
             <button>Dashboard</button>
-
             <button onclick="window.location.href='receita'">Receita</button>
-
             <button>Metas</button>
-
             <button>Relatórios</button>
-
         </aside>
 
         <section class="conteudo">
-
             <div class="card">
-
                 <div class="form-receita">
 
                     <h2>Adicionar Entrada</h2>
 
                     <div class="campos">
-
                         <div class="campo-grupo">
                             <label for="descricao">Descrição</label>
                             <input type="text"
@@ -91,42 +58,41 @@
                                    min="0"
                                    step="0.01">
                         </div>
-
                     </div>
 
                     <div class="botoes-form">
-
-                        <a class="btn-cancelar"
-                           href="menu">Cancelar</a>
-
-                        <button class="btn-salvar"
-                                onclick="salvar()">Salvar</button>
-
+                        <a class="btn-cancelar" href="menu">Cancelar</a>
+                        <button class="btn-salvar" onclick="salvar()">Salvar</button>
                     </div>
 
                 </div>
-
             </div>
-
         </section>
 
     </main>
 
+    <script src="../js/gamification.js"></script>
     <script>
-
-        function salvar() {
-            const desc  = document.getElementById('descricao').value.trim();
-            const valor = parseFloat(document.getElementById('valor').value);
-            if (!desc)           { alert('Informe uma descrição.'); return; }
-            if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
-
-            alert('Entrada adicionada!\n\n' + desc + ' — R$ ' + valor.toFixed(2).replace('.', ','));
-
-            window.location.href = 'menu'; 
+        // Saudação no header
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+        if (usuario.nome) {
+            document.getElementById('saudacao').textContent = `Olá, ${usuario.nome}!`;
         }
 
+        async function salvar() {
+            const desc  = document.getElementById('descricao').value.trim();
+            const valor = parseFloat(document.getElementById('valor').value);
+
+            if (!desc)                { alert('Informe uma descrição.'); return; }
+            if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
+
+            // Concede +15 XP pela receita
+            await ganharXp('receita', desc);
+
+            alert('Entrada adicionada!\n\n' + desc + ' — R$ ' + valor.toFixed(2).replace('.', ','));
+            window.location.href = 'menu';
+        }
     </script>
 
 </body>
-
 </html>

@@ -237,20 +237,26 @@
 
     </main>
 
-    <script>
-        function salvar() {
-            const desc      = document.getElementById('descricao').value.trim();
-            const valor     = parseFloat(document.getElementById('valor').value);
-            const categoria = document.getElementById('categoria').value;
-            if (!desc)                { alert('Informe uma descrição.'); return; }
-            if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
-            if (!categoria)           { alert('Selecione uma categoria.'); return; }
-            alert('Gasto registrado!\n\n' + desc + ' (' + categoria + ') — R$ ' + valor.toFixed(2).replace('.', ','));
+    <script src="../js/gamification.js"></script>
+<script>
+    async function salvar() {
+        const desc      = document.getElementById('descricao').value.trim();
+        const valor     = parseFloat(document.getElementById('valor').value);
+        const categoria = document.getElementById('categoria').value;
+        if (!desc)                { alert('Informe uma descrição.'); return; }
+        if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
+        if (!categoria)           { alert('Selecione uma categoria.'); return; }
+        
+        await ganharXp('gasto', desc);
 
-            window.location.href = 'menu';
-        }
+        alert('Gasto registrado!\n\n' + desc + ' (' + categoria + ') — R$ ' + valor.toFixed(2).replace('.', ','));
 
-    </script>
+        window.location.href = 'menu';
+    }
+</script>
+
+
+
 
 </body>
 

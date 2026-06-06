@@ -2,184 +2,107 @@
 <html lang="pt-br">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PiggyMe</title>
-
-    <link rel="stylesheet"
-          href="../css/menu.css">
-
+    <link rel="stylesheet" href="../css/menu.css">
 </head>
 
 <body>
 
-
-
     <header>
-
-        <img src="../images/piggyme_logo2.png"
-             class="porco-logo"
-             alt="Logo PiggyMe">
-
+        <img src="../images/piggyme_logo2.png" class="porco-logo" alt="Logo PiggyMe">
         <div class="menu-direita">
-
-            <h2>Olá,seu zé</h2>
+            <h2 id="saudacao">Olá!</h2>
             <div class="botao-inicio">
-
-                <button>
-                    <strong>Início</strong>
-                </button>
-
+                <button><strong>Início</strong></button>
             </div>
-
             <div class="icone_conta">
-
-                <img src="../images/icone_conta.png"
-                     alt="Ícone da conta">
-
+                <img src="../images/icone_conta.png" alt="Ícone da conta">
             </div>
-
         </div>
-
     </header>
-
-
 
     <main class="dashboard">
 
         <aside class="botoes-resto">
-
             <button>Dashboard</button>
-
             <button onclick="window.location.href='receita'">Receita</button>
-
             <button>Metas</button>
-
             <button>Relatórios</button>
-
         </aside>
 
         <section class="conteudo">
 
             <div class="segunda-header">
                 <div>
-
-                        <h1>Seu dinheiro sob controle</h1>
-
-                        <h2>Sem complicação</h2>
-                        <aside class="botoes-header2">
-                            <button  onclick="window.location.href='add_gastos'">Adicionar gasto</button>
-                            <button  onclick="window.location.href='add_receita'">Adicionar Receita</button>
-                        </aside>
-                        
-                    </div>
-                    
+                    <h1>Seu dinheiro sob controle</h1>
+                    <h2>Sem complicação</h2>
+                    <aside class="botoes-header2">
+                        <button onclick="window.location.href='add_gastos'">Adicionar gasto</button>
+                        <button onclick="window.location.href='add_receita'">Adicionar Receita</button>
+                    </aside>
+                </div>
                 <img class="pig-background" src="../images/pig_background.png">
             </div>
 
             <div class="cards-area">
 
-                    <div class="card saldo-card">
-
-                        <div>
-
-                            <h2>Saldo</h2>
-
-                            <h1>R$ 16.100,00</h1>
-
-                        </div>
-
-                        <div class="icone-moeda">
-
-                            $
-
-                        </div>
-
+                <div class="card saldo-card">
+                    <div>
+                        <h2>Saldo</h2>
+                        <h1 id="saldo-valor">R$ 0,00</h1>
                     </div>
+                    <div class="icone-moeda">$</div>
+                </div>
 
-                    <div class="card xp-card">
+                <div class="card xp-card">
+                    <div class="xp-info">
+                        <!-- gamification.js atualiza estes elementos automaticamente -->
+                        <h2>Nível 1</h2>
+                        <h1>XP</h1>
+                        <div class="barra-xp">
+                            <div class="xp-preenchido" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <img src="../images/porco_feliz.png" class="porquinho" alt="Porquinho">
+                </div>
 
-                        <div class="xp-info">
+                <div class="card objetivos-card">
+                    <div class="objetivos-topo">
+                        <h2>Seu Progresso financeiro</h2>
+                        <span>+</span>
+                    </div>
+                    <div class="objetivo">
+                        <p>casa</p>
+                        <span>70%</span>
+                    </div>
+                    <div class="objetivo">
+                        <p>automovel</p>
+                        <span>20%</span>
+                    </div>
+                    <div class="consquistas">
+                        <span class="valor-dias">33</span>
+                        <span>Dias em sequencia</span>
+                    </div>
+                </div>
 
-                            <h2>Nível 2</h2>
-
-                            <h1>XP</h1>
-
-                            <div class="barra-xp">
-
-                                <div class="xp-preenchido"></div>
-
+                <div class="card resumo-card">
+                    <h2>Gastos por categoria</h2>
+                    <div class="resumo-box">
+                        <div class="grafico-pizza"></div>
+                        <div class="legenda">
+                            <div class="item-legenda">
+                                <span>Alimentação</span>
+                                <span>R$ 250,00</span>
                             </div>
-
-                        </div>
-
-                        <img src="../images/porco_feliz.png"
-                             class="porquinho"
-                             alt="Porquinho">
-
-                    </div>
-
-                    <div class="card objetivos-card">
-
-                        <div class="objetivos-topo">
-
-                            <h2>Seu Progresso financeiro</h2>
-
-                            <span>+</span>
-
-                        </div>
-
-                        <div class="objetivo">
-
-                            <p>casa</p>
-
-                            <span>70%</span>
-
-                        </div>
-
-                        <div class="objetivo">
-
-                            <p>automovel</p>
-
-                            <span>20%</span>
-
-                        </div>
-                        <div class="consquistas"> 
-                            <span class="valor-dias">33</span>
-                            <span>Dias em sequencia</span>
-                        </div>
-
-                    </div>
-
-               >
-
-                    <div class="card resumo-card">
-
-                        <h2>Gastos por categoria</h2>
-
-                        <div class="resumo-box">
-
-                            <div class="grafico-pizza"></div>
-
-                            <div class="legenda">
-                                <div class="item-legenda">
-                                    <span>Alimentação</span>
-                                    <span>R$ 250,00</span>
-                                </div>
-
-                                <div class="item-legenda">
-                                    <span>Transporte</span>
-                                    <span>R$ 84,00</span>
-                                </div>
+                            <div class="item-legenda">
+                                <span>Transporte</span>
+                                <span>R$ 84,00</span>
                             </div>
-
+                        </div>
                     </div>
-
-                
+                </div>
 
             </div>
 
@@ -187,6 +110,15 @@
 
     </main>
 
-</body>
+    <script src="../js/gamification.js"></script>
 
+    <script>
+
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+        if (usuario.nome) {
+            document.getElementById('saudacao').textContent = `Olá, ${usuario.nome}!`;
+        }
+    </script>
+
+</body>
 </html>
