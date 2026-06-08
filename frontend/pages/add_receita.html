@@ -86,11 +86,40 @@
             if (!desc)                { alert('Informe uma descrição.'); return; }
             if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
 
-            // Concede +15 XP pela receita
-            await ganharXp('receita', desc);
+            const btn = document.querySelector('.btn-salvar');
+            btn.disabled = true;
+            btn.textContent = 'Salvando…';
 
-            alert('Entrada adicionada!\n\n' + desc + ' — R$ ' + valor.toFixed(2).replace('.', ','));
-            window.location.href = 'menu';
+            try {
+                const token = localStorage.getItem('token');
+                const resp = await fetch('/api/transacoes/receita', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ descricao: desc, valor })
+                });
+
+                const dados = await resp.json();
+
+                if (!resp.ok) {
+                    alert(dados.erro || 'Erro ao salvar receita.');
+                    btn.disabled = false;
+                    btn.textContent = 'Salvar';
+                    return;
+                }
+
+                await ganharXp('receita', desc);
+                alert('Entrada adicionada!\n\n' + desc + ' — R$ ' + valor.toFixed(2).replace('.', ','));
+                window.location.href = 'menu';
+
+            } catch (err) {
+                console.error(err);
+                alert('Não foi possível conectar ao servidor.');
+                btn.disabled = false;
+                btn.textContent = 'Salvar';
+            }
         }
     </script>
 

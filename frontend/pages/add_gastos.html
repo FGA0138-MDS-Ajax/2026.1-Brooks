@@ -238,22 +238,52 @@
     </main>
 
     <script src="../js/gamification.js"></script>
-<script>
-    async function salvar() {
-        const desc      = document.getElementById('descricao').value.trim();
-        const valor     = parseFloat(document.getElementById('valor').value);
-        const categoria = document.getElementById('categoria').value;
-        if (!desc)                { alert('Informe uma descrição.'); return; }
-        if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
-        if (!categoria)           { alert('Selecione uma categoria.'); return; }
-        
-        await ganharXp('gasto', desc);
+    <script>
+        async function salvar() {
+            const desc      = document.getElementById('descricao').value.trim();
+            const valor     = parseFloat(document.getElementById('valor').value);
+            const categoria = document.getElementById('categoria').value;
 
-        alert('Gasto registrado!\n\n' + desc + ' (' + categoria + ') — R$ ' + valor.toFixed(2).replace('.', ','));
+            if (!desc)                { alert('Informe uma descrição.'); return; }
+            if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
+            if (!categoria)           { alert('Selecione uma categoria.'); return; }
 
-        window.location.href = 'menu';
-    }
-</script>
+            const btn = document.querySelector('.btn-salvar');
+            btn.disabled = true;
+            btn.textContent = 'Salvando…';
+
+            try {
+                const token = localStorage.getItem('token');
+                const resp = await fetch('/api/transacoes/gasto', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ descricao: desc, valor, categoria })
+                });
+
+                const dados = await resp.json();
+
+                if (!resp.ok) {
+                    alert(dados.erro || 'Erro ao salvar gasto.');
+                    btn.disabled = false;
+                    btn.textContent = 'Salvar';
+                    return;
+                }
+
+                await ganharXp('gasto', desc);
+                alert('Gasto registrado!\n\n' + desc + ' (' + categoria + ') — R$ ' + valor.toFixed(2).replace('.', ','));
+                window.location.href = 'menu';
+
+            } catch (err) {
+                console.error(err);
+                alert('Não foi possível conectar ao servidor.');
+                btn.disabled = false;
+                btn.textContent = 'Salvar';
+            }
+        }
+    </script>
 
 
 
