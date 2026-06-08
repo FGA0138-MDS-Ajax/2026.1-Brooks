@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
   email         VARCHAR(150)  NOT NULL UNIQUE,
   senha         VARCHAR(255)  NOT NULL,
   criado_em     TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
   PRIMARY KEY (id)
 );
 
@@ -20,9 +19,9 @@ CREATE TABLE IF NOT EXISTS transacoes (
   valor         DECIMAL(10, 2)  NOT NULL,
   tipo          ENUM('receita', 'despesa') NOT NULL,
   descricao     VARCHAR(255),
+  categoria     VARCHAR(50),
   data          DATE            NOT NULL,
   criado_em     TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
   PRIMARY KEY (id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
@@ -34,7 +33,6 @@ CREATE TABLE IF NOT EXISTS metas_financeiras (
   valor_atual   DECIMAL(10, 2)  NOT NULL DEFAULT 0.00,
   prazo         DATE            NOT NULL,
   criado_em     TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
   PRIMARY KEY (id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
@@ -46,7 +44,6 @@ CREATE TABLE IF NOT EXISTS xp_usuario (
   nivel         INT       NOT NULL DEFAULT 1,
   criado_em     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-
   PRIMARY KEY (id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
@@ -54,11 +51,10 @@ CREATE TABLE IF NOT EXISTS xp_usuario (
 CREATE TABLE IF NOT EXISTS xp_historico (
   id            INT          NOT NULL AUTO_INCREMENT,
   usuario_id    INT          NOT NULL,
-  acao          VARCHAR(50)  NOT NULL,   -- 'gasto', 'receita', 'meta_criada', etc.
+  acao          VARCHAR(50)  NOT NULL,
   xp_ganho      INT          NOT NULL,
   descricao     VARCHAR(100),
   criado_em     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
   PRIMARY KEY (id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
