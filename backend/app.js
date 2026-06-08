@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 
@@ -30,6 +31,10 @@ app.get('/add_gastos', (req, res) => {
 
 app.get('/add_receita', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/add_receita.html'));
+});
+
+app.get('/forgot_password', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/forgot_password.html'));
 });
 
 module.exports = app;

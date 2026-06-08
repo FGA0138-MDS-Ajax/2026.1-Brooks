@@ -4,5 +4,5 @@ const AuthController = require('../controllers/authController.js');
 const router = express.Router();
 
 router.post('/login', AuthController.login); //rota pubicla nao precisa de token
- 
+router.post('/forgot_password', AuthController.forgotPassword);
 module.exports = router;
