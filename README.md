@@ -7,6 +7,7 @@ npm install mysql2
 npm install bcrypt
 npm install jsonwebtoken
 npm install dotenv
+npm install nodemailer
 
 
 A gente abre pelo localhost:3000/
