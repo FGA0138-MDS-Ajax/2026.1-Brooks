@@ -25,7 +25,15 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
 <h2 align="center">👥 Equipe Brooks</h2>
 
 <table align="center">
+  <!-- Primeira linha -->
   <tr>
+    <td align="center">
+      <a href="https://github.com/Calyene">
+        <img src="https://github.com/Calyene.png" width="100px;" alt="Calyene"/><br />
+        <sub><b>Calyene</b></sub><br />
+        <sub>Product Owner</sub>
+      </a>
+    </td>
     <td align="center">
       <a href="https://github.com/cauamc2006-sketch">
         <img src="https://github.com/cauamc2006-sketch.png" width="100px;" alt="Cauã Mendes"/><br />
@@ -40,6 +48,10 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
         <sub>Product Owner</sub>
       </a>
     </td>
+  </tr>
+
+  <!-- Segunda linha -->
+  <tr>
     <td align="center">
       <a href="https://github.com/isaiasmoraes694">
         <img src="https://github.com/isaiasmoraes694.png" width="100px;" alt="Isaias Moraes"/><br />
@@ -48,30 +60,32 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
       </a>
     </td>
     <td align="center">
+      <a href="https://github.com/luis-o-jogador">
+        <img src="https://github.com/luis-o-jogador.png" width="100px;" alt="Luis Gabriel"/><br />
+        <sub><b>Luis Gabriel</b></sub><br />
+        <sub>Desenvolvedor</sub>
+      </a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/identicons/rafael-araujo.png" width="100px;" alt="Rafael Araújo"/><br />
+      <sub><b>Rafael Araújo</b></sub><br />
+      <sub>Desenvolvedor</sub>
+    </td>
+  </tr>
+
+  <!-- Terceira linha -->
+  <tr>
+    <td align="center">
       <a href="https://github.com/Leafare">
         <img src="https://github.com/Leafare.png" width="100px;" alt="Rafael Magalhães"/><br />
         <sub><b>Rafael Magalhães</b></sub><br />
         <sub>Desenvolvedor</sub>
       </a>
     </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="https://github.com/identicons/rafael-araujo.png" width="100px;" alt="Rafael Araújo"/><br />
-      <sub><b>Rafael Araújo</b></sub><br />
-      <sub>Desenvolvedor</sub>
-    </td>
     <td align="center">
       <a href="https://github.com/RodrigoDutraF88">
         <img src="https://github.com/RodrigoDutraF88.png" width="100px;" alt="Rodrigo Dutra"/><br />
         <sub><b>Rodrigo Dutra</b></sub><br />
-        <sub>Desenvolvedor</sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/luis-o-jogador">
-        <img src="https://github.com/luis-o-jogador.png" width="100px;" alt="Luis Gabriel"/><br />
-        <sub><b>Luis Gabriel</b></sub><br />
         <sub>Desenvolvedor</sub>
       </a>
     </td>
