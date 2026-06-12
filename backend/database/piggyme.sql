@@ -59,3 +59,14 @@ CREATE TABLE IF NOT EXISTS xp_historico (
   PRIMARY KEY (id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS categorias (
+  id          INT           NOT NULL AUTO_INCREMENT,
+  usuario_id  INT           NOT NULL,
+  nome        VARCHAR(50)   NOT NULL,
+  tipo        ENUM('receita', 'despesa') NOT NULL,
+  criado_em   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+  UNIQUE KEY unique_categoria_usuario (usuario_id, nome, tipo)
+);

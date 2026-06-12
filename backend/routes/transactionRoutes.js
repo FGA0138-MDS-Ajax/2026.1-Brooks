@@ -1,6 +1,6 @@
 const express               = require('express');
-const TransactionController = require('../controllers/transactionController');
-const authMiddleware        = require('../middlewares/authMiddleware');
+const TransactionController = require('../controllers/transactionController.js');
+const authMiddleware        = require('../middlewares/authMiddleware.js');
 
 const router = express.Router();
 
