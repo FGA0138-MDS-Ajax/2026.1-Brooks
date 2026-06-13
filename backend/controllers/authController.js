@@ -63,7 +63,7 @@ class AuthController {
 
                 const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
 
-                const resetLink = `${baseUrl}/reset_password?token=${resetToken}`;
+                const resetLink = `http://127.0.0.1:5500/frontend/pages/reset_password.html?token=${resetToken}`;
                 
                 await Notification.sendPasswordRecoveryEmail(email, resetLink);
                 
@@ -72,6 +72,27 @@ class AuthController {
             console.error('Erro no forgotPassword:', error);
             return res.status(500).json({ erro: 'Erro no servidor' });
       }
+    }
+
+    async resetPassword(req, res) {
+        const { token, novaSenha } = req.body;
+
+        try {
+            // verifica se o token é válido e não expirou
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            return res.status(200).json({ message: 'Senha redefinida com sucesso!' });
+
+        } catch (error) {
+            console.error('Erro no resetPassword:', error);
+            
+            // Se o token foi adulterado ou já passou de 1 hora, o JWT avisa:
+            if (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError') {
+                return res.status(400).json({ erro: 'Token inválido ou expirado. Solicite um novo link.' });
+            }
+
+            return res.status(500).json({ erro: 'Erro interno no servidor' });
+        }
     }
 }
 module.exports = new AuthController();
