@@ -32,6 +32,10 @@ class TransactionService {
     async listar(usuarioId) {
         return Transaction.listarPorUsuario(usuarioId);
     }
+
+    async saldo(usuarioId) {
+        return Transaction.saldoPorUsuario(usuarioId);
+    }
 }
 
 module.exports = new TransactionService();
