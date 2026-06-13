@@ -47,7 +47,29 @@
             color: #73002f;
         }
 
-        .campo-grupo input,
+        .campo-grupo input {
+            height: 70px;
+            border-radius: 40px;
+            border: 4px solid #333;
+            background-color: white;
+            font-size: 24px;
+            padding: 0 28px;
+            color: #333;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .campo-grupo input:focus {
+            border-color: #73002f;
+            background-color: #f9fdf6;
+        }
+
+        .campo-grupo input::placeholder {
+            color: #bbb;
+        }
+
         .campo-grupo select {
             height: 70px;
             border-radius: 40px;
@@ -61,32 +83,17 @@
             transition: 0.2s;
             width: 100%;
             appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2373002f'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 28px center;
             cursor: pointer;
         }
 
-        .campo-grupo input:focus,
         .campo-grupo select:focus {
             border-color: #73002f;
             background-color: #f9fdf6;
-        }
-
-        .campo-grupo input::placeholder {
-            color: #bbb;
-        }
-
-        .select-wrap {
-            position: relative;
-        }
-
-        .select-wrap::after {
-            content: '▾';
-            position: absolute;
-            right: 28px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 24px;
-            color: #73002f;
-            pointer-events: none;
         }
 
         .botoes-form {
@@ -135,6 +142,93 @@
             background-color: #5c0f27;
         }
 
+        /* Modal de nova categoria */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.45);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal-overlay.ativo {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 30px;
+            border: 4px solid #73002f;
+            padding: 40px;
+            width: 90%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-box h3 {
+            color: #73002f;
+            font-size: 26px;
+            margin: 0;
+        }
+
+        .modal-box input {
+            height: 60px;
+            border-radius: 30px;
+            border: 4px solid #333;
+            font-size: 20px;
+            padding: 0 22px;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .modal-box input:focus {
+            border-color: #73002f;
+        }
+
+        .modal-botoes {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+        }
+
+        .modal-botoes button {
+            height: 50px;
+            padding: 0 24px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 4px solid #333;
+            background: white;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .modal-botoes button:hover {
+            transform: scale(1.03);
+            background-color: #f0f0f0;
+        }
+
+        .modal-botoes .btn-confirmar {
+            border-color: #73002f;
+            background-color: #73002f;
+            color: white;
+        }
+
+        .modal-botoes .btn-confirmar:hover {
+            background-color: #5c0f27;
+        }
+
+        .erro-categoria {
+            color: #c0392b;
+            font-size: 16px;
+            display: none;
+        }
+
     </style>
 
 </head>
@@ -147,6 +241,8 @@
              alt="Logo PiggyMe">
 
         <div class="menu-direita">
+
+            <h2 id="saudacao">Olá!</h2>
 
             <div class="botao-inicio">
 
@@ -203,18 +299,11 @@
 
                         <div class="campo-grupo">
                             <label for="categoria">Categoria</label>
-                            <div class="select-wrap">
-                                <select id="categoria">
-                                    <option value="">Selecionar…</option>
-                                    <option value="Alimentação">Alimentação</option>
-                                    <option value="Moradia">Moradia</option>
-                                    <option value="Transporte">Transporte</option>
-                                    <option value="Saúde">Saúde</option>
-                                    <option value="Educação">Educação</option>
-                                    <option value="Lazer">Lazer</option>
-                                    <option value="Outros">Outros</option>
-                                </select>
-                            </div>
+                            <select id="categoria">
+                                <option value="">Selecione uma categoria</option>
+                                <option value="__nova__">+ Criar nova categoria…</option>
+                            </select>
+                            <span class="erro-categoria" id="erroCategoria">Selecione uma categoria.</span>
                         </div>
 
                     </div>
@@ -237,23 +326,146 @@
 
     </main>
 
+    <!-- Modal nova categoria -->
+    <div class="modal-overlay" id="modalCategoria">
+        <div class="modal-box">
+            <h3>Nova categoria</h3>
+            <input type="text" id="novaCategoriaInput" placeholder="Ex: Mercado, Transporte…" maxlength="50">
+            <div class="modal-botoes">
+                <button onclick="fecharModalCategoria()">Cancelar</button>
+                <button class="btn-confirmar" onclick="confirmarNovaCategoria()">Criar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/gamification.js"></script>
     <script>
+        // Saudação no header
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+        if (usuario.nome) {
+            document.getElementById('saudacao').textContent = `Olá, ${usuario.nome}!`;
+        }
+
+        const token = localStorage.getItem('token');
+        const selectCategoria = document.getElementById('categoria');
+        const opcaoNova = selectCategoria.querySelector('option[value="__nova__"]');
+
+        // Carrega categorias do tipo "despesa" ao entrar na página
+        async function carregarCategorias() {
+            try {
+                const resp = await fetch('/api/categorias?tipo=despesa', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const dados = await resp.json();
+                if (!resp.ok) {
+                    console.error(dados.erro || 'Erro ao carregar categorias.');
+                    return;
+                }
+
+                (dados.categorias || []).forEach(cat => {
+                    const opt = document.createElement('option');
+                    opt.value = cat.nome;
+                    opt.textContent = cat.nome;
+                    selectCategoria.insertBefore(opt, opcaoNova);
+                });
+            } catch (err) {
+                console.error('Não foi possível carregar categorias:', err);
+            }
+        }
+
+        // Controle do select: ao escolher "+ Criar nova categoria…" abre o modal
+        let valorAnteriorSelect = '';
+
+        selectCategoria.addEventListener('change', (e) => {
+            if (e.target.value === '__nova__') {
+                abrirModalCategoria();
+            } else {
+                valorAnteriorSelect = e.target.value;
+                ocultarErroCategoria();
+            }
+        });
+
+        function abrirModalCategoria() {
+            document.getElementById('novaCategoriaInput').value = '';
+            document.getElementById('modalCategoria').classList.add('ativo');
+        }
+
+        function fecharModalCategoria() {
+            document.getElementById('modalCategoria').classList.remove('ativo');
+            // Volta o select para o valor anterior se o usuário cancelar
+            selectCategoria.value = valorAnteriorSelect;
+        }
+
+        async function confirmarNovaCategoria() {
+            const nome = document.getElementById('novaCategoriaInput').value.trim();
+
+            if (!nome) {
+                alert('Informe o nome da categoria.');
+                return;
+            }
+
+            try {
+                const resp = await fetch('/api/categorias', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ nome, tipo: 'despesa' })
+                });
+
+                const dados = await resp.json();
+
+                if (!resp.ok) {
+                    alert(dados.erro || 'Erro ao criar categoria.');
+                    return;
+                }
+
+                // Adiciona a nova categoria ao select e a seleciona
+                const opt = document.createElement('option');
+                opt.value = dados.categoria.nome;
+                opt.textContent = dados.categoria.nome;
+                selectCategoria.insertBefore(opt, opcaoNova);
+                selectCategoria.value = dados.categoria.nome;
+                valorAnteriorSelect = dados.categoria.nome;
+
+                document.getElementById('modalCategoria').classList.remove('ativo');
+                ocultarErroCategoria();
+
+            } catch (err) {
+                console.error(err);
+                alert('Não foi possível conectar ao servidor.');
+            }
+        }
+
+        function mostrarErroCategoria() {
+            document.getElementById('erroCategoria').style.display = 'block';
+        }
+
+        function ocultarErroCategoria() {
+            document.getElementById('erroCategoria').style.display = 'none';
+        }
+
         async function salvar() {
             const desc      = document.getElementById('descricao').value.trim();
             const valor     = parseFloat(document.getElementById('valor').value);
-            const categoria = document.getElementById('categoria').value;
+            const categoria = selectCategoria.value;
 
             if (!desc)                { alert('Informe uma descrição.'); return; }
             if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
-            if (!categoria)           { alert('Selecione uma categoria.'); return; }
+
+            if (!categoria || categoria === '__nova__') {
+                mostrarErroCategoria();
+                selectCategoria.focus();
+                return;
+            }
 
             const btn = document.querySelector('.btn-salvar');
             btn.disabled = true;
             btn.textContent = 'Salvando…';
 
             try {
-                const token = localStorage.getItem('token');
                 const resp = await fetch('/api/transacoes/gasto', {
                     method: 'POST',
                     headers: {
@@ -283,10 +495,9 @@
                 btn.textContent = 'Salvar';
             }
         }
+
+        carregarCategorias();
     </script>
-
-
-
 
 </body>
 
