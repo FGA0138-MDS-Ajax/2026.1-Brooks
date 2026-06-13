@@ -1,4 +1,5 @@
 const UserModel = require('../models/UserModel');
+const { criarCategoriasPadrao } = require('../utils/seedCategory');
 
 class UserController {
     async cadastrar(req, res) {
@@ -22,6 +23,7 @@ class UserController {
             }
 
             const novoUsuario = await UserModel.criar(nome, email, senha);
+            await criarCategoriasPadrao(novoUsuario.id);
 
             res.status(201).json({
                 mensagem: 'Cadastro realizado com sucesso, seja bem-vindo ao Piggyme!',
