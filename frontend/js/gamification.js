@@ -29,6 +29,15 @@ function atualizarCardXp(xpTotal, nivel, progresso) {
         elBarra.style.width = `${progresso}%`;
         elBarra.style.transition = 'width 0.6s ease';
     }
+    const porco = document.querySelector('.porquinho');
+    switch (nivel) {
+        case 1: porco.src="../images/porco_inicial_1.png"; break;
+        case 2: porco.src="../images/porco_inicial_2.png";break;
+        case 3: porco.src="../images/porco_inicial_3.png";break;
+        case 4: porco.src="../images/porco_feliz.png";break;
+        case 5: porco.src="../images/porco_folgado_1.png";break;
+        default: porco.src="../images/porco_folgado_2.png";break;
+    }
 }
 
 async function carregarXp() {
@@ -41,6 +50,8 @@ async function carregarXp() {
         console.warn('[Gamificação] Não foi possível carregar XP:', err.message);
     }
 }
+
+
 
 
 /**

@@ -21,6 +21,27 @@ class Transaction {
         );
         return rows;
     }
+    static async saldoPorUsuario(usuarioId) {
+        const [rows] = await db.query(
+            `
+            SELECT 
+                SUM(CASE WHEN tipo = 'receita' THEN valor ELSE 0 END) AS receitas,
+                SUM(CASE WHEN tipo = 'despesa' THEN valor ELSE 0 END) AS despesas
+            FROM transacoes
+            WHERE usuario_id = ?
+            `,
+            [usuarioId]
+        );
+        const receitas = Number(rows[0].receitas || 0);
+        const despesas = Number(rows[0].despesas || 0);
+
+
+        return {
+            saldo: receitas - despesas,
+            receitas,
+            despesas
+        };
+    }
 }
 
 module.exports = Transaction;

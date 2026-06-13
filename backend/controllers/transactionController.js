@@ -36,6 +36,28 @@ class TransactionController {
             return res.status(500).json({ erro: 'Erro ao buscar transações.' });
         }
     }
+
+    async saldo(req, res) {
+        try {
+
+            const usuarioId = req.usuario.id;
+
+            const saldo = await transactionService.saldo(usuarioId);
+
+            return res.status(200).json(saldo);
+
+
+        } catch(err) {
+
+            console.error(err);
+
+            return res.status(500).json({
+                erro: 'Erro ao buscar saldo.'
+            });
+
+        }
+
+    }
 }
 
 module.exports = new TransactionController();
