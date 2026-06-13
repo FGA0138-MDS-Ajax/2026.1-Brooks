@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashboardPiggyMe</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1> Dashboard</h1>
+            <p>Controle total das suas finanças</p>
+        </div>
+
+        <div class="kpi-container">
+            <div class="kpi-card entradas">
+                <div class="kpi-icon"></div>
+                <div class="kpi-info">
+                    <h3>Total de Receitas</h3>
+                    <div class="kpi-value" id="totalEntradas">R$ 0,00</div>
+                    <div class="kpi-subtitle">Últimos 12 meses</div>
+                </div>
+            </div>
+            <div class="kpi-card saidas">
+                <div class="kpi-icon"></div>
+                <div class="kpi-info">
+                    <h3>Total de Despesas</h3>
+                    <div class="kpi-value" id="totalSaidas">R$ 0,00</div>
+                    <div class="kpi-subtitle">Últimos 12 meses</div>
+                </div>
+            </div>
+            <div class="kpi-card saldo">
+                <div class="kpi-icon"></div>
+                <div class="kpi-info">
+                    <h3>Saldo Atual</h3>
+                    <div class="kpi-value" id="saldoAtual">R$ 0,00</div>
+                    <div class="kpi-subtitle">Receitas  - Despesas</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="section-header">
+                <h2> Evolução Financeira Mensal</h2>
+                <p>Acompanhe a variação de receita, despesas e saldo ao longo dos meses</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="evolucaoChart"></canvas>
+            </div>
+        </div>
+
+    
+        <div class="chart-section">
+            <div class="section-header">
+                <h2> Despesas por Categoria</h2>
+                <p>Distribuição dos seus gastos por categoria</p>
+            </div>
+            <div class="charts-row">
+                <div class="chart-container half">
+                    <canvas id="categoriasChart"></canvas>
+                </div>
+                <div class="categories-list" id="categoriesList">
+                    <h3>Detalhamento por Categoria</h3>
+                    <div id="categoriesDetail"></div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="table-section">
+            <div class="section-header">
+                <h2> Resumo Mensal Detalhado</h2>
+                <p>Consulta por mês</p>
+            </div>
+            <div class="table-container">
+                <table id="resumoMensalTable">
+                    <thead>
+                        <tr>
+                            <th>Mês</th>
+                            <th>Receita</th>
+                            <th>Despesas</th>
+                            <th>Saldo do Mês</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resumoMensalBody">
+                        <tr>
+                            <td colspan="5" class="loading-text">Carregando dados...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
