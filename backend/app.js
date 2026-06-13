@@ -53,4 +53,8 @@ app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/dashboard.html'));
 });
 
+app.get('/historico', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/historico.html'));
+});
+
 module.exports = app;

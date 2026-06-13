@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiggyMe – Histórico Financeiro</title>
+
+    <link rel="stylesheet" href="../css/menu.css">
+
+    <style>
+        .historico-container {
+            padding: 40px;
+            width: 100%;
+        }
+
+        .historico-container h2 {
+            font-size: 38px;
+            color: #73002f;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Estilização da Tabela de Histórico */
+        .tabela-wrapper {
+            background: white;
+            border-radius: 20px;
+            border: 4px solid #333;
+            overflow: hidden; /* Para manter as bordas arredondadas na tabela */
+        }
+
+        .tabela-historico {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .tabela-historico th {
+            background-color: #73002f;
+            color: white;
+            font-size: 20px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .tabela-historico td {
+            padding: 18px 20px;
+            font-size: 18px;
+            color: #333;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tabela-historico tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tabela-historico tr:hover {
+            background-color: #f9fdf6;
+        }
+
+        /* Cores dinâmicas para os valores */
+        .valor-receita {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .valor-despesa {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .sem-registros {
+            text-align: center;
+            padding: 40px !important;
+            font-size: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="../images/piggyme_logo2.png" class="porco-logo" alt="Logo PiggyMe">
+        <div class="menu-direita">
+            <h2 id="saudacao">Olá!</h2>
+            <div class="botao-inicio">
+                <button onclick="window.location.href='menu'">
+                    <strong>Início</strong>
+                </button>
+            </div>
+            <div class="icone_conta">
+                <img src="../images/icone_conta.png" alt="Ícone da conta">
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <aside class="botoes-resto">
+            <button onclick="window.location.href='dashboard'">Dashboard</button>
+            <button onclick="window.location.href='add_receita'">Adicionar Entrada +</button>
+            <button onclick="window.location.href='add_gastos'">Informar Gasto -</button>
+            <button>Metas</button>
+            <button>Relatórios</button>
+        </aside>
+
+        <section class="conteudo">
+            <div class="card" style="align-items: flex-start;">
+                <div class="historico-container">
+                    <h2>Seu Histórico Financeiro</h2>
+                    
+                    <div class="tabela-wrapper">
+                        <table class="tabela-historico">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabela">
+                                <tr>
+                                    <td colspan="4" class="sem-registros">Carregando transações...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/gamification.js"></script>
+    <script>
+        // Saudação no header
+        const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+        if (usuario.nome) {
+            document.getElementById('saudacao').textContent = `Olá, ${usuario.nome}!`;
+        }
+
+        const token = localStorage.getItem('token');
+        const corpoTabela = document.getElementById('corpoTabela');
+
+        // Função para buscar e renderizar o histórico
+        async function carregarHistorico() {
+            try {
+                // Chama o endpoint que acabamos de validar
+                const resposta = await fetch('/api/transacoes', {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const dados = await resposta.json();
+
+                if (!resposta.ok) {
+                    corpoTabela.innerHTML = `<tr><td colspan="4" class="sem-registros">Erro ao carregar histórico: ${dados.erro}</td></tr>`;
+                    return;
+                }
+
+                const transacoes = dados.transacoes || [];
+
+                if (transacoes.length === 0) {
+                    corpoTabela.innerHTML = `<tr><td colspan="4" class="sem-registros">Nenhuma transação encontrada. Adicione uma receita ou gasto para começar!</td></tr>`;
+                    return;
+                }
+
+                // Limpa o "Carregando..."
+                corpoTabela.innerHTML = '';
+
+                // Monta as linhas da tabela dinamicamente
+                transacoes.forEach(transacao => {
+                    // Formatação segura da data para o padrão brasileiro (DD/MM/AAAA)
+                    const dataFormatada = new Date(transacao.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+                    
+                    // Formatação do valor para moeda
+                    const valorFormatado = parseFloat(transacao.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    
+                    // Definição da cor e sinal com base no tipo (receita ou despesa)
+                    const classeValor = transacao.tipo === 'receita' ? 'valor-receita' : 'valor-despesa';
+                    const sinal = transacao.tipo === 'receita' ? '+' : '-';
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${dataFormatada}</td>
+                        <td>${transacao.descricao}</td>
+                        <td>${transacao.categoria}</td>
+                        <td class="${classeValor}">${sinal} ${valorFormatado}</td>
+                    `;
+                    corpoTabela.appendChild(tr);
+                });
+
+            } catch (erro) {
+                console.error(erro);
+                corpoTabela.innerHTML = `<tr><td colspan="4" class="sem-registros">Falha de comunicação com o servidor.</td></tr>`;
+            }
+        }
+
+        // Chama a função assim que a página carrega
+        carregarHistorico();
+    </script>
+</body>
+
+</html>
