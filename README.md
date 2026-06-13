@@ -37,4 +37,9 @@ Com objetivo de realizar o cadastro de usuário proposto na Sprint 1 foram criad
       server.js em services: inicia o servidor.
 
       config.js em database: conecta o Node.js e o MYSQL.
+Com objetivo de implementar a criação de categorias personalizadas proposta na Sprint 3, foram criados/atualizados os seguintes arquivos:categoryController.js, Category.js ,categoryRoutes.js ,seedCategory.js .
 
+Setup necessário antes de rodar:
+      1. Rodar o script SQL que cria a tabela categorias (está em database/...).
+      2. Rodar uma vez: node backend/scripts/seedCategoriasExistentes.js — popula categorias padrão para usuários já cadastrados antes dessa sprint.
+Atenção: toda categoria pertence a um usuário e tem um tipo (receita ou despesa). Ao criar uma transação, a categoria selecionada precisa existir para aquele usuário e tipo, senão o backend recusa a transação.
