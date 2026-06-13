@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../database/config');
 
 const CATEGORIAS_PADRAO = [
    
