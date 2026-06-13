@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PiggyMe</title>
-    <link rel="stylesheet" href="../css/menu.css">
-    <script src="/js/saldo.js"></script>
+    <link rel="stylesheet" href="../css/metas.css">
+    <script src="/js/metas.js"></script>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
         <aside class="botoes-resto">
             <button>Dashboard</button>
             <button onclick="window.location.href='receita'">Receita</button>
-            <button onclick="window.location.href='metas'">Metas</button>
+            <button onclick="window.location.href='menu'">Menu</button>
             <button>Relatórios</button>
         </aside>
 
@@ -37,49 +37,51 @@
 
             <div class="segunda-header">
                 <div>
-                    <h1>Seu dinheiro sob controle</h1>
-                    <h2>Sem complicação</h2>
+                    <h1>Metas</h1>
+                    <h2>Defina seus objetivos e conquiste seus sonhos passo a passo</h2>
                     <aside class="botoes-header2">
-                        <button onclick="window.location.href='add_gastos'">Adicionar gasto</button>
-                        <button onclick="window.location.href='add_receita'">Adicionar Receita</button>
+                        <button onclick="window.location.href='add_gastos'">Criar nova Meta</button>
                     </aside>
                 </div>
-                <img class="pig-background" src="../images/pig_background.png">
+                <img class="pig-background" src="../images/pig_background_metas.png">
             </div>
 
             <div class="cards-area">
 
                 <div class="card saldo-card">
+                    <img class="icone-moeda" src="../images/icone_metas.png">
                     <div>
-                        <h2>Saldo</h2>
+                        <h2>Resumo das metas</h2>
                         <h1 id="saldo-valor">R$ 0,00</h1>
                     </div>
-                    <div class="icone-moeda">$</div>
+                    
                 </div>
 
                 <div class="card xp-card">
                     <div class="xp-info">
                         <!-- gamification.js atualiza estes elementos automaticamente -->
-                        <h2>Nível 1</h2>
-                        <h1>XP</h1>
-                        <div class="barra-xp">
-                            <div class="xp-preenchido" style="width: 0%;"></div>
-                        </div>
+                        <h2>Total de metas</h2>
+                        <h1>1</h1>
+                        
                     </div>
-                    <img src="../images/porco_feliz.png" class="porquinho" alt="Porquinho">
                 </div>
 
                 <div class="card objetivos-card">
                     <div class="objetivos-topo">
-                        <h2>Seu Progresso financeiro</h2>
-                        <span>+</span>
+                        <h2>Metas ativas</h2>
                     </div>
                     <div class="objetivo">
                         <p>casa</p>
+                         <div class="barra-xp">
+                            <div class="xp-preenchido" style="width: 0%;"></div>
+                        </div>
                         <span>70%</span>
                     </div>
                     <div class="objetivo">
                         <p>automovel</p>
+                         <div class="barra-xp">
+                            <div class="xp-preenchido" style="width: 0%;"></div>
+                        </div>
                         <span>20%</span>
                     </div>
                     <div class="consquistas">
@@ -88,20 +90,20 @@
                     </div>
                 </div>
 
+                <div class="card conquistas_gerais">
+                    <h2>Conquistas Recentes</h2>
+                    
+                    <span>Meta: Viagem para japão</span>
+                    
+                    <span>Meta: Viagem para Colombia</span>
+                 
+                    <span>Meta: Viagem para venezuela</span>
+                </div>
+
                 <div class="card resumo-card">
-                    <h2>Gastos por categoria</h2>
-                    <div class="resumo-box">
-                        <div class="grafico-pizza"></div>
-                        <div class="legenda">
-                            <div class="item-legenda">
-                                <span>Alimentação</span>
-                                <span>R$ 250,00</span>
-                            </div>
-                            <div class="item-legenda">
-                                <span>Transporte</span>
-                                <span>R$ 84,00</span>
-                            </div>
-                        </div>
+                    <h2>Progresso geral</h2>
+                    <div class="barra-xp">
+                            <div class="xp-preenchido" style="width: 0%;"></div>
                     </div>
                 </div>
 
@@ -110,8 +112,6 @@
         </section>
 
     </main>
-
-    <script src="../js/gamification.js"></script>
 
     <script>
 

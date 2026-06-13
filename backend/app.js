@@ -25,6 +25,10 @@ app.get('/menu', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/menu.html'));
 });
 
+app.get('/metas', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/metas.html'));
+});
+
 app.get('/add_gastos', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/add_gastos.html'));
 });
@@ -36,5 +40,7 @@ app.get('/add_receita', (req, res) => {
 app.get('/forgot_password', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/forgot_password.html'));
 });
+
+
 
 module.exports = app;

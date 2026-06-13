@@ -2,8 +2,6 @@ async function carregarSaldo(){
     try {
 
         const token = localStorage.getItem('token');
-
-
         const resposta = await fetch('/api/saldo',{
             headers:{
                 Authorization:`Bearer ${token}`
