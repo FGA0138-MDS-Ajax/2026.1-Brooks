@@ -1,18 +1,3 @@
-
-A gente abre pelo localhost:3000/
-no terminal vc entra na pasta backend com cd backend
-e depois node server.js
-
-rapaziada vamos seguir assim
-git fetch
-git status
-git pull
-
-git add .
-git commit -m "mensagem"
-git push
-
-
 # 🐷 PiggyMe
 
 Repositório oficial do projeto **PiggyMe**, desenvolvido pela equipe **Brooks** para a disciplina de Métodos de Desenvolvimento de Software (MDS), ministrada pelo professor Ricardo Ajax.
