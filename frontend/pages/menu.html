@@ -6,11 +6,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PiggyMe</title>
     <link rel="stylesheet" href="../css/menu.css">
-    <script src="/js/saldo.js"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f7ec;
+        }
+
+     
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ffffff;
+            padding: 14px 32px;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+
+
+        .menu-direita {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-direita h2 {
+            font-size: 22px;
+            color: #333;
+            margin: 0;
+        }
+
+        .botao-inicio button {
+            height: 44px;
+            padding: 0 24px;
+            border-radius: 40px;
+            border: 2px solid #73002f;
+            background: white;
+            color: #73002f;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .botao-inicio button:hover {
+            background: #73002f;
+            color: white;
+        }
+
+        .icone_conta img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+    
+        .dashboard {
+            display: flex;
+            height: calc(100vh - 99px);
+        }
+
+
+        aside.botoes-resto {
+            width: 260px;
+            min-width: 260px;
+            background-color: #f0f7ec;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-right: 1px solid #dde8d6;
+        }
+
+        aside.botoes-resto button {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 40px;
+            border: none;
+            background-color: #73002f;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.2s, transform 0.15s;
+        }
+
+        aside.botoes-resto button:hover {
+            background-color: #5c0f27;
+            transform: scale(1.02);
+        }
+
+        aside.botoes-resto button .sidebar-icon {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        aside.botoes-resto button .sidebar-icon img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        aside.botoes-resto button .sidebar-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        aside.botoes-resto .btn-sair {
+            background-color: transparent;
+            border: 2px solid #bbb;
+            color: #666;
+            margin-top: auto;
+        }
+
+        aside.botoes-resto .btn-sair:hover {
+            background-color: #e8e8e8;
+            transform: none;
+            color: #333;
+        }
+
+     
+       
+    </style>
 </head>
 
 <body>
 
+  
     <header>
         <img src="../images/piggyme_logo2.png" class="porco-logo" alt="Logo PiggyMe">
         <div class="menu-direita">
@@ -26,13 +164,68 @@
 
     <main class="dashboard">
 
+        <!-- SIDEBAR — novo design -->
         <aside class="botoes-resto">
-            <button>Dashboard</button>
-            <button onclick="window.location.href='receita'">Receita</button>
-            <button onclick="window.location.href='metas'">Metas</button>
-            <button>Relatórios</button>
-            <button onclick="window.location.href='historico'">Histórico Detalhado</button>
+
+            <button onclick="window.location.href='menu'">
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </span>
+                Dashboard
+            </button>
+
+            <button onclick="window.location.href='add_gastos'">
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 7H3a1 1 0 00-1 1v12a2 2 0 002 2h16a2 2 0 002-2V8a1 1 0 00-1-1zm-1 12H4V9h16v10zM3 5h15a1 1 0 000-2H3a1 1 0 000 2z"/>
+                    </svg>
+                </span>
+                Gastos
+            </button>
+
+            <button>
+                <span class="sidebar-icon">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </span>
+                Metas
+            </button>
+
+            <button>
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M5 12H3v9h2v-9zm4-5H7v14h2V7zm4-4h-2v18h2V3zm4 8h-2v10h2v-10zm4-4h-2v14h2V7z"/>
+                    </svg>
+                </span>
+                Relatórios
+            </button>
+
+            <button>
+                <span class="sidebar-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.5 11c-.17 0-.34.01-.5.03V9a5 5 0 00-5-5H9a5 5 0 00-5 5v5a5 5 0 005 5h3.5A5.5 5.5 0 0017.5 11zm-6.5 7H9a3 3 0 01-3-3V9a3 3 0 013-3h3a3 3 0 013 3v1.54A5.5 5.5 0 0011 18zm6.5 0a3.5 3.5 0 110-7 3.5 3.5 0 010 7zm0-5a.75.75 0 00-.75.75v1.5c0 .41.34.75.75.75s.75-.34.75-.75v-1.5A.75.75 0 0017.5 13z"/>
+                    </svg>
+                </span>
+                Seu porquinho
+            </button>
+
+            <button class="btn-sair" onclick="window.location.href='login'">
+                <span class="sidebar-icon">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" color="#666">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                </span>
+                Sair
+            </button>
+
         </aside>
+
 
         <section class="conteudo">
 
@@ -42,7 +235,7 @@
                     <h2>Sem complicação</h2>
                     <aside class="botoes-header2">
                         <button onclick="window.location.href='add_gastos'">Adicionar gasto</button>
-                        <button onclick="window.location.href='add_receita'">Adicionar Receita</button>
+                        <button onclick="window.location.href='add_receita'">Registrar Receita</button>
                     </aside>
                 </div>
                 <img class="pig-background" src="../images/pig_background.png">
@@ -60,7 +253,6 @@
 
                 <div class="card xp-card">
                     <div class="xp-info">
-                        <!-- gamification.js atualiza estes elementos automaticamente -->
                         <h2>Nível 1</h2>
                         <h1>XP</h1>
                         <div class="barra-xp">
@@ -113,9 +305,7 @@
     </main>
 
     <script src="../js/gamification.js"></script>
-
     <script>
-
         const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
         if (usuario.nome) {
             document.getElementById('saudacao').textContent = `Olá, ${usuario.nome}!`;
