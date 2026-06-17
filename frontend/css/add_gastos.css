@@ -76,8 +76,11 @@
         .dashboard {
             display: flex;
             height: calc(100vh - 99px);
+            position: relative;  /* ← adicione isso */
+            overflow: hidden; 
         }
 
+ 
         aside.botoes-resto {
             width: 260px;
             min-width: 260px;
@@ -134,11 +137,11 @@
             display: flex;
             flex-direction: column;
             gap: 28px;
-            background-color: #f1f9ec;
+            background-color: #fffef6;
         }
 
         .hero-banner {
-            background-color: #ffffff;
+            background-color: #fffef6;
             border-radius: 20px;
             padding: 28px 36px;
             display: flex;
@@ -147,7 +150,7 @@
             position: relative;
             overflow: hidden;
             min-height: 160px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+         
         }
 
         .hero-icone {
@@ -182,13 +185,12 @@
 
         .hero-imagem-deco {
             position: absolute;
-            right: -25px;
+            right: -185px;
             top: 50%;
             transform: translateY(-50%);
-            height: 290%;
-            max-width: 850px;
-            object-fit: contain;
-            opacity: 0.85;
+            height: 400%;
+            max-width: 1250px;
+            opacity: 0.95;
             pointer-events: none;
             user-select: none;
         }
