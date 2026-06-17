@@ -1,6 +1,6 @@
- *, *::before, *::after { box-sizing: border-box; }
- 
- body {
+*, *::before, *::after { box-sizing: border-box; }
+
+        body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f0f7ec;
@@ -16,111 +16,9 @@
             box-shadow: 0 1px 4px rgba(0,0,0,0.06);
         }
 
+      
 
-.form-receita {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            height: 100%;
-            padding: 60px 0;
-        }
-
-        .form-receita h2 {
-            font-size: 38px;
-            color: #73002f;
-        }
-
-        .campos {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .campo-grupo {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .campo-grupo label {
-            font-size: 24px;
-            font-weight: bold;
-            color: #73002f;
-        }
-
-        .campo-grupo input {
-            height: 70px;
-            border-radius: 40px;
-            border: 4px solid #333;
-            background-color: white;
-            font-size: 24px;
-            padding: 0 28px;
-            color: #333;
-            outline: none;
-            font-family: Arial, Helvetica, sans-serif;
-            transition: 0.2s;
-        }
-
-        .campo-grupo input:focus {
-            border-color: #73002f;
-            background-color: #f9fdf6;
-        }
-
-        .campo-grupo input::placeholder {
-            color: #bbb;
-        }
-
-        .botoes-form {
-            display: flex;
-            gap: 24px;
-            margin-top: 10px;
-        }
-
-        .btn-cancelar {
-            width: 200px;
-            height: 70px;
-            border-radius: 40px;
-            border: 4px solid #333;
-            background-color: white;
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-cancelar:hover {
-            transform: scale(1.03);
-            background-color: #f0f0f0;
-        }
-
-        .btn-salvar {
-            width: 200px;
-            height: 70px;
-            border-radius: 40px;
-            border: 4px solid #73002f;
-            background-color: #73002f;
-            font-size: 22px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-salvar:hover {
-            transform: scale(1.03);
-            background-color: #5c0f27;
-        }
-
-.menu-direita {
+        .menu-direita {
             display: flex;
             align-items: center;
             gap: 20px;
@@ -191,8 +89,7 @@
             border-right: 1px solid #dde8d6;
         }
 
-        aside.botoes-resto button,
-        aside.botoes-resto a.sidebar-link {
+        aside.botoes-resto button {
             display: flex;
             align-items: center;
             gap: 14px;
@@ -209,13 +106,11 @@
             transition: 0.2s;
         }
 
-        aside.botoes-resto button:hover,
-        aside.botoes-resto a.sidebar-link:hover {
+        aside.botoes-resto button:hover {
             background-color: #5c0f27;
         }
 
-        aside.botoes-resto button svg,
-        aside.botoes-resto a.sidebar-link svg {
+        aside.botoes-resto button svg {
             width: 22px;
             height: 22px;
             flex-shrink: 0;
@@ -345,7 +240,31 @@
             width: 100%;
         }
 
-        .campo-grupo input:focus,
+        .campo-grupo input:focus {
+            border-color: #73002f;
+            background-color: #f9fdf6;
+        }
+
+        .campo-grupo input::placeholder {
+            color: #bbb;
+        }
+
+        .campo-grupo select {
+            height: 54px;
+            border-radius: 12px;
+            border: 2px solid #ccc;
+            background-color: white;
+            font-size: 16px;
+            padding: 0 18px;
+            color: #333;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: border-color 0.2s, background-color 0.2s;
+            width: 100%;
+            appearance: none;
+            cursor: pointer;
+        }
+
         .campo-grupo select:focus {
             border-color: #73002f;
             background-color: #fdf9fb;
@@ -361,7 +280,7 @@
             -moz-appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2373002f'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 16px center;
+            background-position: right 28px center;
             cursor: pointer;
             padding-right: 44px;
         }
@@ -567,5 +486,3 @@
             background-color: #73002f;
             color: white;
         }
-
-        .modal-botoes .btn-confirmar:hover { background-color: #5c0f27; }
