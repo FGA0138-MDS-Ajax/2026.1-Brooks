@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -111,7 +112,7 @@ header h2 {
     padding: 35px 25px;
 }
 .botoes-header2 button{
-    height: 70px;
+    height: 50px;
 
     border-radius: 40px;
 
@@ -180,40 +181,46 @@ header h2 {
 
     flex: 1;
     background-color: #f4f4f4;
-    padding: 35px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 
-.cards-area{
-
+.cards-area {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: 1fr 1fr;
     width: 100%;
-
-
-    justify-content: space-between;
-
-    gap: 35px;
-    row-gap: 35px;
+    gap: 15px;
+    flex: 1;
+    min-height: 0;
 }
 
 
 .segunda-header{
     width: 100%;
-    height:min-content;
-
-    padding: 0;
-    margin-bottom: 20px;
+    background-color: #f8fbf5;
+    border-radius: 20px;
+    padding: 15px 30px;
+    margin-bottom: 15px;
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
 
-    gap: 20px;
+    flex-shrink: 0;
+}
 
-    flex-wrap: wrap;
+.segunda-header h1 {
+    color: #73002f;
+    font-size: 26px; 
+}
+
+.segunda-header h2 {
+    font-size: 20px;
+    color: #333;
 }
 
 .pig-background{
@@ -239,16 +246,15 @@ header h2 {
 }
 
 
-.card{
-
+.card {
     background-color: #e8f2df;
-    box-shadow: 5px 3px 7px 1px #7c7c7c;
-
-    border-radius: 30px;
-
-    padding: 25px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.15); 
+    border-radius: 20px;
+    padding: 15px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-
 
 
 .saldo-card{
@@ -529,20 +535,19 @@ header h2 {
 
 .grafico-pizza{
 
-    width: 180px;
+    width: 100px;
 
-    height: 180px;
+    height: 100px;
 
     border-radius: 50%;
 
     margin: auto;
 
     background: conic-gradient(
-
-        #73002f 0% 55%,
-        #8bd05a 55% 80%,
-        #bf4778 80% 95%,
-        #ffffff 95% 100%
-
+        #73002f 0% 30%,
+        #a32252 30% 65%,
+        #cbf29a 65% 85%,
+        #f0f7ec 85% 95%, 
+        #ff8e8b 95% 100% 
     );
 }
