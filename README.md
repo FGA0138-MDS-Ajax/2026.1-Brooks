@@ -52,6 +52,7 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
       </a>
     </td>
     <td align="center">
+      <a href="https://github.com/RafaelQueiroz7">
       <img src="https://github.com/identicons/rafael-araujo.png" width="100px;" alt="Rafael Araújo"/><br />
       <sub><b>Rafael Araújo</b></sub><br />
       <sub>Desenvolvedor</sub>
