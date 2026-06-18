@@ -99,8 +99,6 @@ header h2 {
 }
 
 .botoes-header2{
-    height: 100%;
-
     display: flex;
 
     flex-direction: row;
@@ -112,7 +110,8 @@ header h2 {
     padding: 35px 25px;
 }
 .botoes-header2 button{
-    height: 50px;
+    height: 100%;
+    padding: 10px;
 
     border-radius: 40px;
 

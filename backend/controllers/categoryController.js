@@ -29,16 +29,21 @@ class CategoryController {
     }
 
     async listarCategory(req, res) {
+
+        console.log("ENTROU NO LISTAR CATEGORIAS");
         try {
+
+            console.log("USUÁRIO LOGADO:", req.usuario);
+
             const usuarioId = req.usuario.id;
             const { tipo } = req.query;
 
-            if (tipo && !['receita', 'despesa'].includes(tipo)) {
-                return res.status(400).json({ erro: 'O parâmetro tipo deve ser "receita" ou "despesa".' });
-            }
-
             const categorias = await CategoryModel.findAllByUser(usuarioId, tipo || null);
+
+            console.log("CATEGORIAS ENCONTRADAS:", categorias);
+
             return res.status(200).json({ categorias });
+
         } catch (err) {
             console.error(err);
             return res.status(500).json({ erro: 'Erro ao listar categorias.' });
