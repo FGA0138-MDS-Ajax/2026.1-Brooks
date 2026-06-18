@@ -393,7 +393,7 @@ header h2 {
 
 .saldo-card{
     background-color: #73002f;
-    grid-row: 1/3;
+    grid-row: 1;
     grid-column: 1;
 
     display: flex;
@@ -496,15 +496,28 @@ header h2 {
     color: #333;
 }
 
+.xp-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.xp-textos {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+}
+
 .xp-info h2{
 
-    font-size: 38px;
+    font-size: 22px;
 
     color: #73002f;
 }
 
 .xp-info h1{
-    font-size: 30px;
+    font-size: 18px;
 
     color: #333;
 }
@@ -512,11 +525,11 @@ header h2 {
 
 .barra-xp{
 
-    width: 260px;
+    width: 100%;
 
     height: 45px;
 
-    border-radius: 20px;
+    border-radius: 15px;
 
     border: 6px solid #333;
 
@@ -528,8 +541,6 @@ header h2 {
 }
 
 .xp-preenchido{
-
-    width: 70%;
 
     height: 100%;
 
@@ -545,12 +556,12 @@ header h2 {
 
 .objetivos-card{
     grid-row: 2;
-    grid-column: 2/3;
+    grid-column: 1/3;
     display: flex;
-
-    justify-content: space-between;
-    align-items: center;
-    gap: 25px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
 }
 
 .objetivos-topo{
@@ -620,50 +631,65 @@ header h2 {
     color: #73002f;
 }
 
-.resumo-card{
+.resumo-card {
+    background-color: #e8f2df; 
     grid-row: 1;
     grid-column: 3;
     display: flex;
-    flex-direction: row;
-    gap: 12px;
-    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px; 
 }
 
-.resumo-card h2{
-
-    
-    text-align: center;
-    font-size: 38px;    
-
+.categorias-titulo h2 {
+    font-size: 18px;
+    font-weight: 700;
     color: #73002f;
-    margin-bottom: 25px;
-
-    
+    white-space: nowrap; 
 }
 
-
-.resumo-box{
-    background: white;
-    border-radius: 25px;
-
+.categorias-conteudo {
+    background-color: white;
+    border-radius: 20px;
+    padding: 15px; 
     display: flex;
     align-items: center;
-    justify-content: space-around;
-
-    padding: 20px;
+    gap: 15px;
+    width: 100%;
 }
 
-.legenda{
+.legenda {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
-.item-legenda{
+.item-legenda {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 14px;
+    width: 100%;
+}
+
+.item-legenda .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.item-legenda .nome {
+    flex: 1;
+    font-size: 13px; /* Fonte levemente menor para ganhar espaço */
+    color: #333;
+}
+
+.item-legenda .valor {
+    font-size: 12px;
+    color: #555;
+    font-weight: 600;
+    white-space: nowrap; /* Impede o R$ de separar dos números */
 }
 
 
