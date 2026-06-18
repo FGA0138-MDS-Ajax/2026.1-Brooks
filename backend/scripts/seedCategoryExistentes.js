@@ -2,6 +2,8 @@ require('dotenv').config();
 const db = require('../database/config');
 const { criarCategoriasPadrao } = require('../utils/seedCategory');
 
+
+
 async function main() {
     const [usuarios] = await db.query('SELECT id FROM usuarios');
 
