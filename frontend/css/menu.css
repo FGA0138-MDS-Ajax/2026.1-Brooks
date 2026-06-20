@@ -680,7 +680,7 @@ header h2 {
 
 .item-legenda .nome {
     flex: 1;
-    font-size: 13px; /* Fonte levemente menor para ganhar espaço */
+    font-size: 13px;
     color: #333;
 }
 
@@ -688,7 +688,7 @@ header h2 {
     font-size: 12px;
     color: #555;
     font-weight: 600;
-    white-space: nowrap; /* Impede o R$ de separar dos números */
+    white-space: nowrap; 
 }
 
 
@@ -709,4 +709,181 @@ header h2 {
         #f0f7ec 85% 95%, 
         #ff8e8b 95% 100% 
     );
+}
+
+
+@media (max-width: 768px) {
+
+  html, body {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Header mais compacto */
+  header {
+    flex-direction: column;
+    padding: 10px 16px;
+    row-gap: 10px;
+  }
+
+  .porco-logo {
+    width: 130px;
+  }
+
+  .menu-direita {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .menu-direita h2 {
+    font-size: 16px;
+  }
+
+  .botao-inicio button {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .icone_conta img {
+    width: 34px;
+    height: 34px;
+  }
+
+
+  .dashboard {
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+ 
+  aside.botoes-resto {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    width: 100%;
+    min-width: 0;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    gap: 8px;
+    padding: 10px 8px;
+
+    border-right: none;
+    border-bottom: 1px solid #dde8d6;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  aside.botoes-resto button {
+    width: auto;
+    flex-shrink: 0;
+
+    padding: 10px 14px;
+    font-size: 0; 
+    gap: 0;
+    justify-content: center;
+  }
+
+  aside.botoes-resto button .sidebar-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+
+  aside.botoes-resto .btn-sair {
+    margin-top: 0;
+    margin-left: auto;
+  }
+
+
+  .conteudo {
+    flex: none;
+    overflow-y: visible;
+    height: auto;
+    padding: 14px;
+    padding-bottom: 40px; 
+  }
+
+  .segunda-header {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 18px;
+  }
+
+  .segunda-header > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .segunda-header h1,
+  .segunda-header h2 {
+    text-align: center;
+  }
+
+  .segunda-header h1 {
+    font-size: 20px;
+  }
+
+  .segunda-header h2 {
+    font-size: 16px;
+  }
+
+  .botoes-header2 {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0 0 0;
+  }
+
+  .botoes-header2 button {
+    width: 100%;
+    max-width: 320px;
+    font-size: 16px;
+  }
+
+  .pig-background {
+    display: none; 
+  }
+
+
+  .cards-area {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+    min-height: 0;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .saldo-card,
+  .xp-card,
+  .objetivos-card,
+  .porquinho-card,
+  .resumo-card {
+    grid-row: auto;
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .porquinho {
+    width: 140px;
+  }
+
+  .icone-moeda {
+    width: 60px;
+    height: 60px;
+    font-size: 32px;
+  }
 }
