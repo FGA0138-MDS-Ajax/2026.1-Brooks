@@ -51,7 +51,7 @@
             <button onclick="window.location.href='menu'">
                 <span class="sidebar-icon">
                     <svg fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
                     </svg>
                 </span>
                 Dashboard
@@ -60,7 +60,8 @@
             <button onclick="window.location.href='add_gastos'">
                 <span class="sidebar-icon">
                     <svg fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M21 7H3a1 1 0 00-1 1v12a2 2 0 002 2h16a2 2 0 002-2V8a1 1 0 00-1-1zm-1 12H4V9h16v10zM3 5h15a1 1 0 000-2H3a1 1 0 000 2z"/>
+                        <path
+                            d="M21 7H3a1 1 0 00-1 1v12a2 2 0 002 2h16a2 2 0 002-2V8a1 1 0 00-1-1zm-1 12H4V9h16v10zM3 5h15a1 1 0 000-2H3a1 1 0 000 2z" />
                     </svg>
                 </span>
                 Gastos
@@ -69,9 +70,9 @@
             <button onclick="window.location.href='/metas'">
                 <span class="sidebar-icon">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="6"/>
-                        <circle cx="12" cy="12" r="2"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="6" />
+                        <circle cx="12" cy="12" r="2" />
                     </svg>
                 </span>
                 Metas
@@ -80,7 +81,7 @@
             <button onclick="window.location.href='/relatorios'">
                 <span class="sidebar-icon">
                     <svg fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M5 12H3v9h2v-9zm4-5H7v14h2V7zm4-4h-2v18h2V3zm4 8h-2v10h2v-10zm4-4h-2v14h2V7z"/>
+                        <path d="M5 12H3v9h2v-9zm4-5H7v14h2V7zm4-4h-2v18h2V3zm4 8h-2v10h2v-10zm4-4h-2v14h2V7z" />
                     </svg>
                 </span>
                 Relatórios
@@ -89,7 +90,8 @@
             <button>
                 <span class="sidebar-icon">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.5 11c-.17 0-.34.01-.5.03V9a5 5 0 00-5-5H9a5 5 0 00-5 5v5a5 5 0 005 5h3.5A5.5 5.5 0 0017.5 11zm-6.5 7H9a3 3 0 01-3-3V9a3 3 0 013-3h3a3 3 0 013 3v1.54A5.5 5.5 0 0011 18zm6.5 0a3.5 3.5 0 110-7 3.5 3.5 0 010 7zm0-5a.75.75 0 00-.75.75v1.5c0 .41.34.75.75.75s.75-.34.75-.75v-1.5A.75.75 0 0017.5 13z"/>
+                        <path
+                            d="M17.5 11c-.17 0-.34.01-.5.03V9a5 5 0 00-5-5H9a5 5 0 00-5 5v5a5 5 0 005 5h3.5A5.5 5.5 0 0017.5 11zm-6.5 7H9a3 3 0 01-3-3V9a3 3 0 013-3h3a3 3 0 013 3v1.54A5.5 5.5 0 0011 18zm6.5 0a3.5 3.5 0 110-7 3.5 3.5 0 010 7zm0-5a.75.75 0 00-.75.75v1.5c0 .41.34.75.75.75s.75-.34.75-.75v-1.5A.75.75 0 0017.5 13z" />
                     </svg>
                 </span>
                 Seu porquinho
@@ -99,7 +101,7 @@
                 <span class="sidebar-icon">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" color="#666">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
                 </span>
                 Sair
@@ -126,7 +128,7 @@
                 </div>
 
 
-                <img src="../images/pig_background.png">
+                <img src="../images/tela_icon_relatorios.png">
 
             </div>
 
@@ -143,10 +145,10 @@
 
                     <p>Você gastou</p>
 
-                    <h1>R$ 1.380,00</h1>
+                    <h1 id="totalMes">R$ 0,00</h1>
 
-                    <span>↓ 12% em relação ao mês passado</span>
-
+                    <span id="comparacaoMes">
+                    </span>
 
                 </div>
 
@@ -158,12 +160,16 @@
 
                     <h2>Maior gasto</h2>
 
-                    <h3>Alimentação</h3>
+                    <h3 id="maiorCategoria">---</h3>
 
-                    <h1>R$ 520,00</h1>
+                    <h1 id="maiorValor">
+                        R$ 0,00
+                    </h1>
 
-                    <p>37% do total</p>
-s
+                    <p id="maiorPercentual">
+                        0% do total
+                    </p>
+
                 </div>
 
 
@@ -174,12 +180,15 @@ s
 
                     <h2>Menor gasto</h2>
 
-                    <h3>Estudos</h3>
+                    <h3 id="menorCategoria">---</h3>
 
-                    <h1>R$120,00</h1>
+                    <h1 id="menorValor">
+                        R$ 0,00
+                    </h1>
 
-                    <p>9% do total</p>
-
+                    <p id="menorPercentual">
+                        0% do total
+                    </p>
 
                 </div>
 
@@ -194,20 +203,62 @@ s
 
 
                     <div class="linha">
-                        <span>● Supermercado</span>
-                        <div></div>
+
+                        <div class="info-gasto">
+
+                            <span id="top1Nome"></span>
+
+                            <small id="top1Valor"></small>
+
+                        </div>
+
+
+                        <div class="barra-container">
+
+                            <div id="top1Barra"></div>
+
+                        </div>
+
                     </div>
 
 
                     <div class="linha">
-                        <span>● Ifood</span>
-                        <div></div>
+
+                        <div class="info-gasto">
+
+                            <span id="top2Nome"></span>
+
+                            <small id="top2Valor"></small>
+
+                        </div>
+
+
+                        <div class="barra-container">
+
+                            <div id="top2Barra"></div>
+
+                        </div>
+
                     </div>
 
 
                     <div class="linha">
-                        <span>● Transporte</span>
-                        <div></div>
+
+                        <div class="info-gasto">
+
+                            <span id="top3Nome"></span>
+
+                            <small id="top3Valor"></small>
+
+                        </div>
+
+
+                        <div class="barra-container">
+
+                            <div id="top3Barra"></div>
+
+                        </div>
+
                     </div>
 
 
@@ -225,13 +276,88 @@ s
 
                     <div class="barras">
 
-                        <div style="height:80%"></div>
-                        <div style="height:40%"></div>
-                        <div style="height:75%"></div>
-                        <div style="height:30%"></div>
-                        <div style="height:50%"></div>
-                        <div style="height:70%"></div>
-                        <div style="height:35%"></div>
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorSeg"></div>
+
+                            <div class="barra" id="seg"></div>
+
+                            <span>Segunda</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorTer"></div>
+
+                            <div class="barra" id="ter"></div>
+
+                            <span>Terça</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorQua"></div>
+
+                            <div class="barra" id="qua"></div>
+
+                            <span>Quarta</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorQui"></div>
+
+                            <div class="barra" id="qui"></div>
+
+                            <span>Quinta</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorSex"></div>
+
+                            <div class="barra" id="sex"></div>
+
+                            <span>Sexta</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorSab"></div>
+
+                            <div class="barra" id="sab"></div>
+
+                            <span>Sábado</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorDom"></div>
+
+                            <div class="barra" id="dom"></div>
+
+                            <span>Domingo</span>
+
+                        </div>
 
 
                     </div>
@@ -243,32 +369,6 @@ s
 
 
 
-                <div class="card comparativo">
-
-
-                    <h2>Comparativo mensal</h2>
-
-
-                    <div>
-                        <strong>Gastos totais</strong>
-                        <span>R$1.380,00 ↓12%</span>
-                    </div>
-
-
-                    <div>
-                        <strong>Alimentação</strong>
-                        <span>R$620,00 ↑10%</span>
-                    </div>
-
-
-                    <div>
-                        <strong>Lazer</strong>
-                        <span>R$190,00 ↓8%</span>
-                    </div>
-
-
-
-                </div>
 
 
 
@@ -295,9 +395,8 @@ s
                 `Olá, ${usuario.nome}!`;
 
         }
-
-
     </script>
+    <script src="../js/relatorios.js"></script>
 
 
 

@@ -325,7 +325,6 @@ header {
 
     height: 15px;
 
-    background: #73002f;
 
     border-radius: 20px;
 
@@ -339,37 +338,143 @@ header {
 
 .grafico {
 
-    grid-column: 1/4;
+    grid-column: 1/5;
 
     height: 350px;
 
 }
 
+.info-gasto{
+
+display:flex;
+flex-direction:column;
+width:150px;
+
+}
 
 
-.barras {
+.info-gasto span{
 
-    height: 220px;
+font-weight:bold;
 
-    display: flex;
+}
 
-    align-items: end;
 
-    gap: 25px;
+.info-gasto small{
 
-    margin-top: 30px;
+color:#555;
 
 }
 
 
 
-.barras div {
+.barra-container{
 
-    width: 45px;
+flex:1;
 
-    background: #73002f;
+height:15px;
 
-    border-radius: 10px 10px 0 0;
+background:#cbe7a8;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+
+
+.barra-container div{
+
+height:100%;
+
+background:#73002f;
+
+border-radius:20px;
+
+transition:.5s;
+
+}
+
+
+
+.linha{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+margin:20px 0;
+
+}
+
+.barras{
+
+height:250px;
+
+display:flex;
+
+align-items:end;
+
+justify-content:space-around;
+
+gap:15px;
+
+}
+
+
+
+.barra-dia{
+
+height:100%;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:end;
+
+gap:8px;
+
+}
+
+
+
+.barra{
+
+width:45px;
+
+background:#73002f;
+
+border-radius:10px 10px 0 0;
+
+transition:.5s;
+
+}
+
+
+
+.valor-dia{
+
+font-size:12px;
+
+font-weight:bold;
+
+color:#333;
+
+}
+
+
+
+.barra-dia span{
+
+font-size:13px;
+
+font-weight:bold;
 
 }
 
