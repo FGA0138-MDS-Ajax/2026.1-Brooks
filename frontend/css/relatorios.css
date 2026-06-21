@@ -1,0 +1,400 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+
+
+body {
+    background: #f4f4f4;
+    height: 100vh;
+}
+
+
+
+header {
+
+    height: 100px;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 40px;
+
+    box-shadow: 0 2px 5px #ddd;
+
+}
+
+
+
+.porco-logo {
+    width: 150px;
+}
+
+
+
+.menu-direita {
+
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+}
+
+
+.menu-direita h2 {
+
+    color: #73002f;
+
+}
+
+
+
+.botao-inicio button {
+
+    padding: 12px 30px;
+
+    border-radius: 40px;
+
+    border: 2px solid #73002f;
+
+    background: white;
+
+    color: #73002f;
+
+    font-size: 18px;
+
+}
+
+
+
+.icone_conta img {
+
+    width: 50px;
+
+}
+
+
+
+
+.dashboard {
+
+    display: flex;
+
+    height: calc(100vh - 100px);
+
+}
+
+
+
+.botoes-resto {
+
+    width: 260px;
+
+    background: #f0f7ec;
+
+    padding: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+
+.botoes-resto button {
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 40px;
+
+    background: #73002f;
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+
+.botoes-resto .ativo {
+
+    background: #520021;
+
+}
+
+
+
+.btn-sair {
+
+    margin-top: auto;
+
+    background: white !important;
+
+    color: #666 !important;
+
+    border: 2px solid #bbb !important;
+
+}
+
+
+
+
+
+.conteudo {
+
+    flex: 1;
+
+    padding: 25px;
+
+    overflow: auto;
+
+}
+
+
+
+
+
+.titulo {
+
+    background: #f8fbf5;
+
+    border-radius: 25px;
+
+    padding: 20px 40px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+
+.titulo h1 {
+
+    font-size: 40px;
+
+    color: #73002f;
+
+}
+
+
+
+.titulo p {
+
+    font-size: 20px;
+
+}
+
+
+
+.titulo img {
+
+    width: 300px;
+
+}
+
+
+
+
+
+.cards {
+
+
+    margin-top: 20px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    gap: 20px;
+
+
+}
+
+
+
+
+
+.card {
+
+
+    background: #e8f2df;
+
+    border-radius: 25px;
+
+    padding: 25px;
+
+    box-shadow: 2px 3px 8px #ddd;
+
+
+}
+
+
+
+.card h2 {
+
+    color: #73002f;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.card h1 {
+
+    font-size: 35px;
+
+}
+
+
+
+.resumo {
+
+    background: #73002f;
+
+    color: white;
+
+}
+
+
+
+.resumo h2,
+.resumo h1 {
+
+    color: white;
+
+}
+
+
+
+.resumo span {
+
+    color: #cbf29a;
+
+    font-size: 18px;
+
+}
+
+
+
+
+
+.top {
+
+    grid-column: 4;
+
+    grid-row: 1;
+
+}
+
+
+
+.linha {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 20px 0;
+
+}
+
+
+
+.linha div {
+
+    height: 15px;
+
+    background: #73002f;
+
+    border-radius: 20px;
+
+    flex: 1;
+
+}
+
+
+
+
+
+.grafico {
+
+    grid-column: 1/4;
+
+    height: 350px;
+
+}
+
+
+
+.barras {
+
+    height: 220px;
+
+    display: flex;
+
+    align-items: end;
+
+    gap: 25px;
+
+    margin-top: 30px;
+
+}
+
+
+
+.barras div {
+
+    width: 45px;
+
+    background: #73002f;
+
+    border-radius: 10px 10px 0 0;
+
+}
+
+
+
+
+
+.comparativo {
+
+    grid-row: 2;
+    grid-column: 4;
+    height: 350px;
+
+}
+
+
+
+.comparativo div {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin: 25px 0;
+
+    font-size: 18px;
+
+}
