@@ -49,6 +49,10 @@ app.get('/forgot_password', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/forgot_password.html'));
 });
 
+app.get('/reset_password', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/reset_password.html'));
+});
+
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/dashboard.html'));
 });

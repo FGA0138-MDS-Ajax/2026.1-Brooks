@@ -56,37 +56,49 @@ class AuthController {
 
     async forgotPassword(req, res) {
         const { email } = req.body;
-        try{
-           //const usuario = await UserModel.buscarPorEmail(email);//Verificar se o email existe
-            //if (usuario) { //comentado para teste
-                const resetToken = jwt.sign({id: 1}, process.env.JWT_SECRET, {expiresIn: '1h'});
-
-                const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-
-                const resetLink = `http://127.0.0.1:5500/frontend/pages/reset_password.html?token=${resetToken}`;
+        try {
+            
+            const usuario = await UserModel.buscarPorEmail(email);
+            
+            if (!usuario) {
                 
-                await Notification.sendPasswordRecoveryEmail(email, resetLink);
-                
-            // }   //
-        } catch (error){
+                return res.status(200).json({ message: 'Se o e-mail existir, um link de recuperação foi enviado.' });
+            }
+
+            const resetToken = jwt.sign({ id: usuario.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+            const baseUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+            const resetLink = `${baseUrl}/reset_password?token=${resetToken}`;
+            
+            // Envia o e-mail
+            await Notification.sendPasswordRecoveryEmail(email, resetLink);
+            
+            return res.status(200).json({ message: 'Link de recuperação enviado com sucesso.' });
+
+        } catch (error) {
             console.error('Erro no forgotPassword:', error);
             return res.status(500).json({ erro: 'Erro no servidor' });
-      }
+        }
     }
 
     async resetPassword(req, res) {
         const { token, novaSenha } = req.body;
 
         try {
-            // verifica se o token é válido e não expirou
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const usuarioId = decoded.id;
+
+            const salt = await bcrypt.genSalt(10);
+            const senhaCriptografada = await bcrypt.hash(novaSenha, salt);
+
+            //  Salva a nova senha no banco de dados
+            await UserModel.atualizarSenha(usuarioId, senhaCriptografada);
 
             return res.status(200).json({ message: 'Senha redefinida com sucesso!' });
 
         } catch (error) {
             console.error('Erro no resetPassword:', error);
             
-            // Se o token foi adulterado ou já passou de 1 hora, o JWT avisa:
             if (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError') {
                 return res.status(400).json({ erro: 'Token inválido ou expirado. Solicite um novo link.' });
             }
