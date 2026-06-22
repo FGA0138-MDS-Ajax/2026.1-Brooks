@@ -7,9 +7,9 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #2d5016;
     min-height: 100vh;
-    padding: 20px;
+    padding: 35px;
 }
 
 .dashboard-container {
@@ -17,7 +17,7 @@ body {
     margin: 0 auto;
     background: white;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -28,22 +28,64 @@ body {
 }
 
 .dashboard-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #ffffff;
     color: white;
-    padding: 30px;
+    padding: 15px 30px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header-logo {
+    height: 100px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.header-center {
     text-align: center;
+    flex: 1;
 }
 
-.dashboard-header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+.header-center h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #000000;
 }
 
-.dashboard-header p {
-    font-size: 1.1em;
-    opacity: 0.95;
+.header-center p {
+    margin: 2px 0 0 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+    color: #000000;
 }
 
+.header-right {
+    flex-shrink: 0;
+}
+
+.btn-voltar {
+    background:  #c92a3d;
+    color: white;
+    border: 2px solid rgba(69, 47, 47, 0.455);
+    padding: 8px 18px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-voltar:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
 .kpi-container {
     display: grid;
@@ -159,7 +201,7 @@ body {
 }
 
 .category-item:hover {
-    background: white;
+    background: #f8f9fa;
     border-radius: 8px;
 }
 
@@ -167,6 +209,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #000000;
 }
 
 .category-color {
@@ -204,18 +247,23 @@ table {
 }
 
 thead {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #2d5016;
     color: white;
 }
 
-th, td {
+th {
+    padding: 15px;
+    text-align: left;
+     border-bottom: 1px solid #e0e0e0;
+     font-weight: 600;
+    color: white;
+}
+
+td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
-}
-
-th {
-    font-weight: 600;
+    color: #000000;
 }
 
 tbody tr:hover {
@@ -284,7 +332,24 @@ tbody tr:hover {
 @media (max-width: 768px) {
     body { padding: 10px; }
     
-    .dashboard-header h1 { font-size: 1.8em; }
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 0;
+    }
+    
+    .header-logo {
+        height: 35px;
+    }
+    
+    .header-center h1 {
+        font-size: 1.5em;
+    }
+    
+    .btn-voltar {
+        font-size: 0.8em;
+        padding: 6px 14px;
+    }
     
     .kpi-card {
         padding: 15px;
@@ -305,7 +370,27 @@ tbody tr:hover {
 }
 
 @media (max-width: 480px) {
-    .dashboard-header h1 { font-size: 1.5em; }
+    .header-content {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .header-logo {
+        height: 30px;
+    }
+    
+    .header-center h1 {
+        font-size: 1.2em;
+    }
+    
+    .header-center p {
+        font-size: 0.8em;
+    }
+    
+    .btn-voltar {
+        font-size: 0.7em;
+        padding: 5px 12px;
+    }
     
     .kpi-icon {
         font-size: 2em;
