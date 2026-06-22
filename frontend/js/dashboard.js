@@ -302,7 +302,7 @@ function updateResumoMensal(monthlyData) {
     
     const rows = monthlyData.map((data, index) => {
         const status = data.saldo > 0 ? 'positive' : (data.saldo < 0 ? 'negative' : 'neutral');
-        const statusText = data.saldo > 0 ? '📈 Superávit' : (data.saldo < 0 ? '📉 Déficit' : '⚖️ Equilibrado');
+        const statusText = data.saldo > 0 ? 'Superávit' : (data.saldo < 0 ? 'Déficit' : 'Equilibrado');
         const statusClass = `status-${status}`;
         
         return `

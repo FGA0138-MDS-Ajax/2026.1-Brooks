@@ -488,3 +488,174 @@
             background-color: #73002f;
             color: white;
         }
+
+
+@media (max-width: 768px) {
+ 
+  html, body {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+ 
+
+  header {
+    flex-direction: column;
+    padding: 10px 16px;
+    row-gap: 10px;
+  }
+ 
+  .porco-logo {
+    width: 130px;
+  }
+ 
+  .menu-direita {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+ 
+  .menu-direita h2 {
+    font-size: 16px;
+  }
+ 
+  .botao-inicio button {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+ 
+  .header-icones {
+    gap: 10px;
+  }
+ 
+  .icone-sino-wrap svg,
+  .icone-casa svg {
+    width: 26px;
+    height: 26px;
+  }
+ 
+
+  .dashboard {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    flex-direction: column;
+  }
+ 
+ 
+  aside.botoes-resto {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+ 
+    width: 100%;
+    min-width: 0;
+ 
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+ 
+    gap: 8px;
+    padding: 10px 8px;
+ 
+    border-right: none;
+    border-bottom: 1px solid #dde8d6;
+ 
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+ 
+  aside.botoes-resto button,
+  aside.botoes-resto a.sidebar-link {
+    width: auto;
+    flex-shrink: 0;
+ 
+    padding: 10px 14px;
+    font-size: 0; 
+    gap: 0;
+    justify-content: center;
+  }
+ 
+  aside.botoes-resto button svg,
+  aside.botoes-resto a.sidebar-link svg {
+    width: 22px;
+    height: 22px;
+  }
+ 
+  aside.botoes-resto .btn-sair {
+    margin-top: 0;
+    margin-left: auto;
+  }
+ 
+ 
+  section.conteudo {
+    flex: none;
+    overflow-y: visible;
+    height: auto;
+    padding: 16px;
+    padding-bottom: 40px;
+    gap: 18px;
+  }
+ 
+ 
+  .hero-banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 22px 18px;
+    min-height: 0;
+    gap: 14px;
+  }
+ 
+  .hero-imagem-deco {
+    display: none;
+  }
+ 
+  .hero-icone {
+    width: 60px;
+    height: 60px;
+  }
+ 
+  .hero-icone svg {
+    width: 32px;
+    height: 32px;
+  }
+ 
+  .hero-texto h1 {
+    font-size: 22px;
+  }
+ 
+  .hero-texto p {
+    font-size: 14px;
+  }
+ 
+  .grid-form-resumo {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+ 
+  .card-form {
+    padding: 22px 18px 26px;
+  }
+ 
+  .campos-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+ 
+  .botoes-form {
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+ 
+  .card-resumo {
+    padding: 20px 18px 24px;
+  }
+ 
+  .modal-box {
+    padding: 24px;
+  }
+}
