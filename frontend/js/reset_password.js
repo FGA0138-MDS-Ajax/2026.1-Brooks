@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!token) {
         mensagem.textContent = 'Erro: Link de recuperação inválido ou ausente.';
         mensagem.style.color = 'red';
-        // Desativa o botão para evitar envio inútil
+    
         form.querySelector('button').disabled = true; 
-        return; // Para a execução do script aqui
+        return;
     }
 
     // 2. INTERCEPTAR O FORMULÁRIO
     form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Impede a página de recarregar piscando a tela
+        event.preventDefault(); 
 
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
@@ -32,11 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         mensagem.textContent = 'A salvar nova senha...';
-        mensagem.style.color = '#e1b12c'; // Uma cor amarela/laranja de carregamento
+        mensagem.style.color = '#e1b12c';
 
         try {
-            // 3. ENVIAR PARA O BACKEND
-            // Vamos mandar tanto o Token (para o backend saber QUEM é) quanto a Nova Senha
+        
             const response = await fetch('http://localhost:3000/auth/reset_password', {
                 method: 'POST',
                 headers: {
@@ -54,9 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 mensagem.textContent = 'Senha alterada com sucesso! Redirecionando...';
                 mensagem.style.color = 'green';
                 
-                // Redireciona o usuário de volta para a tela de login após 3 segundos
                 setTimeout(() => {
-                    window.location.href = 'login.html'; // Ajuste se o seu arquivo de login tiver outro nome
+                    window.location.href = '../pages/login.html'; 
                 }, 3000);
             } else {
                 mensagem.textContent = data.erro || 'Erro ao redefinir a senha.';
