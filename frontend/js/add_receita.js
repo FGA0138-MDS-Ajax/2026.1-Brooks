@@ -20,7 +20,7 @@ function hideErro() {
 /* ── saldo ── */
 async function carregarSaldo() {
     try {
-        const r = await fetch(`${API}/transacoes/saldo`, {
+        const r = await fetch(`${API}/api/transacoes/saldo`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         const d = await r.json();
@@ -38,7 +38,7 @@ function atualizarSaldoApos() {
 /* ── categorias ── */
 async function carregarCategorias(selecionada = '') {
     try {
-        const r = await fetch(`${API}/categorias?tipo=receita`, {
+        const r = await fetch(`${API}/api/categorias?tipo=receita`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         const { categorias } = await r.json();
@@ -146,9 +146,9 @@ async function salvar() {
     try {
         let r;
         if (editandoId) {
-            r = await fetch(`${API}/transacoes/${editandoId}`, { method: 'PUT', headers, body });
+            r = await fetch(`${API}/api/transacoes/${editandoId}`, { method: 'PUT', headers, body });
         } else {
-            r = await fetch(`${API}/transacoes/receita`, { method: 'POST', headers, body });
+            r = await fetch(`${API}/api/transacoes/receita`, { method: 'POST', headers, body });
         }
 
         const d = await r.json();
@@ -184,7 +184,7 @@ async function carregarHistorico() {
     if (!container) return;
 
     try {
-        const r = await fetch(`${API}/transacoes`, {
+        const r = await fetch(`${API}/api/transacoes`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         const { transacoes } = await r.json();
