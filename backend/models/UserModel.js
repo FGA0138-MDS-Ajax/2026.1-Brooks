@@ -23,11 +23,25 @@ class UserModel {
     }
 
     static async buscarPorEmail(email) {
-    const [rows] = await db.query('SELECT * FROM usuarios WHERE email = ?', [email]);
-    return rows[0] || null;
+        const [rows] = await db.query('SELECT * FROM usuarios WHERE email = ?', [email]);
+        return rows[0] || null;
+    }
+
+    static async atualizarSenha(id, novaSenhaHash) {
+        const query = 'UPDATE usuarios SET senha = ? WHERE id = ?';
+        const values = [novaSenhaHash, id];
+        
+        try {
+            await db.execute(query, values); // Ajuste para db.query ou o comando que você usa
+            return true;
+        } catch (error) {
+            console.error('Erro ao atualizar senha no banco:', error);
+            throw error;
+        }
+    }
 }
 
 
-}
+
 
 module.exports = UserModel;

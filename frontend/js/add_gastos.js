@@ -1,276 +1,180 @@
-/* =========================================================
-   add_gastos.js  –  Adicionar + Editar + Excluir gastos
-   ========================================================= */
+const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+        if (usuario.nome) {
 
-const API = '';   // mesmo origin
+    const saudacao = document.getElementById('saudacao');
 
-/* ── estado global ── */
-let saldoAtual = 0;
-let editandoId  = null;   // null = modo criar, number = modo editar
-
-/* ── utilitários ── */
-const fmt = v =>
-    new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
-
-function showErro(msg) {
-    const el = document.getElementById('erroCategoria');
-    el.textContent = msg;
-    el.style.display = 'block';
-}
-function hideErro() {
-    document.getElementById('erroCategoria').style.display = 'none';
-}
-
-/* ── saldo ── */
-async function carregarSaldo() {
-    try {
-        const r = await fetch(`${API}/transacoes/saldo`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        });
-        const d = await r.json();
-        saldoAtual = d.saldo ?? 0;
-        document.getElementById('saldoAtual').textContent = fmt(saldoAtual);
-        atualizarSaldoApos();
-    } catch { /* silencioso */ }
-}
-
-function atualizarSaldoApos() {
-    const v = parseFloat(document.getElementById('valor').value) || 0;
-    document.getElementById('saldoApos').textContent = fmt(saldoAtual - v);
-}
-
-/* ── categorias ── */
-async function carregarCategorias(selecionada = '') {
-    try {
-        const r = await fetch(`${API}/categorias?tipo=despesa`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        });
-        const { categorias } = await r.json();
-        const sel = document.getElementById('categoria');
-        sel.innerHTML = '<option value="">Selecione uma categoria</option>';
-        categorias.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c.nome;
-            opt.textContent = c.nome;
-            if (c.nome === selecionada) opt.selected = true;
-            sel.appendChild(opt);
-        });
-
-        /* botão "Nova categoria" — cria só uma vez */
-        if (!document.getElementById('btnNovaCategoria')) {
-            const btn = document.createElement('button');
-            btn.id        = 'btnNovaCategoria';
-            btn.type      = 'button';
-            btn.className = 'btn-nova-cat';
-            btn.textContent = '+ Nova categoria';
-            btn.onclick   = abrirModalCategoria;
-            sel.parentElement.appendChild(btn);
-        }
-    } catch { /* silencioso */ }
-}
-
-/* ── modal nova categoria ── */
-function abrirModalCategoria()  { document.getElementById('modalCategoria').classList.add('ativo'); }
-function fecharModalCategoria() { document.getElementById('modalCategoria').classList.remove('ativo'); }
-
-async function confirmarNovaCategoria() {
-    const nome = document.getElementById('novaCategoriaInput').value.trim();
-    if (!nome) return;
-    try {
-        await fetch(`${API}/categorias`, {
-            method : 'POST',
-            headers: {
-                'Content-Type' : 'application/json',
-                Authorization  : `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({ nome, tipo: 'despesa' })
-        });
-        fecharModalCategoria();
-        document.getElementById('novaCategoriaInput').value = '';
-        await carregarCategorias(nome);
-        document.getElementById('categoria').value = nome;
-    } catch { alert('Erro ao criar categoria.'); }
-}
-
-/* ── limpar formulário ── */
-function limparForm() {
-    document.getElementById('descricao').value = '';
-    document.getElementById('valor').value     = '';
-    document.getElementById('categoria').value = '';
-    document.getElementById('data').value      = '';
-    hideErro();
-    editandoId = null;
-
-    document.querySelector('.btn-salvar').textContent = 'Salvar gasto';
-    const btnCancelarEdicao = document.getElementById('btnCancelarEdicao');
-    if (btnCancelarEdicao) btnCancelarEdicao.remove();
-
-    atualizarSaldoApos();
-}
-
-/* ── preencher formulário para edição ── */
-function preencherFormParaEdicao(t) {
-    editandoId = t.id;
-    document.getElementById('descricao').value = t.descricao;
-    document.getElementById('valor').value     = t.valor;
-    document.getElementById('categoria').value = t.categoria || '';
-    if (t.data) document.getElementById('data').value = t.data.substring(0, 10);
-
-    document.querySelector('.btn-salvar').textContent = 'Salvar alterações';
-
-    /* botão cancelar edição */
-    if (!document.getElementById('btnCancelarEdicao')) {
-        const btn = document.createElement('button');
-        btn.id        = 'btnCancelarEdicao';
-        btn.type      = 'button';
-        btn.className = 'btn-cancelar-edicao';
-        btn.textContent = 'Cancelar edição';
-        btn.onclick     = limparForm;
-        document.querySelector('.botoes-form').appendChild(btn);
+    if (saudacao) {
+        saudacao.textContent = `Olá, ${usuario.nome}! 👋`;
     }
 
-    atualizarSaldoApos();
-    document.getElementById('descricao').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    document.getElementById('descricao').focus();
 }
 
-/* ── salvar (criar ou editar) ── */
-async function salvar() {
-    const descricao = document.getElementById('descricao').value.trim();
-    const valor     = parseFloat(document.getElementById('valor').value);
-    const categoria = document.getElementById('categoria').value;
+        const inputData = document.getElementById('data');
+        const hoje = new Date().toISOString().split('T')[0];
+        inputData.value = hoje;
 
-    if (!descricao) return showErro('Informe uma descrição.');
-    if (!valor || valor <= 0) return showErro('Informe um valor válido.');
-    if (!categoria) return showErro('Selecione uma categoria.');
-    hideErro();
+        const token = localStorage.getItem('token');
+        const selectCategoria = document.getElementById('categoria');
 
-    const body    = JSON.stringify({ descricao, valor, categoria });
-    const headers = {
-        'Content-Type' : 'application/json',
-        Authorization  : `Bearer ${localStorage.getItem('token')}`
-    };
+        async function carregarCategorias() {
 
-    try {
-        let r;
-        if (editandoId) {
-            r = await fetch(`${API}/transacoes/${editandoId}`, { method: 'PUT', headers, body });
-        } else {
-            r = await fetch(`${API}/transacoes/gasto`, { method: 'POST', headers, body });
+            try {
+
+                const resp = await fetch('/api/categorias?tipo=despesa', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const dados = await resp.json();
+
+                console.log("DADOS RECEBIDOS:", dados);
+
+                if (!resp.ok) {
+                    console.error(dados.erro);
+                    return;
+                }
+
+
+                const select = document.getElementById('categoria');
+
+                // limpa opções antigas
+                select.innerHTML = `
+                    <option value="">
+                        Selecione uma categoria
+                    </option>
+                `;
+
+
+                dados.categorias.forEach(categoria => {
+
+                    const option = document.createElement('option');
+
+                    option.value = categoria.nome;
+                    option.textContent = categoria.nome;
+
+                    select.appendChild(option);
+
+                });
+
+                console.log(
+                    "OPTIONS NO SELECT:",
+                    select.options
+                );
+
+
+            } catch(error) {
+
+                console.error(
+                    "Erro ao carregar categorias:",
+                    error
+                );
+
+            }
         }
 
-        const d = await r.json();
-        if (!r.ok) return showErro(d.erro || 'Erro ao salvar.');
+        let valorAnteriorSelect = '';
 
-        const msg = editandoId ? 'Gasto atualizado!' : 'Gasto registrado!';
-        mostrarToast(msg, 'sucesso');
-        limparForm();
-        await carregarSaldo();
-        await carregarHistorico();
-    } catch { showErro('Erro de conexão.'); }
-}
-
-/* ── excluir ── */
-async function excluir(id) {
-    if (!confirm('Deseja excluir este gasto?')) return;
-    try {
-        const r = await fetch(`${API}/transacoes/${id}`, {
-            method : 'DELETE',
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        selectCategoria.addEventListener('change', (e) => {
+            if (e.target.value === '__nova__') {
+                abrirModalCategoria();
+            } else {
+                valorAnteriorSelect = e.target.value;
+                ocultarErroCategoria();
+            }
         });
-        if (!r.ok) { const d = await r.json(); return alert(d.erro); }
-        mostrarToast('Gasto excluído.', 'erro');
-        if (editandoId === id) limparForm();
-        await carregarSaldo();
-        await carregarHistorico();
-    } catch { alert('Erro de conexão.'); }
-}
 
-/* ── histórico ── */
-async function carregarHistorico() {
-    const container = document.getElementById('historicoLista');
-    if (!container) return;
+        document.getElementById('valor').addEventListener('input', atualizarResumo);
 
-    try {
-        const r = await fetch(`${API}/transacoes`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        });
-        const { transacoes } = await r.json();
-        const gastos = transacoes.filter(t => t.tipo === 'despesa');
+        function atualizarResumo() {
+            const saldoAtual = parseFloat(localStorage.getItem('saldoAtual') || '0');
+            const valorInput = parseFloat(document.getElementById('valor').value) || 0;
 
-        if (!gastos.length) {
-            container.innerHTML = '<p class="historico-vazio">Nenhum gasto registrado ainda.</p>';
-            return;
+            const fmt = (n) => 'R$ ' + n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            document.getElementById('saldoAtual').textContent = fmt(saldoAtual);
+            document.getElementById('saldoApos').textContent  = fmt(saldoAtual - valorInput);
         }
 
-        container.innerHTML = gastos.map(t => `
-            <div class="historico-item" data-id="${t.id}">
-                <div class="historico-info">
-                    <span class="historico-desc">${t.descricao}</span>
-                    <span class="historico-cat">${t.categoria || '—'}</span>
-                    <span class="historico-data">${formatarData(t.data)}</span>
-                </div>
-                <div class="historico-direita">
-                    <span class="historico-valor">- ${fmt(t.valor)}</span>
-                    <div class="historico-acoes">
-                        <button class="btn-editar-item" title="Editar" onclick='editarItem(${JSON.stringify(t)})'>
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5
-                                         m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                            </svg>
-                        </button>
-                        <button class="btn-excluir-item" title="Excluir" onclick="excluir(${t.id})">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <polyline points="3 6 5 6 21 6"/>
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6
-                                         m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    } catch { /* silencioso */ }
-}
+        atualizarResumo();
 
-function editarItem(t) {
-    carregarCategorias(t.categoria || '').then(() => preencherFormParaEdicao(t));
-}
+        function abrirModalCategoria() {
+            document.getElementById('novaCategoriaInput').value = '';
+            document.getElementById('modalCategoria').classList.add('ativo');
+        }
 
-function formatarData(str) {
-    if (!str) return '';
-    const [y, m, d] = str.substring(0, 10).split('-');
-    return `${d}/${m}/${y}`;
-}
+        function fecharModalCategoria() {
+            document.getElementById('modalCategoria').classList.remove('ativo');
+            selectCategoria.value = valorAnteriorSelect;
+        }
 
-/* ── toast ── */
-function mostrarToast(msg, tipo = 'sucesso') {
-    let t = document.getElementById('toast');
-    if (!t) {
-        t = document.createElement('div');
-        t.id = 'toast';
-        document.body.appendChild(t);
-    }
-    t.textContent  = msg;
-    t.className    = `toast toast-${tipo} toast-visivel`;
-    clearTimeout(t._timer);
-    t._timer = setTimeout(() => t.classList.remove('toast-visivel'), 3000);
-}
+        async function confirmarNovaCategoria() {
+            const nome = document.getElementById('novaCategoriaInput').value.trim();
+            if (!nome) { alert('Informe o nome da categoria.'); return; }
+            try {
+                const resp = await fetch('/api/categorias', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ nome, tipo: 'despesa' })
+                });
+                const dados = await resp.json();
+                if (!resp.ok) { alert(dados.erro || 'Erro ao criar categoria.'); return; }
+                const opt = document.createElement('option');
+                opt.value = dados.categoria.nome;
+                opt.textContent = dados.categoria.nome;
+                selectCategoria.value = dados.categoria.nome;
+                valorAnteriorSelect  = dados.categoria.nome;
+                document.getElementById('modalCategoria').classList.remove('ativo');
+                ocultarErroCategoria();
+            } catch (err) {
+                console.error(err);
+                alert('Não foi possível conectar ao servidor.');
+            }
+        }
 
-/* ── init ── */
-document.addEventListener('DOMContentLoaded', async () => {
-    document.getElementById('valor')
-        ?.addEventListener('input', atualizarSaldoApos);
+        function mostrarErroCategoria()  { document.getElementById('erroCategoria').style.display = 'block'; }
+        function ocultarErroCategoria()  { document.getElementById('erroCategoria').style.display = 'none';  }
 
-    /* data padrão = hoje */
-    const dataEl = document.getElementById('data');
-    if (dataEl && !dataEl.value) {
-        dataEl.value = new Date().toISOString().substring(0, 10);
-    }
+        async function salvar() {
+            const desc      = document.getElementById('descricao').value.trim();
+            const valor     = parseFloat(document.getElementById('valor').value);
+            const categoria = selectCategoria.value;
+            const data      = document.getElementById('data').value;
 
-    await carregarSaldo();
-    await carregarCategorias();
-    await carregarHistorico();
-});
+            if (!desc)                { alert('Informe uma descrição.'); return; }
+            if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
+            if (!data)                { alert('Informe a data.'); return; }
+            if (!categoria || categoria === '__nova__') {
+                mostrarErroCategoria();
+                selectCategoria.focus();
+                return;
+            }
+
+            const btn = document.querySelector('.btn-salvar');
+            btn.disabled = true;
+            btn.textContent = 'Salvando…';
+
+            try {
+                const resp = await fetch('/api/transacoes/gasto', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ descricao: desc, valor, categoria, data })
+                });
+                const dados = await resp.json();
+                if (!resp.ok) {
+                    alert(dados.erro || 'Erro ao salvar gasto.');
+                    btn.disabled = false;
+                    btn.textContent = 'Salvar gasto';
+                    return;
+                }
+                await ganharXp('gasto', desc);
+                alert('Gasto registrado!\n\n' + desc + ' (' + categoria + ') — R$ ' + valor.toFixed(2).replace('.', ','));
+                window.location.href = 'menu';
+            } catch (err) {
+                console.error(err);
+                alert('Não foi possível conectar ao servidor.');
+                btn.disabled = false;
+                btn.textContent = 'Salvar gasto';
+            }
+        }
+
+        carregarCategorias();

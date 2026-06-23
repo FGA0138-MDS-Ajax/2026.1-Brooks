@@ -49,12 +49,20 @@ app.get('/forgot_password', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/forgot_password.html'));
 });
 
+app.get('/reset_password', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/reset_password.html'));
+});
+
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/dashboard.html'));
 });
 
 app.get('/historico', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/historico.html'));
+});
+
+app.get('/relatorios', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/relatorios.html'));
 });
 
 module.exports = app;

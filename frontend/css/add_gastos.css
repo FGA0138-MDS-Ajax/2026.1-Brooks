@@ -1,4 +1,4 @@
-        *, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -15,6 +15,8 @@
             border-bottom: 1px solid #e0e0e0;
             box-shadow: 0 1px 4px rgba(0,0,0,0.06);
         }
+
+      
 
         .menu-direita {
             display: flex;
@@ -74,8 +76,11 @@
         .dashboard {
             display: flex;
             height: calc(100vh - 99px);
+            position: relative;  /* ← adicione isso */
+            overflow: hidden; 
         }
 
+ 
         aside.botoes-resto {
             width: 260px;
             min-width: 260px;
@@ -87,8 +92,7 @@
             border-right: 1px solid #dde8d6;
         }
 
-        aside.botoes-resto button,
-        aside.botoes-resto a.sidebar-link {
+        aside.botoes-resto button {
             display: flex;
             align-items: center;
             gap: 14px;
@@ -105,13 +109,11 @@
             transition: 0.2s;
         }
 
-        aside.botoes-resto button:hover,
-        aside.botoes-resto a.sidebar-link:hover {
+        aside.botoes-resto button:hover {
             background-color: #5c0f27;
         }
 
-        aside.botoes-resto button svg,
-        aside.botoes-resto a.sidebar-link svg {
+        aside.botoes-resto button svg {
             width: 22px;
             height: 22px;
             flex-shrink: 0;
@@ -135,11 +137,11 @@
             display: flex;
             flex-direction: column;
             gap: 28px;
-            background-color: #f1f9ec;
+            background-color: #fffef6;
         }
 
         .hero-banner {
-            background-color: #ffffff;
+            background-color: #fffef6;
             border-radius: 20px;
             padding: 28px 36px;
             display: flex;
@@ -148,7 +150,7 @@
             position: relative;
             overflow: hidden;
             min-height: 160px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+         
         }
 
         .hero-icone {
@@ -183,13 +185,12 @@
 
         .hero-imagem-deco {
             position: absolute;
-            right: -25px;
+            right: -185px;
             top: 50%;
             transform: translateY(-50%);
-            height: 290%;
-            max-width: 850px;
-            object-fit: contain;
-            opacity: 0.85;
+            height: 400%;
+            max-width: 1250px;
+            opacity: 0.95;
             pointer-events: none;
             user-select: none;
         }
@@ -241,7 +242,31 @@
             width: 100%;
         }
 
-        .campo-grupo input:focus,
+        .campo-grupo input:focus {
+            border-color: #73002f;
+            background-color: #f9fdf6;
+        }
+
+        .campo-grupo input::placeholder {
+            color: #bbb;
+        }
+
+        .campo-grupo select {
+            height: 54px;
+            border-radius: 12px;
+            border: 2px solid #ccc;
+            background-color: white;
+            font-size: 16px;
+            padding: 0 18px;
+            color: #333;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: border-color 0.2s, background-color 0.2s;
+            width: 100%;
+            appearance: none;
+            cursor: pointer;
+        }
+
         .campo-grupo select:focus {
             border-color: #73002f;
             background-color: #fdf9fb;
@@ -257,7 +282,7 @@
             -moz-appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2373002f'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 16px center;
+            background-position: right 28px center;
             cursor: pointer;
             padding-right: 44px;
         }
@@ -464,8 +489,6 @@
             color: white;
         }
 
-        .modal-botoes .btn-confirmar:hover { background-color: #5c0f27; }
-
 
 @media (max-width: 768px) {
  
@@ -475,7 +498,7 @@
     overflow-y: auto;
   }
  
- 
+
   header {
     flex-direction: column;
     padding: 10px 16px;
@@ -520,7 +543,7 @@
     flex-direction: column;
   }
  
-  
+ 
   aside.botoes-resto {
     position: sticky;
     top: 0;
@@ -566,17 +589,17 @@
     margin-left: auto;
   }
  
-
+ 
   section.conteudo {
     flex: none;
     overflow-y: visible;
     height: auto;
     padding: 16px;
-    padding-bottom: 40px; 
+    padding-bottom: 40px;
     gap: 18px;
   }
  
-
+ 
   .hero-banner {
     flex-direction: column;
     align-items: center;
@@ -607,7 +630,6 @@
   .hero-texto p {
     font-size: 14px;
   }
- 
  
   .grid-form-resumo {
     grid-template-columns: 1fr;
