@@ -8,5 +8,7 @@ router.post('/transacoes/gasto',   authMiddleware, TransactionController.salvarG
 router.post('/transacoes/receita', authMiddleware, TransactionController.salvarReceita);
 router.get('/transacoes',          authMiddleware, TransactionController.listar);
 router.get('/saldo', authMiddleware, TransactionController.saldo);
+router.put('/transacoes/:id',  authMiddleware, TransactionController.editar);
+router.delete('/transacoes/:id', authMiddleware, TransactionController.excluir);
 
 module.exports = router;
