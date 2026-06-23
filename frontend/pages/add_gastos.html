@@ -3,332 +3,151 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-    <title>PiggyMe – Informar Gasto</title>
-
-    <link rel="stylesheet"
-          href="../css/menu.css">
-
-    <style>
-
-        .form-gasto {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            height: 100%;
-            padding: 60px 0;
-        }
-
-        .form-gasto h2 {
-            font-size: 38px;
-            color: #73002f;
-        }
-
-        .campos {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .campo-grupo {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .campo-grupo label {
-            font-size: 24px;
-            font-weight: bold;
-            color: #73002f;
-        }
-
-        .campo-grupo input {
-            height: 70px;
-            border-radius: 40px;
-            border: 4px solid #333;
-            background-color: white;
-            font-size: 24px;
-            padding: 0 28px;
-            color: #333;
-            outline: none;
-            font-family: Arial, Helvetica, sans-serif;
-            transition: 0.2s;
-            width: 100%;
-        }
-
-        .campo-grupo input:focus {
-            border-color: #73002f;
-            background-color: #f9fdf6;
-        }
-
-        .campo-grupo input::placeholder {
-            color: #bbb;
-        }
-
-        .campo-grupo select {
-            height: 70px;
-            border-radius: 40px;
-            border: 4px solid #333;
-            background-color: white;
-            font-size: 24px;
-            padding: 0 28px;
-            color: #333;
-            outline: none;
-            font-family: Arial, Helvetica, sans-serif;
-            transition: 0.2s;
-            width: 100%;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2373002f'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 28px center;
-            cursor: pointer;
-        }
-
-        .campo-grupo select:focus {
-            border-color: #73002f;
-            background-color: #f9fdf6;
-        }
-
-        .botoes-form {
-            display: flex;
-            gap: 24px;
-            margin-top: 10px;
-        }
-
-        .btn-cancelar {
-            width: 200px;
-            height: 70px;
-            border-radius: 40px;
-            border: 4px solid #333;
-            background-color: white;
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-cancelar:hover {
-            transform: scale(1.03);
-            background-color: #f0f0f0;
-        }
-
-        .btn-salvar {
-            width: 200px;
-            height: 70px;
-            border-radius: 40px;
-            border: 4px solid #73002f;
-            background-color: #73002f;
-            font-size: 22px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-salvar:hover {
-            transform: scale(1.03);
-            background-color: #5c0f27;
-        }
-
-        /* Modal de nova categoria */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.45);
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-        }
-
-        .modal-overlay.ativo {
-            display: flex;
-        }
-
-        .modal-box {
-            background: white;
-            border-radius: 30px;
-            border: 4px solid #73002f;
-            padding: 40px;
-            width: 90%;
-            max-width: 420px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .modal-box h3 {
-            color: #73002f;
-            font-size: 26px;
-            margin: 0;
-        }
-
-        .modal-box input {
-            height: 60px;
-            border-radius: 30px;
-            border: 4px solid #333;
-            font-size: 20px;
-            padding: 0 22px;
-            outline: none;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .modal-box input:focus {
-            border-color: #73002f;
-        }
-
-        .modal-botoes {
-            display: flex;
-            gap: 16px;
-            justify-content: flex-end;
-        }
-
-        .modal-botoes button {
-            height: 50px;
-            padding: 0 24px;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            border: 4px solid #333;
-            background: white;
-            color: #333;
-            transition: 0.3s;
-        }
-
-        .modal-botoes button:hover {
-            transform: scale(1.03);
-            background-color: #f0f0f0;
-        }
-
-        .modal-botoes .btn-confirmar {
-            border-color: #73002f;
-            background-color: #73002f;
-            color: white;
-        }
-
-        .modal-botoes .btn-confirmar:hover {
-            background-color: #5c0f27;
-        }
-
-        .erro-categoria {
-            color: #c0392b;
-            font-size: 16px;
-            display: none;
-        }
-
-    </style>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiggyMe – Adicionar Gasto</title>
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/add_gastos.css">
+    <script src="../js/auth.js"></script>
 </head>
 
 <body>
+
     <header>
-
-        <img src="../images/piggyme_logo2.png"
-             class="porco-logo"
-             alt="Logo PiggyMe">
-
+        <img src="../images/piggyme_logo2.png" class="porco-logo" alt="Logo PiggyMe">
         <div class="menu-direita">
-
-            <h2 id="saudacao">Olá!</h2>
-
             <div class="botao-inicio">
-
                 <button onclick="window.location.href='menu'">
                     <strong>Início</strong>
                 </button>
-
-            </div>
-            <div class="icone_conta">
-
-                <img src="../images/icone_conta.png"
-                     alt="Ícone da conta">
             </div>
         </div>
     </header>
+
     <main class="dashboard">
+
         <aside class="botoes-resto">
-
-            <button>Categoria</button>
-
-            <button>Categoria</button>
-
-            <button>Categoria</button>
-
-            <button>Categoria</button>
-
-            <button onclick="window.location.href='add_gastos'">Informar gasto -</button>
-
-            <button onclick="window.location.href='add_receita'">Adicionar entrada +</button>
-
-            <button onclick="window.location.href='historico'">Histórico Detalhado</button>
-
+            <button onclick="window.location.href='menu'">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                Dashboard
+            </button>
+            <button onclick="window.location.href='add_gastos'">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 7H3a1 1 0 00-1 1v12a2 2 0 002 2h16a2 2 0 002-2V8a1 1 0 00-1-1zm-1 12H4V9h16v10zM3 5h15a1 1 0 000-2H3a1 1 0 000 2z"/></svg>
+                Gastos
+            </button>
+            <button>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                Metas
+            </button>
+            <button onclick="window.location.href='/historico'">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M5 12H3v9h2v-9zm4-5H7v14h2V7zm4-4h-2v18h2V3zm4 8h-2v10h2v-10zm4-4h-2v14h2V7z"/></svg>
+                Relatórios
+            </button>
+            <button>
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19.07 10.49A7.01 7.01 0 0012.07 4h-.5C10.14 2.82 8.91 2 7.5 2 6.24 2 5 2.74 4.31 4H4a2 2 0 00-2 2v1a2 2 0 002 2h.07A7.02 7.02 0 004 11.07 7.01 7.01 0 009 17.93V20H8a1 1 0 000 2h8a1 1 0 000-2h-1v-2.07a7.01 7.01 0 005.07-5.44H21a1 1 0 000-2h-1.93z"/></svg>
+                Seu porquinho
+            </button>
+            <button class="btn-sair" onclick="sair()">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                Sair
+            </button>
         </aside>
 
         <section class="conteudo">
-            <div class="card">
-                <div class="form-gasto">
-                    <h2>Informar Gasto</h2>
-                    <div class="campos">
+
+            <div class="hero-banner">
+                <div class="hero-icone">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21 7H3a1 1 0 00-1 1v12a2 2 0 002 2h16a2 2 0 002-2V8a1 1 0 00-1-1zm-1 12H4V9h16v10zM3 5h15a1 1 0 000-2H3a1 1 0 000 2z"/></svg>
+                </div>
+                <div class="hero-texto">
+                    <h1>Adicionar gasto</h1>
+                    <p>Registre suas despesas e acompanhe para onde seu dinheiro está indo.</p>
+                </div>
+                <img src="../images/22.png" class="hero-imagem-deco" alt="Ilustração financeira">
+            </div>
+
+            <div class="grid-form-resumo">
+
+                <div class="card-form">
+                    <div class="campos-grid">
+
                         <div class="campo-grupo">
-                            <label for="descricao">Descrição</label>
-                            <input type="text"
-                                   id="descricao"
-                                   placeholder="Ex: Mercado, Aluguel…"
-                                   maxlength="100">
+                            <label for="descricao">Nome do gasto</label>
+                            <input type="text" id="descricao" placeholder="Ex: Mercado, Aluguel…" maxlength="100">
                         </div>
 
                         <div class="campo-grupo">
                             <label for="valor">Valor (R$)</label>
-                            <input type="number"
-                                   id="valor"
-                                   placeholder="0,00"
-                                   min="0"
-                                   step="0.01">
+                            <input type="number" id="valor" placeholder="R$ 0,00" min="0" step="0.01">
                         </div>
 
                         <div class="campo-grupo">
                             <label for="categoria">Categoria</label>
                             <select id="categoria">
                                 <option value="">Selecione uma categoria</option>
-                                <option value="__nova__">+ Criar nova categoria…</option>
                             </select>
                             <span class="erro-categoria" id="erroCategoria">Selecione uma categoria.</span>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="data">Data</label>
+                            <div class="input-data-wrap">
+                                <input type="date" id="data">
+                                <span class="icone-cal">
+                                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                </span>
+                            </div>
                         </div>
 
                     </div>
 
                     <div class="botoes-form">
-
-                        <a class="btn-cancelar"
-                           href="menu">Cancelar</a>
-
-                        <button class="btn-salvar"
-                                onclick="salvar()">Salvar</button>
-
+                        <button class="btn-salvar" onclick="salvar()">Salvar gasto</button>
+                        <a class="btn-cancelar" href="menu">Cancelar</a>
                     </div>
-
                 </div>
 
+                <div class="card-resumo">
+                    <div class="resumo-titulo">
+                        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 2a16 16 0 100 32A16 16 0 0018 2z" fill="#e8f5e2"/>
+                            <path d="M18 2v16l11.31 11.31A16 16 0 0018 2z" fill="#73002f" opacity=".7"/>
+                            <path d="M18 18L6.69 29.31A16 16 0 0018 34V18z" fill="#73002f" opacity=".4"/>
+                        </svg>
+                        <span>Resumo rápido</span>
+                    </div>
+                    <div class="resumo-linha">
+                        <label>Saldo atual:</label>
+                        <span class="valor" id="saldoAtual">R$ –</span>
+                    </div>
+                    <div class="resumo-linha">
+                        <label>Após este gasto:</label>
+                        <span class="valor" id="saldoApos">R$ –</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-historico">
+                <div class="historico-cabecalho">
+                    <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M13 3a9 9 0 10.001 18.001A9 9 0 0013 3zm0 16a7 7 0 110-14 7 7 0 010 14zm.5-11H12v6l5.25 3.15.75-1.23-4.5-2.67V8z"/>
+                    </svg>
+                    <h2>Histórico de gastos</h2>
+                </div>
+                <div id="historicoLista" class="historico-lista">
+                    <p class="historico-vazio">Carregando…</p>
+                </div>
             </div>
 
         </section>
 
     </main>
 
-    <!-- Modal nova categoria -->
     <div class="modal-overlay" id="modalCategoria">
         <div class="modal-box">
             <h3>Nova categoria</h3>
@@ -341,166 +160,7 @@
     </div>
 
     <script src="../js/gamification.js"></script>
-    <script>
-        // Saudação no header
-        const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-        if (usuario.nome) {
-            document.getElementById('saudacao').textContent = `Olá, ${usuario.nome}!`;
-        }
-
-        const token = localStorage.getItem('token');
-        const selectCategoria = document.getElementById('categoria');
-        const opcaoNova = selectCategoria.querySelector('option[value="__nova__"]');
-
-        // Carrega categorias do tipo "despesa" ao entrar na página
-        async function carregarCategorias() {
-            try {
-                const resp = await fetch('/api/categorias?tipo=despesa', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-
-                const dados = await resp.json();
-                if (!resp.ok) {
-                    console.error(dados.erro || 'Erro ao carregar categorias.');
-                    return;
-                }
-
-                (dados.categorias || []).forEach(cat => {
-                    const opt = document.createElement('option');
-                    opt.value = cat.nome;
-                    opt.textContent = cat.nome;
-                    selectCategoria.insertBefore(opt, opcaoNova);
-                });
-            } catch (err) {
-                console.error('Não foi possível carregar categorias:', err);
-            }
-        }
-
-        // Controle do select: ao escolher "+ Criar nova categoria…" abre o modal
-        let valorAnteriorSelect = '';
-
-        selectCategoria.addEventListener('change', (e) => {
-            if (e.target.value === '__nova__') {
-                abrirModalCategoria();
-            } else {
-                valorAnteriorSelect = e.target.value;
-                ocultarErroCategoria();
-            }
-        });
-
-        function abrirModalCategoria() {
-            document.getElementById('novaCategoriaInput').value = '';
-            document.getElementById('modalCategoria').classList.add('ativo');
-        }
-
-        function fecharModalCategoria() {
-            document.getElementById('modalCategoria').classList.remove('ativo');
-            // Volta o select para o valor anterior se o usuário cancelar
-            selectCategoria.value = valorAnteriorSelect;
-        }
-
-        async function confirmarNovaCategoria() {
-            const nome = document.getElementById('novaCategoriaInput').value.trim();
-
-            if (!nome) {
-                alert('Informe o nome da categoria.');
-                return;
-            }
-
-            try {
-                const resp = await fetch('/api/categorias', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ nome, tipo: 'despesa' })
-                });
-
-                const dados = await resp.json();
-
-                if (!resp.ok) {
-                    alert(dados.erro || 'Erro ao criar categoria.');
-                    return;
-                }
-
-                // Adiciona a nova categoria ao select e a seleciona
-                const opt = document.createElement('option');
-                opt.value = dados.categoria.nome;
-                opt.textContent = dados.categoria.nome;
-                selectCategoria.insertBefore(opt, opcaoNova);
-                selectCategoria.value = dados.categoria.nome;
-                valorAnteriorSelect = dados.categoria.nome;
-
-                document.getElementById('modalCategoria').classList.remove('ativo');
-                ocultarErroCategoria();
-
-            } catch (err) {
-                console.error(err);
-                alert('Não foi possível conectar ao servidor.');
-            }
-        }
-
-        function mostrarErroCategoria() {
-            document.getElementById('erroCategoria').style.display = 'block';
-        }
-
-        function ocultarErroCategoria() {
-            document.getElementById('erroCategoria').style.display = 'none';
-        }
-
-        async function salvar() {
-            const desc      = document.getElementById('descricao').value.trim();
-            const valor     = parseFloat(document.getElementById('valor').value);
-            const categoria = selectCategoria.value;
-
-            if (!desc)                { alert('Informe uma descrição.'); return; }
-            if (!valor || valor <= 0) { alert('Informe um valor válido.'); return; }
-
-            if (!categoria || categoria === '__nova__') {
-                mostrarErroCategoria();
-                selectCategoria.focus();
-                return;
-            }
-
-            const btn = document.querySelector('.btn-salvar');
-            btn.disabled = true;
-            btn.textContent = 'Salvando…';
-
-            try {
-                const resp = await fetch('/api/transacoes/gasto', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ descricao: desc, valor, categoria })
-                });
-
-                const dados = await resp.json();
-
-                if (!resp.ok) {
-                    alert(dados.erro || 'Erro ao salvar gasto.');
-                    btn.disabled = false;
-                    btn.textContent = 'Salvar';
-                    return;
-                }
-
-                await ganharXp('gasto', desc);
-                alert('Gasto registrado!\n\n' + desc + ' (' + categoria + ') — R$ ' + valor.toFixed(2).replace('.', ','));
-                window.location.href = 'menu';
-
-            } catch (err) {
-                console.error(err);
-                alert('Não foi possível conectar ao servidor.');
-                btn.disabled = false;
-                btn.textContent = 'Salvar';
-            }
-        }
-
-        carregarCategorias();
-    </script>
+    <script src="../js/add_gastos.js"></script>
 
 </body>
-
 </html>
