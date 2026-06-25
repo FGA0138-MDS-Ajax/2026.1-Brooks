@@ -135,16 +135,16 @@ async function salvar() {
     const categoria = document.getElementById('categoria').value;
 
 
-    if (!descricao) 
+    if (!descricao)
         return showErro('Informe uma descrição.');
 
-    if (!valor || valor <= 0) 
+    if (!valor || valor <= 0)
         return showErro('Informe um valor válido.');
 
     hideErro();
 
 
-    const metaId = 
+    const metaId =
         document.getElementById('meta')?.value || null;
 
 
@@ -159,9 +159,9 @@ async function salvar() {
     }
 
     console.log({
-    metaId,
-    valorMeta
-});
+        metaId,
+        valorMeta
+    });
 
     const body = JSON.stringify({
         descricao,
@@ -173,23 +173,22 @@ async function salvar() {
 
 
     const headers = {
-        'Content-Type':'application/json',
+        'Content-Type': 'application/json',
         Authorization:
             `Bearer ${localStorage.getItem('token')}`
     };
-
-
+    
     try {
 
         let r;
 
 
-        if(editandoId){
+        if (editandoId) {
 
             r = await fetch(
                 `${API}/api/transacoes/${editandoId}`,
                 {
-                    method:'PUT',
+                    method: 'PUT',
                     headers,
                     body
                 }
@@ -202,14 +201,13 @@ async function salvar() {
             r = await fetch(
                 `${API}/api/transacoes/receita`,
                 {
-                    method:'POST',
+                    method: 'POST',
                     headers,
                     body
                 }
             );
 
         }
-
 
 
         const d = await r.json();
@@ -219,7 +217,7 @@ async function salvar() {
 
 
 
-        if(!r.ok){
+        if (!r.ok) {
 
             return showErro(
                 d.erro || "Erro ao salvar."
@@ -230,9 +228,9 @@ async function salvar() {
 
 
         mostrarToast(
-            editandoId 
-            ? "Receita atualizada!"
-            : "Receita registrada!",
+            editandoId
+                ? "Receita atualizada!"
+                : "Receita registrada!",
             "sucesso"
         );
 
@@ -244,9 +242,9 @@ async function salvar() {
 
 
 
-    } catch(err){
+    } catch (err) {
 
-        console.error("ERRO SALVAR:",err);
+        console.error("ERRO SALVAR:", err);
 
         showErro(
             "Erro de conexão."

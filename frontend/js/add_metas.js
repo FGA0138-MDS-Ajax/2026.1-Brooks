@@ -114,41 +114,41 @@ async function carregarMetas() {
 
         lista.innerHTML += `
 
-<div class="meta-card">
+            <div class="meta-card">
 
-<h2>${meta.titulo}</h2>
+            <h2>${meta.titulo}</h2>
 
-<p>
-Objetivo:
-${fmt(meta.valor_alvo)}
-</p>
-
-
-<p>
-Prazo:
-${meta.prazo.substring(0, 10)}
-</p>
+            <p>
+            Objetivo:
+            ${fmt(meta.valor_alvo)}
+            </p>
 
 
-
-<div class="barra">
-
-<div style="
-width:${percentual}%;
-">
-</div>
-
-</div>
+            <p>
+            Prazo:
+            ${meta.prazo.substring(0, 10)}
+            </p>
 
 
-<span>
-${percentual.toFixed(1)}%
-</span>
+
+            <div class="barra">
+
+            <div style="
+            width:${percentual}%;
+            ">
+            </div>
+
+            </div>
 
 
-</div>
+            <span>
+            ${percentual.toFixed(1)}%
+            </span>
 
-`;
+
+            </div>
+
+            `;
 
     });
 

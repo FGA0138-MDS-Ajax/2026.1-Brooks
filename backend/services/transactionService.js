@@ -32,6 +32,17 @@ class TransactionService {
             categoriaFinal = categoria;
         }
 
+
+        console.log("DADOS RECEBIDOS NO SERVICE:");
+        console.log({
+            usuarioId,
+            descricao,
+            valor,
+            categoria,
+            metaId,
+            valorMeta
+        });
+
         const receita = await Transaction.criar({
 
             usuarioId,

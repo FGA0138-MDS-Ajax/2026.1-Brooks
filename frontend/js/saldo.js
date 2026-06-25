@@ -1,15 +1,15 @@
-async function carregarSaldo(){
+async function carregarSaldo() {
     try {
 
         const token = localStorage.getItem('token');
-        const resposta = await fetch('/api/saldo',{
-            headers:{
-                Authorization:`Bearer ${token}`
+        const resposta = await fetch('/api/saldo', {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
         });
 
 
-        if(!resposta.ok){
+        if (!resposta.ok) {
             console.log("Erro ao buscar saldo");
             return;
         }
@@ -24,15 +24,15 @@ async function carregarSaldo(){
         const elementoSaldo = document.getElementById('saldo-valor');
 
 
-        if(elementoSaldo){
+        if (elementoSaldo) {
 
             elementoSaldo.textContent =
-                `R$ ${dados.saldo.toFixed(2).replace('.',',')}`;
+                `R$ ${dados.saldo.toFixed(2).replace('.', ',')}`;
 
         }
 
 
-    } catch(erro){
+    } catch (erro) {
 
         console.error("Erro saldo:", erro);
 
@@ -42,17 +42,17 @@ async function carregarSaldo(){
 
 
 
-async function carregarGastosCategoria(){
+async function carregarGastosCategoria() {
 
-    try{
+    try {
 
 
         const token = localStorage.getItem('token');
 
 
-        const resposta = await fetch('/api/transacoes',{
-            headers:{
-                Authorization:`Bearer ${token}`
+        const resposta = await fetch('/api/transacoes', {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
         });
 
@@ -63,16 +63,16 @@ async function carregarGastosCategoria(){
 
 
         const transacoes =
-        dados.transacoes || [];
+            dados.transacoes || [];
 
 
 
         // pega somente gastos
 
         const gastos =
-        transacoes.filter(
-            t=>t.tipo === "despesa"
-        );
+            transacoes.filter(
+                t => t.tipo === "despesa"
+            );
 
 
 
@@ -80,18 +80,18 @@ async function carregarGastosCategoria(){
 
 
 
-        gastos.forEach(gasto=>{
+        gastos.forEach(gasto => {
 
 
-            if(!categorias[gasto.categoria]){
+            if (!categorias[gasto.categoria]) {
 
-                categorias[gasto.categoria]=0;
+                categorias[gasto.categoria] = 0;
 
             }
 
 
             categorias[gasto.categoria]
-            += Number(gasto.valor);
+                += Number(gasto.valor);
 
 
         });
@@ -101,7 +101,7 @@ async function carregarGastosCategoria(){
         criarPizza(categorias);
 
 
-    }catch(erro){
+    } catch (erro) {
 
         console.error(
             "Erro gráfico:",
@@ -112,268 +112,311 @@ async function carregarGastosCategoria(){
 
 }
 
-function criarPizza(categorias){
+function criarPizza(categorias) {
 
 
-const cores=[
+    const cores = [
 
-"#73002f",
-"#a32252",
-"#cbf29a",
-"#f0f7ec",
-"#ff8e8b"
+        "#73002f",
+        "#a32252",
+        "#cbf29a",
+        "#f0f7ec",
+        "#ff8e8b"
 
-];
-
-
-
-const total =
-Object.values(categorias)
-.reduce(
-(a,b)=>a+b,
-0
-);
+    ];
 
 
 
-let inicio = 0;
-
-let partes=[];
-
-
-
-const lista =
-Object.entries(categorias)
-.sort((a,b)=>b[1]-a[1]);
+    const total =
+        Object.values(categorias)
+            .reduce(
+                (a, b) => a + b,
+                0
+            );
 
 
 
-lista.forEach((item,index)=>{
+    let inicio = 0;
 
-
-const valor = item[1];
-
-
-const porcentagem =
-(valor / total) * 100;
+    let partes = [];
 
 
 
-const fim =
-inicio + porcentagem;
+    const lista =
+        Object.entries(categorias)
+            .sort((a, b) => b[1] - a[1]);
 
 
 
-partes.push(
-`${cores[index]} ${inicio}% ${fim}%`
-);
+    lista.forEach((item, index) => {
+
+
+        const valor = item[1];
+
+
+        const porcentagem =
+            (valor / total) * 100;
 
 
 
-inicio=fim;
+        const fim =
+            inicio + porcentagem;
 
 
 
-});
+        partes.push(
+            `${cores[index]} ${inicio}% ${fim}%`
+        );
+
+
+
+        inicio = fim;
+
+
+
+    });
 
 
 
 
 
-const pizza =
-document.getElementById(
-'graficoPizza'
-);
+    const pizza =
+        document.getElementById(
+            'graficoPizza'
+        );
 
 
 
-if(pizza){
+    if (pizza) {
 
-pizza.style.background =
-`conic-gradient(${partes.join(",")})`;
+        pizza.style.background =
+            `conic-gradient(${partes.join(",")})`;
+
+    }
+
+
+
+
+    // atualiza legenda
+
+    const linhas =
+        document.querySelectorAll(
+            '.item-legenda'
+        );
+
+
+
+    lista.slice(0, 5)
+        .forEach((item, index) => {
+
+
+            linhas[index]
+                .querySelector('.dot')
+                .style.background =
+                cores[index];
+
+
+
+            linhas[index]
+                .querySelector('.nome')
+                .textContent =
+                item[0];
+
+
+
+            linhas[index]
+                .querySelector('.valor')
+                .textContent =
+                formatarMoeda(item[1]);
+
+
+
+        });
+
+
+
+}
+
+async function carregarMetasMenu(){
+
+    const resposta = await fetch('/api/metas',{
+        headers:{
+            Authorization:
+            `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+
+
+    const {metas}=await resposta.json();
+
+
+    document.getElementById('listaMetas').innerHTML =
+    metas.map(meta=>{
+
+        const progresso =
+        ((meta.valor_atual/meta.valor_alvo)*100)
+        .toFixed(0);
+
+
+        return `
+        <div class="meta-item">
+
+            <h3>${meta.titulo}</h3>
+
+            <p>
+            R$ ${meta.valor_atual}
+            /
+            R$ ${meta.valor_alvo}
+            </p>
+
+            <div class="barra">
+                <div style="width:${progresso}%"></div>
+            </div>
+
+            <span>${progresso}%</span>
+
+        </div>
+        `;
+
+    }).join('');
+
+}
+
+function criarPizza(categorias) {
+
+
+    const cores = [
+
+        "#73002f",
+        "#a32252",
+        "#cbf29a",
+        "#f0f7ec",
+        "#ff8e8b"
+
+    ];
+
+
+
+    const total =
+        Object.values(categorias)
+            .reduce(
+                (a, b) => a + b,
+                0
+            );
+
+
+
+    let inicio = 0;
+
+    let partes = [];
+
+
+
+    const lista =
+        Object.entries(categorias)
+            .sort((a, b) => b[1] - a[1]);
+
+
+
+    lista.forEach((item, index) => {
+
+
+        const valor = item[1];
+
+
+        const porcentagem =
+            (valor / total) * 100;
+
+
+
+        const fim =
+            inicio + porcentagem;
+
+
+
+        partes.push(
+            `${cores[index]} ${inicio}% ${fim}%`
+        );
+
+
+
+        inicio = fim;
+
+
+
+    });
+
+
+
+
+
+    const pizza =
+        document.getElementById(
+            'graficoPizza'
+        );
+
+
+
+    if (pizza) {
+
+        pizza.style.background =
+            `conic-gradient(${partes.join(",")})`;
+
+    }
+
+
+
+
+    const linhas =
+        document.querySelectorAll(
+            '.item-legenda'
+        );
+
+
+
+    lista.slice(0, 5)
+        .forEach((item, index) => {
+
+
+            linhas[index]
+                .querySelector('.dot')
+                .style.background =
+                cores[index];
+
+
+
+            linhas[index]
+                .querySelector('.nome')
+                .textContent =
+                item[0];
+
+
+
+            linhas[index]
+                .querySelector('.valor')
+                .textContent =
+                formatarMoeda(item[1]);
+
+
+
+        });
+
+}
+
+function formatarMoeda(valor) {
+
+    return Number(valor)
+        .toLocaleString(
+            'pt-BR',
+            {
+                style: 'currency',
+                currency: 'BRL'
+            }
+        );
 
 }
 
 
-
-
-// atualiza legenda
-
-const linhas =
-document.querySelectorAll(
-'.item-legenda'
-);
-
-
-
-lista.slice(0,5)
-.forEach((item,index)=>{
-
-
-linhas[index]
-.querySelector('.dot')
-.style.background =
-cores[index];
-
-
-
-linhas[index]
-.querySelector('.nome')
-.textContent =
-item[0];
-
-
-
-linhas[index]
-.querySelector('.valor')
-.textContent =
-formatarMoeda(item[1]);
-
-
-
-});
-
-
-
-}
-
-function criarPizza(categorias){
-
-
-const cores=[
-
-"#73002f",
-"#a32252",
-"#cbf29a",
-"#f0f7ec",
-"#ff8e8b"
-
-];
-
-
-
-const total =
-Object.values(categorias)
-.reduce(
-(a,b)=>a+b,
-0
-);
-
-
-
-let inicio = 0;
-
-let partes=[];
-
-
-
-const lista =
-Object.entries(categorias)
-.sort((a,b)=>b[1]-a[1]);
-
-
-
-lista.forEach((item,index)=>{
-
-
-const valor = item[1];
-
-
-const porcentagem =
-(valor / total) * 100;
-
-
-
-const fim =
-inicio + porcentagem;
-
-
-
-partes.push(
-`${cores[index]} ${inicio}% ${fim}%`
-);
-
-
-
-inicio=fim;
-
-
-
-});
-
-
-
-
-
-const pizza =
-document.getElementById(
-'graficoPizza'
-);
-
-
-
-if(pizza){
-
-pizza.style.background =
-`conic-gradient(${partes.join(",")})`;
-
-}
-
-
-
-
-// atualiza legenda
-
-const linhas =
-document.querySelectorAll(
-'.item-legenda'
-);
-
-
-
-lista.slice(0,5)
-.forEach((item,index)=>{
-
-
-linhas[index]
-.querySelector('.dot')
-.style.background =
-cores[index];
-
-
-
-linhas[index]
-.querySelector('.nome')
-.textContent =
-item[0];
-
-
-
-linhas[index]
-.querySelector('.valor')
-.textContent =
-formatarMoeda(item[1]);
-
-
-
-});
-
-}
-
-function formatarMoeda(valor){
-
-return Number(valor)
-.toLocaleString(
-'pt-BR',
-{
-style:'currency',
-currency:'BRL'
-}
-);
-
-}
-
-
-document.addEventListener( 
-    'DOMContentLoaded', ()=>{ carregarSaldo(); carregarGastosCategoria();;}
+document.addEventListener(
+    'DOMContentLoaded', () => { carregarSaldo(); carregarGastosCategoria();carregarMetasMenu(); }
 );

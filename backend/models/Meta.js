@@ -57,33 +57,48 @@ class Meta {
         );
     }
 
-    static async adicionarValor(
-        usuarioId,
-        metaId,
-        valor
-    ) {
+    static async adicionarValor(usuarioId, metaId, valor) {
 
-        const sql = `
-
-            UPDATE metas_financeiras
-
-            SET valor_atual =
-            valor_atual + ?
-
-            WHERE id=?
-            AND usuario_id=?
-
-            `;
+        const [meta] = await db.execute(
+            `
+        SELECT valor_atual, valor_alvo
+        FROM metas_financeiras
+        WHERE id=? AND usuario_id=?
+        `,
+            [
+                metaId,
+                usuarioId
+            ]
+        );
 
 
-        return db.execute(sql, [
+        if (meta.length === 0) {
+            throw new Error("Meta não encontrada.");
+        }
 
-            valor,
-            metaId,
-            usuarioId
 
-        ]);
+        let novoValor =
+            Number(meta[0].valor_atual) + Number(valor);
 
+
+        if (novoValor > meta[0].valor_alvo) {
+            novoValor = meta[0].valor_alvo;
+        }
+
+
+        return db.execute(
+            `
+        UPDATE metas_financeiras
+        SET valor_atual=?
+        WHERE id=? 
+        AND usuario_id=?
+        `,
+            [
+                novoValor,
+                metaId,
+                usuarioId
+            ]
+        );
     }
 }
 

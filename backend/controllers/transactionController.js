@@ -15,6 +15,8 @@ class TransactionController {
     }
 
     async salvarReceita(req, res) {
+        console.log("CHEGOU NO CONTROLLER:");
+    console.log(req.body);
         try {
             const usuarioId = req.usuario.id;
             const { 
