@@ -118,10 +118,15 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
 ```
 
 ---
+### Instalação das dependências
+
+```bash
+npm install mysql2 bcrypt jsonwebtoken dotenv nodemailer
+```
 
 ## 🚀 Como rodar localmente
 
-```
+```bash
 cd backend
 node server.js
 ```
