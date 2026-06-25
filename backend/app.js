@@ -37,6 +37,10 @@ app.get('/metas', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/metas.html'));
 });
 
+app.get('/add_metas', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/add_metas.html'));
+});
+
 app.get('/add_gastos', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/add_gastos.html'));
 });

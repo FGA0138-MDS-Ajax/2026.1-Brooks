@@ -3,7 +3,7 @@
 const API = '';
 
 let saldoAtual = 0;
-let editandoId  = null;
+let editandoId = null;
 
 const fmt = v =>
     new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
@@ -54,17 +54,17 @@ async function carregarCategorias(selecionada = '') {
 
         if (!document.getElementById('btnNovaCategoria')) {
             const btn = document.createElement('button');
-            btn.id          = 'btnNovaCategoria';
-            btn.type        = 'button';
-            btn.className   = 'btn-nova-cat';
+            btn.id = 'btnNovaCategoria';
+            btn.type = 'button';
+            btn.className = 'btn-nova-cat';
             btn.textContent = '+ Nova categoria';
-            btn.onclick     = abrirModalCategoria;
+            btn.onclick = abrirModalCategoria;
             sel.parentElement.appendChild(btn);
         }
     } catch { /* silencioso */ }
 }
 
-function abrirModalCategoria()  { document.getElementById('modalCategoria').classList.add('ativo'); }
+function abrirModalCategoria() { document.getElementById('modalCategoria').classList.add('ativo'); }
 function fecharModalCategoria() { document.getElementById('modalCategoria').classList.remove('ativo'); }
 
 async function confirmarNovaCategoria() {
@@ -72,10 +72,10 @@ async function confirmarNovaCategoria() {
     if (!nome) return;
     try {
         await fetch(`${API}/categorias`, {
-            method : 'POST',
+            method: 'POST',
             headers: {
-                'Content-Type' : 'application/json',
-                Authorization  : `Bearer ${localStorage.getItem('token')}`
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify({ nome, tipo: 'receita' })
         });
@@ -89,9 +89,9 @@ async function confirmarNovaCategoria() {
 /* ── limpar formulário ── */
 function limparForm() {
     document.getElementById('descricao').value = '';
-    document.getElementById('valor').value     = '';
+    document.getElementById('valor').value = '';
     document.getElementById('categoria').value = '';
-    document.getElementById('data').value      = '';
+    document.getElementById('data').value = '';
     hideErro();
     editandoId = null;
 
@@ -106,7 +106,7 @@ function limparForm() {
 function preencherFormParaEdicao(t) {
     editandoId = t.id;
     document.getElementById('descricao').value = t.descricao;
-    document.getElementById('valor').value     = t.valor;
+    document.getElementById('valor').value = t.valor;
     document.getElementById('categoria').value = t.categoria || '';
     if (t.data) document.getElementById('data').value = t.data.substring(0, 10);
 
@@ -114,11 +114,11 @@ function preencherFormParaEdicao(t) {
 
     if (!document.getElementById('btnCancelarEdicao')) {
         const btn = document.createElement('button');
-        btn.id          = 'btnCancelarEdicao';
-        btn.type        = 'button';
-        btn.className   = 'btn-cancelar-edicao';
+        btn.id = 'btnCancelarEdicao';
+        btn.type = 'button';
+        btn.className = 'btn-cancelar-edicao';
         btn.textContent = 'Cancelar edição';
-        btn.onclick     = limparForm;
+        btn.onclick = limparForm;
         document.querySelector('.botoes-form').appendChild(btn);
     }
 
@@ -127,39 +127,133 @@ function preencherFormParaEdicao(t) {
     document.getElementById('descricao').focus();
 }
 
-/* ── salvar ── */
+
 async function salvar() {
+
     const descricao = document.getElementById('descricao').value.trim();
-    const valor     = parseFloat(document.getElementById('valor').value);
+    const valor = parseFloat(document.getElementById('valor').value);
     const categoria = document.getElementById('categoria').value;
 
-    if (!descricao) return showErro('Informe uma descrição.');
-    if (!valor || valor <= 0) return showErro('Informe um valor válido.');
+
+    if (!descricao) 
+        return showErro('Informe uma descrição.');
+
+    if (!valor || valor <= 0) 
+        return showErro('Informe um valor válido.');
+
     hideErro();
 
-    const body    = JSON.stringify({ descricao, valor, categoria: categoria || null });
+
+    const metaId = 
+        document.getElementById('meta')?.value || null;
+
+
+    const valorMeta =
+        parseFloat(document.getElementById('valorMeta')?.value) || 0;
+
+
+    if (valorMeta > valor) {
+        return showErro(
+            "O valor destinado à meta não pode ser maior que a receita."
+        );
+    }
+
+    console.log({
+    metaId,
+    valorMeta
+});
+
+    const body = JSON.stringify({
+        descricao,
+        valor,
+        categoria,
+        metaId,
+        valorMeta
+    });
+
+
     const headers = {
-        'Content-Type' : 'application/json',
-        Authorization  : `Bearer ${localStorage.getItem('token')}`
+        'Content-Type':'application/json',
+        Authorization:
+            `Bearer ${localStorage.getItem('token')}`
     };
 
+
     try {
+
         let r;
-        if (editandoId) {
-            r = await fetch(`${API}/api/transacoes/${editandoId}`, { method: 'PUT', headers, body });
+
+
+        if(editandoId){
+
+            r = await fetch(
+                `${API}/api/transacoes/${editandoId}`,
+                {
+                    method:'PUT',
+                    headers,
+                    body
+                }
+            );
+
+
         } else {
-            r = await fetch(`${API}/api/transacoes/receita`, { method: 'POST', headers, body });
+
+
+            r = await fetch(
+                `${API}/api/transacoes/receita`,
+                {
+                    method:'POST',
+                    headers,
+                    body
+                }
+            );
+
         }
 
-        const d = await r.json();
-        if (!r.ok) return showErro(d.erro || 'Erro ao salvar.');
 
-        const msg = editandoId ? 'Receita atualizada!' : 'Receita registrada!';
-        mostrarToast(msg, 'sucesso');
+
+        const d = await r.json();
+
+
+        console.log("Resposta servidor:", d);
+
+
+
+        if(!r.ok){
+
+            return showErro(
+                d.erro || "Erro ao salvar."
+            );
+
+        }
+
+
+
+        mostrarToast(
+            editandoId 
+            ? "Receita atualizada!"
+            : "Receita registrada!",
+            "sucesso"
+        );
+
+
         limparForm();
+
         await carregarSaldo();
         await carregarHistorico();
-    } catch { showErro('Erro de conexão.'); }
+
+
+
+    } catch(err){
+
+        console.error("ERRO SALVAR:",err);
+
+        showErro(
+            "Erro de conexão."
+        );
+
+    }
+
 }
 
 /* ── excluir ── */
@@ -167,7 +261,7 @@ async function excluir(id) {
     if (!confirm('Deseja excluir esta receita?')) return;
     try {
         const r = await fetch(`${API}/transacoes/${id}`, {
-            method : 'DELETE',
+            method: 'DELETE',
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         if (!r.ok) { const d = await r.json(); return alert(d.erro); }
@@ -246,12 +340,45 @@ function mostrarToast(msg, tipo = 'sucesso') {
         document.body.appendChild(t);
     }
     t.textContent = msg;
-    t.className   = `toast toast-${tipo} toast-visivel`;
+    t.className = `toast toast-${tipo} toast-visivel`;
     clearTimeout(t._timer);
     t._timer = setTimeout(() => t.classList.remove('toast-visivel'), 3000);
 }
 
-/* ── init ── */
+async function carregarMetas() {
+
+    const r = await fetch('/api/metas', {
+        headers: {
+            Authorization:
+                `Bearer ${localStorage.getItem('token')}`
+        }
+    });
+
+
+    const { metas } = await r.json();
+
+
+    const select = document.getElementById('meta');
+
+
+    metas.forEach(m => {
+
+        const option = document.createElement('option');
+
+        option.value = m.id;
+
+        option.textContent =
+            `${m.titulo} (${m.valor_atual}/${m.valor_alvo})`;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('valor')
         ?.addEventListener('input', atualizarSaldoApos);
@@ -264,4 +391,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     await carregarSaldo();
     await carregarCategorias();
     await carregarHistorico();
+    await carregarMetas();
 });

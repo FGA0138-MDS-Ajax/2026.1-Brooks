@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS transacoes (
   categoria     VARCHAR(50),
   data          DATE            NOT NULL,
   criado_em     TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  ADD COLUMN meta_id INT NULL,
+  ADD FOREIGN KEY(meta_id) REFERENCES metas_financeiras(id),
   PRIMARY KEY (id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );

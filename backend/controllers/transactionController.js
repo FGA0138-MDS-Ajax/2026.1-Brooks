@@ -17,8 +17,23 @@ class TransactionController {
     async salvarReceita(req, res) {
         try {
             const usuarioId = req.usuario.id;
-            const { descricao, valor, categoria } = req.body;
-            const transacao = await transactionService.salvarReceita(usuarioId, { descricao, valor, categoria });
+            const { 
+                descricao, 
+                valor, 
+                categoria,
+                metaId,
+                valorMeta
+            } = req.body;
+            const transacao = await transactionService.salvarReceita(
+                usuarioId,
+                { 
+                    descricao,
+                    valor,
+                    categoria,
+                    metaId,
+                    valorMeta
+                }
+            );
             return res.status(201).json({ mensagem: 'Receita registrada com sucesso!', transacao });
         } catch (err) {
             const status = ['Informe', 'Selecione'].some(p => err.message.startsWith(p)) ? 400 : 500;

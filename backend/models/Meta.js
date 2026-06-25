@@ -1,69 +1,91 @@
 const db = require('../database/config');
 
-async function listar() {
-    const [rows] = await db.query(
-        'SELECT * FROM metas_financeiras'
-    );
+class Meta {
 
-    return rows;
+    static async criar({ usuarioId, titulo, valorAlvo, prazo }) {
+
+        const [resultado] = await db.execute(
+            `
+            INSERT INTO metas_financeiras
+            (usuario_id, titulo, valor_alvo, prazo)
+            VALUES (?, ?, ?, ?)
+            `,
+            [
+                usuarioId,
+                titulo,
+                valorAlvo,
+                prazo
+            ]
+        );
+
+        return {
+            id: resultado.insertId,
+            titulo,
+            valorAlvo,
+            prazo
+        };
+    }
+
+
+    static async listarPorUsuario(usuarioId) {
+
+        const [rows] = await db.execute(
+            `
+            SELECT *
+            FROM metas_financeiras
+            WHERE usuario_id = ?
+            ORDER BY prazo ASC
+            `,
+            [usuarioId]
+        );
+
+        return rows;
+    }
+
+
+    static async excluir(id, usuarioId) {
+
+        await db.execute(
+            `
+            DELETE FROM metas_financeiras
+            WHERE id=? AND usuario_id=?
+            `,
+            [
+                id,
+                usuarioId
+            ]
+        );
+    }
+
+    static async adicionarValor(
+        usuarioId,
+        metaId,
+        valor
+    ) {
+
+        const sql = `
+
+            UPDATE metas_financeiras
+
+            SET valor_atual =
+            valor_atual + ?
+
+            WHERE id=?
+            AND usuario_id=?
+
+            `;
+
+
+        return db.execute(sql, [
+
+            valor,
+            metaId,
+            usuarioId
+
+        ]);
+
+    }
 }
 
-async function buscarPorId(id) {
-    const [rows] = await db.query(
-        'SELECT * FROM metas_financeiras WHERE id = ?',
-        [id]
-    );
 
-    return rows[0];
-}
-
-async function criar(meta) {
-    const [result] = await db.query(
-        `INSERT INTO metas_financeiras
-        (usuario_id, titulo, valor_alvo, valor_atual, prazo)
-        VALUES (?, ?, ?, ?, ?)`,
-        [
-            
-            meta.usuario_id,
-            meta.titulo,
-            meta.valor_alvo,
-            meta.valor_atual || 0,
-            meta.prazo
-        ]
-    );
-
-    return result.insertId;
-}
-
-async function atualizar(id, meta) {
-    await db.query(
-        `UPDATE metas_financeiras
-        SET titulo = ?,
-            valor_alvo = ?,
-            valor_atual = ?,
-            prazo = ?
-        WHERE id = ?`,
-        [   
-            meta.titulo,
-            meta.valor_alvo,
-            meta.valor_atual,
-            meta.prazo,
-            id
-        ]
-    );
-}
-
-async function excluir(id) {
-    await db.query(
-        'DELETE FROM metas_financeiras WHERE id = ?',
-        [id]
-    );
-}
-
-module.exports = {
-    listar,
-    buscarPorId,
-    criar,
-    atualizar,
-    excluir
-};
+module.exports = Meta;

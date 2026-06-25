@@ -2,15 +2,32 @@ const express = require('express');
 const router = express.Router();
 
 const metaController = require('../controllers/metaController');
+const auth = require('../middlewares/authMiddleware');
 
-router.get('/', metaController.listarMetas);
 
-router.get('/:id', metaController.buscarMeta);
 
-router.post('/', metaController.criarMeta);
+router.post(
+    '/',
+    auth,
+    metaController.criar
+);
 
-router.put('/:id', metaController.atualizarMeta);
 
-router.delete('/:id', metaController.excluirMeta);
+
+router.get(
+    '/',
+    auth,
+    metaController.listar
+);
+
+
+
+router.delete(
+    '/:id',
+    auth,
+    metaController.excluir
+);
+
+
 
 module.exports = router;

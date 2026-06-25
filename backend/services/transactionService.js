@@ -1,12 +1,13 @@
 const Transaction = require('../models/Transaction');
 const Category = require('../models/Category');
+const Meta = require('../models/Meta');
 
 class TransactionService {
 
     async salvarGasto(usuarioId, { descricao, valor, categoria }) {
         if (!descricao || !descricao.trim()) throw new Error('Informe uma descrição.');
-        if (!valor || valor <= 0)            throw new Error('Informe um valor válido.');
-        if (!categoria)                      throw new Error('Selecione uma categoria.');
+        if (!valor || valor <= 0) throw new Error('Informe um valor válido.');
+        if (!categoria) throw new Error('Selecione uma categoria.');
 
         const categoriaExiste = await Category.findByNomeTipo(categoria, 'despesa', usuarioId);
         if (!categoriaExiste) throw new Error('Selecione uma categoria válida.');
@@ -20,9 +21,9 @@ class TransactionService {
         });
     }
 
-    async salvarReceita(usuarioId, { descricao, valor, categoria }) {
+    async salvarReceita(usuarioId, { descricao, valor, categoria, metaId, valorMeta }) {
         if (!descricao || !descricao.trim()) throw new Error('Informe uma descrição.');
-        if (!valor || valor <= 0)            throw new Error('Informe um valor válido.');
+        if (!valor || valor <= 0) throw new Error('Informe um valor válido.');
 
         let categoriaFinal = null;
         if (categoria) {
@@ -31,18 +32,38 @@ class TransactionService {
             categoriaFinal = categoria;
         }
 
-        return Transaction.criar({
+        const receita = await Transaction.criar({
+
             usuarioId,
             valor: parseFloat(valor),
             tipo: 'receita',
-            descricao: descricao.trim(),
-            categoria: categoriaFinal,
+            descricao,
+            categoria
+
         });
+
+
+
+        if (metaId && valorMeta) {
+
+            await Meta.adicionarValor(
+
+                usuarioId,
+
+                metaId,
+
+                valorMeta
+
+            );
+
+        }
+
+        return receita;
     }
 
     async editar(usuarioId, id, { descricao, valor, categoria }) {
         if (!descricao || !descricao.trim()) throw new Error('Informe uma descrição.');
-        if (!valor || valor <= 0)            throw new Error('Informe um valor válido.');
+        if (!valor || valor <= 0) throw new Error('Informe um valor válido.');
 
         const transacao = await Transaction.buscarPorId(id, usuarioId);
         if (!transacao) throw new Error('Transação não encontrada.');

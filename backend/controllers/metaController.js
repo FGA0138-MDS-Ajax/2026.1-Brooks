@@ -1,63 +1,78 @@
-const Meta = require('../models/Meta');
+const metaService = require('../services/metaService');
 
-exports.listarMetas = async (req, res) => {
-    try {
-        const metas = await Meta.listar();
-        res.json(metas);
-    } catch (error) {
-        res.status(500).json({ erro: error.message });
-    }
-};
 
-exports.buscarMeta = async (req, res) => {
-    try {
-        const meta = await Meta.buscarPorId(req.params.id);
+exports.criar = async(req,res)=>{
 
-        if (!meta) {
-            return res.status(404).json({
-                erro: 'Meta não encontrada'
-            });
-        }
+    try{
+
+        const meta = await metaService.criar(
+            req.usuario.id,
+            req.body
+        );
 
         res.json(meta);
-    } catch (error) {
-        res.status(500).json({ erro: error.message });
-    }
-};
 
-exports.criarMeta = async (req, res) => {
-    try {
-        const id = await Meta.criar(req.body);
 
-        res.status(201).json({
-            mensagem: 'Meta criada com sucesso',
-            id
+    }catch(e){
+
+        res.status(400).json({
+            erro:e.message
         });
-    } catch (error) {
-        res.status(500).json({ erro: error.message });
+
     }
+
 };
 
-exports.atualizarMeta = async (req, res) => {
-    try {
-        await Meta.atualizar(req.params.id, req.body);
+
+
+exports.listar = async(req,res)=>{
+
+    try{
+
+        const metas =
+            await metaService.listar(
+                req.usuario.id
+            );
+
 
         res.json({
-            mensagem: 'Meta atualizada com sucesso'
+            metas
         });
-    } catch (error) {
-        res.status(500).json({ erro: error.message });
+
+
+    }catch(e){
+
+        res.status(500).json({
+            erro:e.message
+        });
+
     }
+
 };
 
-exports.excluirMeta = async (req, res) => {
-    try {
-        await Meta.excluir(req.params.id);
+
+
+exports.excluir = async(req,res)=>{
+
+    try{
+
+        await metaService.excluir(
+            req.usuario.id,
+            req.params.id
+        );
+
 
         res.json({
-            mensagem: 'Meta removida com sucesso'
+            mensagem:"Meta excluída"
         });
-    } catch (error) {
-        res.status(500).json({ erro: error.message });
+
+
+    }catch(e){
+
+        res.status(400).json({
+            erro:e.message
+        });
+
     }
+
 };
