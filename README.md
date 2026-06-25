@@ -162,6 +162,8 @@ node scripts/seedCategoryExistentes.js
 cd backend
 node server.js
 ```
+Acesse a aplicação em: [http://localhost:3000](http://localhost:3000)
+
 
 ---
 
