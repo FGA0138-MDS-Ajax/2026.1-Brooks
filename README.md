@@ -1,47 +1,166 @@
-# PiggyMe - 2026.1-Brooks
-Sistema gamificado de gestão financeira desenvolvido para auxiliar os usuários no controle de gastos,receitas e hábitos finacieros de forma simples, intuitiva e interativa.
+# 🐷 PiggyMe
 
-Requires: MySql, bcrypt, jsonwebtoken, npm
+> **Versão 2026.1 — Brooks**  
+> Sistema gamificado de gestão financeira pessoal — simples, intuitivo e interativo.
 
-npm install mysql2
-npm install bcrypt
-npm install jsonwebtoken
-npm install dotenv
-npm install nodemailer
+PiggyMe ajuda usuários a assumirem o controle de suas finanças por meio de um sistema de controle de gastos, receitas e hábitos financeiros com elementos de gamificação que tornam a experiência mais engajante e motivadora.
 
+---
 
-A gente abre pelo localhost:3000/
-no terminal vc entra na pasta backend com cd backend
-e depois node server.js
+## Índice
 
-rapaziada vamos seguir assim
-git fetch
-git status
-git pull
+- [Visão Geral](#visão-geral)
+- [Tecnologias](#tecnologias)
+- [Arquitetura](#arquitetura)
+- [Instalação](#instalação)
+- [Como Rodar](#como-rodar)
+- [Módulos Implementados](#módulos-implementados)
+- [Regras de Negócio](#regras-de-negócio)
+- [Versionamento](#versionamento)
 
+---
+
+## Visão Geral
+
+PiggyMe é desenvolvido com o objetivo de democratizar o controle financeiro pessoal, oferecendo uma interface clara e uma experiência gamificada para incentivar bons hábitos com o dinheiro.
+
+---
+
+## Tecnologias
+
+| Camada | Tecnologia |
+|--------|------------|
+| Runtime | Node.js |
+| Banco de Dados | MySQL |
+| Autenticação | bcrypt + jsonwebtoken |
+| E-mail | Nodemailer |
+| Variáveis de Ambiente | dotenv |
+
+### Instalação das dependências
+
+```bash
+npm install mysql2 bcrypt jsonwebtoken dotenv nodemailer
+```
+
+---
+
+## Arquitetura
+
+O projeto segue o padrão arquitetural **MVC (Model-View-Controller)**, com separação clara de responsabilidades entre as camadas:
+
+```
+backend/
+├── controllers/       # Lógica de negócio e intermediação entre rotas e models
+├── models/            # Acesso e operações no banco de dados
+├── routes/            # Definição dos endpoints da API
+├── database/          # Configuração e conexão com o MySQL
+└── scripts/           # Scripts utilitários (ex: seeds)
+```
+
+---
+
+## Instalação
+
+### Pré-requisitos
+
+- Node.js instalado
+- MySQL rodando localmente
+- Banco de dados criado conforme os scripts em `database/`
+
+### Passos
+
+```bash
+# 1. Clone o repositório
+git clone <url-do-repositorio>
+
+# 2. Acesse a pasta do backend
+cd backend
+
+# 3. Instale as dependências
+npm install
+
+# 4. Configure as variáveis de ambiente
+# Crie um arquivo .env com base no modelo fornecido
+
+# 5. Execute os scripts SQL para criar as tabelas
+# (consulte os arquivos em database/)
+
+# 6. [Apenas uma vez] Popule as categorias padrão para usuários existentes
+node scripts/seedCategoryExistentes.js
+```
+
+---
+
+## Como Rodar
+
+```bash
+cd backend
+node server.js
+```
+
+Acesse a aplicação em: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## Módulos Implementados
+
+### Sprint 1 — Cadastro de Usuário
+
+| Arquivo | Localização | Responsabilidade |
+|---------|-------------|------------------|
+| `userController.js` | `controllers/` | Recebe os dados do usuário, valida a senha e verifica duplicidade de e-mail |
+| `User.js` | `models/` | Verifica e-mail, criptografa senha e insere o usuário no banco |
+| `userRoutes.js` | `routes/` | Define o endpoint de registro (`POST /register`) |
+| `server.js` | `services/` | Inicializa o servidor Node.js |
+| `config.js` | `database/` | Configura e establece a conexão com o MySQL |
+
+---
+
+### Sprint 3 — Categorias Personalizadas
+
+| Arquivo | Localização | Responsabilidade |
+|---------|-------------|------------------|
+| `categoryController.js` | `controllers/` | Gerencia criação e listagem de categorias por usuário |
+| `Category.js` | `models/` | Operações de banco relacionadas às categorias |
+| `categoryRoutes.js` | `routes/` | Define os endpoints de categorias |
+| `seedCategoryExistentes.js` | `scripts/` | Popula categorias padrão para usuários já cadastrados |
+
+#### Setup necessário (Sprint 3)
+
+1. Execute o script SQL de criação da tabela `categorias` (disponível em `database/`).
+2. Rode o seed **uma única vez** para usuários pré-existentes:
+
+```bash
+node backend/scripts/seedCategoryExistentes.js
+```
+
+---
+
+## Regras de Negócio
+
+> ⚠️ **Atenção:** Estas regras são aplicadas e validadas pelo backend.
+
+- Toda **categoria** pertence a um usuário específico e possui um tipo: `receita` ou `despesa`.
+- Ao **registrar uma transação**, a categoria informada deve existir para aquele usuário e corresponder ao tipo correto.
+- Transações com categorias inválidas ou inexistentes **são recusadas pelo backend**.
+
+---
+
+## Versionamento
+
+```bash
+# Adicionar alterações
 git add .
-git commit -m "mensagem"
+
+# Criar commit
+git commit -m "mensagem descritiva"
+
+# Enviar para o repositório remoto
 git push
+```
 
+---
 
-Para desenvolver o nosso sistema optamos pelo modelo arquitetural Model View Controller e dividimos portanto as pastas nos diretórios de acordo com o nosso documento de arquitetura.
-
-Com objetivo de realizar o cadastro de usuário proposto na Sprint 1 foram criados os seguintes arquivos:
-
-      userController.js em controller: importa o User.js do models recebe dados do usuário, valiada senha e verifica se e-mail já existe.
-
-      User.js em models: gerencia operações no banco de dados, verifica se o e-mail já está cadastrado, criptografa a senha e insere o usuário no banco de dados.
-
-      userRoutes.js em Routes: define o URL que o front-end e API devem chamar para registrar um usuário.
-
-      server.js em services: inicia o servidor.
-
-      config.js em database: conecta o Node.js e o MYSQL.
-Com objetivo de implementar a criação de categorias personalizadas proposta na Sprint 3, foram criados/atualizados os seguintes arquivos:categoryController.js, Category.js ,categoryRoutes.js ,seedCategory.js .
-
-Setup necessário antes de rodar:
-
-1. Rodar o script SQL que cria a tabela categorias (está em database/...).
-2. Rodar uma vez: node backend/scripts/seedCategoryExistentes.js,popula categorias padrão para usuários já cadastrados antes dessa sprint.
- 
-Atenção: toda categoria pertence a um usuário e tem um tipo (receita ou despesa). Ao criar uma transação, a categoria selecionada precisa existir para aquele usuário e tipo, senão o backend recusa a transação.
+<div align="center">
+  <sub>Desenvolvido com 🐷 pelo time PiggyMe — 2026</sub>
+</div>
