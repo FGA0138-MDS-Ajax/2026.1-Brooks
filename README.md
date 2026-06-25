@@ -118,11 +118,43 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
 ```
 
 ---
+
 ### Instalação das dependências
 
 ```bash
 npm install mysql2 bcrypt jsonwebtoken dotenv nodemailer
 ```
+
+
+### Pré-requisitos
+
+- Node.js instalado
+- MySQL rodando localmente
+- Banco de dados criado conforme os scripts em `database/`
+
+### Passos
+
+```bash
+# 1. Clone o repositório
+git clone <url-do-repositorio>
+
+# 2. Acesse a pasta do backend
+cd backend
+
+# 3. Instale as dependências
+npm install
+
+# 4. Configure as variáveis de ambiente
+# Crie um arquivo .env com base no modelo fornecido
+
+# 5. Execute os scripts SQL para criar as tabelas
+# (consulte os arquivos em database/)
+
+# 6. [Apenas uma vez] Popule as categorias padrão para usuários existentes
+node scripts/seedCategoryExistentes.js
+```
+
+---
 
 ## 🚀 Como rodar localmente
 
@@ -158,3 +190,5 @@ node server.js
 ## 📄 Licença
 
 Projeto acadêmico — UnB/FCTE, MDS 2026.1.
+
+
