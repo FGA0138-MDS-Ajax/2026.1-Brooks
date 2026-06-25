@@ -121,7 +121,8 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
 
 ## 🚀 Como rodar localmente
 
-```bash
+```cd backend
+node server.js
 ```
 
 ---
