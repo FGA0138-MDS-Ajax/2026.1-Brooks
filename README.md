@@ -4,6 +4,8 @@ Repositório oficial do projeto **PiggyMe**, desenvolvido pela equipe **Brooks**
 
 O PiggyMe é uma plataforma de educação financeira que auxilia usuários no controle de gastos, definição de metas, acompanhamento de economia e desenvolvimento de hábitos financeiros saudáveis através de elementos de gamificação.
 
+> **Versão 2026.1 — Brooks**  
+> Sistema gamificado de gestão financeira pessoal — simples, intuitivo e interativo.
 ---
 
 ## 👥 Equipe
@@ -13,8 +15,8 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
   <!-- Primeira linha -->
   <tr>
     <td align="center">
-      <a href="https://github.com/Calyene">
-        <img src="https://github.com/Calyene.png" width="100px;" alt="Calyene"/><br />
+      <a href="https://github.com/Calynne">
+        <img src="https://github.com/Calynne.png" width="100px;" alt="Calyene"/><br />
         <sub><b>Calyene</b></sub><br />
         <sub>Product Owner</sub>
       </a>
@@ -94,10 +96,14 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Node.js + Express
 - **Banco de dados:** MySQL
-- **Autenticação:** JWT + bcrypt
 - **Versionamento:** Git/GitHub
+- **Runtime:** Node.js 
+- **Autenticação:** bcrypt + jsonwebtoken 
+- **E-mail:** Nodemailer
+- **Variáveis de Ambiente:** dotenv 
 
 ---
+
 
 ## 📁 Estrutura do Projeto
 
@@ -118,13 +124,26 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
 ```
 
 ---
+## Arquitetura
+
+O projeto segue o padrão arquitetural **MVC (Model-View-Controller)**, com separação clara de responsabilidades entre as camadas:
+
+```
+backend/
+├── controllers/       # Lógica de negócio e intermediação entre rotas e models
+├── models/            # Acesso e operações no banco de dados
+├── routes/            # Definição dos endpoints da API
+├── database/          # Configuração e conexão com o MySQL
+└── scripts/           # Scripts utilitários (ex: seeds)
+```
+---
 
 ### Instalação das dependências
 
 ```bash
 npm install mysql2 bcrypt jsonwebtoken dotenv nodemailer
 ```
-
+---
 
 ### Pré-requisitos
 
@@ -189,6 +208,64 @@ Acesse a aplicação em: [http://localhost:3000](http://localhost:3000)
 
 ---
 
+## Módulos Implementados
+
+### Sprint 1 — Cadastro de Usuário
+
+| Arquivo | Localização | Responsabilidade |
+|---------|-------------|------------------|
+| `userController.js` | `controllers/` | Recebe os dados do usuário, valida a senha e verifica duplicidade de e-mail |
+| `User.js` | `models/` | Verifica e-mail, criptografa senha e insere o usuário no banco |
+| `userRoutes.js` | `routes/` | Define o endpoint de registro (`POST /register`) |
+| `server.js` | `services/` | Inicializa o servidor Node.js |
+| `config.js` | `database/` | Configura e establece a conexão com o MySQL |
+
+---
+
+### Sprint 3 — Categorias Personalizadas
+
+| Arquivo | Localização | Responsabilidade |
+|---------|-------------|------------------|
+| `categoryController.js` | `controllers/` | Gerencia criação e listagem de categorias por usuário |
+| `Category.js` | `models/` | Operações de banco relacionadas às categorias |
+| `categoryRoutes.js` | `routes/` | Define os endpoints de categorias |
+| `seedCategoryExistentes.js` | `scripts/` | Popula categorias padrão para usuários já cadastrados |
+
+#### Setup necessário (Sprint 3)
+
+1. Execute o script SQL de criação da tabela `categorias` (disponível em `database/`).
+2. Rode o seed **uma única vez** para usuários pré-existentes:
+
+```bash
+node backend/scripts/seedCategoryExistentes.js
+```
+
+---
+
+## Regras de Negócio
+
+> ⚠️ **Atenção:** Estas regras são aplicadas e validadas pelo backend.
+
+- Toda **categoria** pertence a um usuário específico e possui um tipo: `receita` ou `despesa`.
+- Ao **registrar uma transação**, a categoria informada deve existir para aquele usuário e corresponder ao tipo correto.
+- Transações com categorias inválidas ou inexistentes **são recusadas pelo backend**.
+
+---
+## Versionamento
+
+```bash
+# Adicionar alterações
+git add .
+
+# Criar commit
+git commit -m "tipo(escopo): breve descrição"
+
+# Enviar para o repositório remoto
+git push
+```
+
+---
+---
 ## 📄 Licença
 
 Projeto acadêmico — UnB/FCTE, MDS 2026.1.
