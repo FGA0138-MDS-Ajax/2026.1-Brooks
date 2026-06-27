@@ -177,7 +177,7 @@ async function salvar() {
         Authorization:
             `Bearer ${localStorage.getItem('token')}`
     };
-    
+
     try {
 
         let r;
@@ -233,6 +233,15 @@ async function salvar() {
                 : "Receita registrada!",
             "sucesso"
         );
+
+        if (!editandoId && window.ganharXp) {
+            await window.ganharXp('receita', descricao);
+        }
+
+        limparForm();
+
+        await carregarSaldo();
+        await carregarHistorico();
 
 
         limparForm();
