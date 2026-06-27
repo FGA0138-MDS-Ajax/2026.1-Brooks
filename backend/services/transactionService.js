@@ -1,6 +1,7 @@
 const Transaction = require('../models/Transaction');
 const Category = require('../models/Category');
 const Meta = require('../models/Meta');
+const gamificationService = require('./gamificationService');
 
 class TransactionService {
 
@@ -99,14 +100,23 @@ class TransactionService {
         return Transaction.buscarPorId(id, usuarioId);
     }
 
+
+
     async excluir(usuarioId, id) {
         const transacao = await Transaction.buscarPorId(id, usuarioId);
         if (!transacao) throw new Error('Transação não encontrada.');
 
         const deletado = await Transaction.deletar(id, usuarioId);
         if (!deletado) throw new Error('Não foi possível excluir a transação.');
-    }
 
+        const acaoXp = transacao.tipo === 'despesa' ? 'gasto' : 'receita';
+        try {
+            await gamificationService.perderXp(usuarioId, acaoXp, `Exclusão: ${transacao.descricao}`);
+        } catch (err) {
+            // Não deixa a exclusão falhar por erro no XP — só loga
+            console.error('[XP] Falha ao remover XP da transação excluída:', err.message);
+        }
+    }
     async listar(usuarioId) {
         return Transaction.listarPorUsuario(usuarioId);
     }
