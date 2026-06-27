@@ -57,6 +57,20 @@ class Meta {
         );
     }
 
+    static async concluir(id, usuarioId) {
+        return db.execute(
+            `
+            UPDATE metas_financeiras
+            SET status = 'concluida'
+            WHERE id = ? AND usuario_id = ?
+            `,
+            [
+                id,
+                usuarioId
+            ]
+        );
+    }
+
     static async adicionarValor(usuarioId, metaId, valor) {
 
         const [meta] = await db.execute(
