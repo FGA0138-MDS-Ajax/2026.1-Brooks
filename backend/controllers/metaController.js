@@ -1,4 +1,5 @@
 const metaService = require('../services/metaService');
+const gamificationService = require('../services/gamificationService');
 
 
 exports.criar = async(req,res)=>{
@@ -9,6 +10,12 @@ exports.criar = async(req,res)=>{
             req.usuario.id,
             req.body
         );
+
+        try {
+            await gamificationService.ganharXp(req.usuario.id, 'meta_criada', 'Criou uma nova meta financeira');
+        } catch (xpErro) {
+            console.error("Erro ao registrar XP de meta criada:", xpErro);
+        }
 
         res.json(meta);
 
@@ -75,4 +82,21 @@ exports.excluir = async(req,res)=>{
 
     }
 
+};
+
+exports.concluir = async(req, res) => {
+    try {
+        await metaService.concluir(req.usuario.id, req.params.id);
+
+        try {
+            await gamificationService.ganharXp(req.usuario.id, 'meta_concluida', 'Concluiu uma meta financeira');
+        } catch (xpErro) {
+            console.error("Erro ao registrar XP de meta concluída:", xpErro);
+        }
+
+        res.json({ mensagem: "Meta concluída com sucesso!" });
+
+    } catch(e) {
+        res.status(400).json({ erro: e.message });
+    }
 };

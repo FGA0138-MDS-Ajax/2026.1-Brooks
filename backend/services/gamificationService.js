@@ -2,11 +2,11 @@
 const Gamification = require('../models/Gamification');
 
 const XP_ACOES = {
-    gasto:          10,
-    receita:        15,
-    meta_criada:    20,
+    gasto: 10,
+    receita: 15,
+    meta_criada: 20,
     meta_concluida: 50,
-    login_diario:    5,
+    login_diario: 5,
 };
 
 const LIMIARES = [0, 100, 250, 500, 1000, 2000];
@@ -25,7 +25,7 @@ class GamificationService {
             return { nivel: nivelMaximo, progresso: 100, xpProximo: LIMIARES[LIMIARES.length - 1] };
         }
 
-        const limiteAtual   = LIMIARES[nivel - 1];
+        const limiteAtual = LIMIARES[nivel - 1];
         const limiteProximo = LIMIARES[nivel];
         const progresso = Math.min(
             Math.round(((xpTotal - limiteAtual) / (limiteProximo - limiteAtual)) * 100),
@@ -49,7 +49,7 @@ class GamificationService {
 
         await Gamification.buscarPorUsuario(usuarioId);
 
-        const xpAnterior  = await Gamification.buscarXpTotal(usuarioId);
+        const xpAnterior = await Gamification.buscarXpTotal(usuarioId);
         const novoXpTotal = xpAnterior + xpGanho;
         const { nivel, progresso, xpProximo } = this.calcularNivel(novoXpTotal);
 
@@ -57,6 +57,25 @@ class GamificationService {
         await Gamification.registrarHistorico(usuarioId, acao, xpGanho, descricao);
 
         return { xpGanho, xpTotal: novoXpTotal, nivel, progresso, xpProximo };
+    }
+    async perderXp(usuarioId, acao, descricao = null) {
+        const xpPerda = XP_ACOES[acao];
+        if (!xpPerda) {
+            throw new Error(`Ação inválida: "${acao}". Use: ${Object.keys(XP_ACOES).join(', ')}`);
+        }
+
+        await Gamification.buscarPorUsuario(usuarioId);
+
+        const xpAnterior = await Gamification.buscarXpTotal(usuarioId);
+        const novoXpTotal = Math.max(xpAnterior - xpPerda, 0); // nunca fica negativo
+        const xpRemovidoReal = xpAnterior - novoXpTotal;        // quanto de fato foi removido
+
+        const { nivel, progresso, xpProximo } = this.calcularNivel(novoXpTotal);
+
+        await Gamification.atualizarXp(usuarioId, -xpRemovidoReal, nivel);
+        await Gamification.registrarHistorico(usuarioId, acao, -xpRemovidoReal, descricao ?? 'Transação excluída');
+
+        return { xpPerdido: xpRemovidoReal, xpTotal: novoXpTotal, nivel, progresso, xpProximo };
     }
 
     async buscarHistorico(usuarioId, limite = 10) {

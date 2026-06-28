@@ -41,6 +41,10 @@ class MetaService {
 
     }
 
+    async concluir(usuarioId, id){
+        return Meta.concluir(id, usuarioId);
+    }
+
 
     async excluir(usuarioId,id){
 

@@ -21,6 +21,13 @@ router.get(
 );
 
 
+router.put(
+    '/:id/concluir',
+    auth,
+    metaController.concluir
+);
+
+
 
 router.delete(
     '/:id',
