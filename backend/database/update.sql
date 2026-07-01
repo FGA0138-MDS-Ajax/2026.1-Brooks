@@ -1,5 +1,9 @@
 USE piggyme;
 
+ALTER TABLE metas_financeiras
+ADD COLUMN status ENUM('pendente','concluida')
+NOT NULL DEFAULT 'pendente';
+
 ALTER TABLE transacoes
 ADD COLUMN meta_id INT NULL;
 

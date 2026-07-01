@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS metas_financeiras (
   valor_alvo    DECIMAL(10, 2)  NOT NULL,
   valor_atual   DECIMAL(10, 2)  NOT NULL DEFAULT 0.00,
   prazo         DATE            NOT NULL,
+  status         ENUM('pendente','concluida') NOT NULL DEFAULT 'pendente',
   criado_em     TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
