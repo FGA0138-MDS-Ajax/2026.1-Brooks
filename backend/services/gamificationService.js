@@ -7,6 +7,7 @@ const XP_ACOES = {
     meta_criada: 20,
     meta_concluida: 50,
     login_diario: 5,
+    curso_concluido: 'dinamico',
 };
 
 const LIMIARES = [0, 100, 250, 500, 1000, 2000];
@@ -42,14 +43,27 @@ class GamificationService {
     }
 
     async ganharXp(usuarioId, acao, descricao = null) {
-        const xpGanho = XP_ACOES[acao];
-        if (!xpGanho) {
-            throw new Error(`Ação inválida: "${acao}". Use: ${Object.keys(XP_ACOES).join(', ')}`);
-        }
-
         await Gamification.buscarPorUsuario(usuarioId);
 
         const xpAnterior = await Gamification.buscarXpTotal(usuarioId);
+        const statsAtuais = this.calcularNivel(xpAnterior);
+        
+        let xpGanho = 0;
+
+        // Se a ação for um curso, calcula quanto falta para o próximo nível
+        if (acao === 'curso_concluido') {
+            if (statsAtuais.nivel >= LIMIARES.length) {
+                xpGanho = 250; // Se já estiver no nível máximo (100%), dá bônus
+            } else {
+                xpGanho = statsAtuais.xpProximo - xpAnterior; 
+            }
+        } else {
+            xpGanho = XP_ACOES[acao];
+            if (!xpGanho) {
+                throw new Error(`Ação inválida: "${acao}". Use: ${Object.keys(XP_ACOES).join(', ')}`);
+            }
+        }
+
         const novoXpTotal = xpAnterior + xpGanho;
         const { nivel, progresso, xpProximo } = this.calcularNivel(novoXpTotal);
 
@@ -58,12 +72,8 @@ class GamificationService {
 
         return { xpGanho, xpTotal: novoXpTotal, nivel, progresso, xpProximo };
     }
-    async perderXp(usuarioId, acao, descricao = null) {
-        const xpPerda = XP_ACOES[acao];
-        if (!xpPerda) {
-            throw new Error(`Ação inválida: "${acao}". Use: ${Object.keys(XP_ACOES).join(', ')}`);
-        }
 
+    async perderXp(usuarioId, acao, descricao = null) {
         await Gamification.buscarPorUsuario(usuarioId);
 
         const xpAnterior = await Gamification.buscarXpTotal(usuarioId);

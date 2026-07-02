@@ -52,3 +52,11 @@ CREATE TABLE IF NOT EXISTS categorias (
   FOREIGN KEY(usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
   UNIQUE KEY unique_categoria_usuario(usuario_id,nome,tipo)
 );
+
+CREATE TABLE IF NOT EXISTS cursos_concluidos (
+    usuario_id INT NOT NULL,
+    curso_id INT NOT NULL,
+    concluido_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (usuario_id, curso_id),
+    FOREIGN KEY(usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);

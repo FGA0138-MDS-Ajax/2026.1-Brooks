@@ -5,6 +5,7 @@ const path = require('path');
 
 const categoryRoutes = require('./routes/categoryRoutes');
 const transactionRoutes = require('./routes/transactionRoutes'); 
+const cursoRoutes = require('./routes/cursoRoutes');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 // ROTAS DA API
 app.use('/api/categorias', categoryRoutes);
 app.use('/api/transacoes', transactionRoutes);
-
+app.use('/api/cursos', cursoRoutes);
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/Home.html'));
 });
@@ -67,6 +68,10 @@ app.get('/historico', (req, res) => {
 
 app.get('/relatorios', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/pages/relatorios.html'));
+});
+
+app.get('/cursos', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/pages/cursos.html'));
 });
 
 module.exports = app;
