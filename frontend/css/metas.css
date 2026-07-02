@@ -1,0 +1,556 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
+header h2 {
+     font-size: 38px;
+
+    color: #73002f;
+}
+
+.porco-logo{
+
+    width: 200px;
+}
+
+
+.menu-direita{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 40px;
+}
+
+
+
+.botao-inicio button{
+
+    width: 200px;
+
+    height: 60px;
+
+    border-radius: 40px;
+
+    border: 4px solid #333;
+
+    background-color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.botao-inicio button:hover{
+
+    transform: scale(1.03);
+}
+
+
+
+.icone_conta img{
+
+    width: 70px;
+}
+
+
+
+.dashboard{
+    height: calc(100vh - 120px);
+    display: flex;
+    background-color: white;
+}
+
+.botoes-header2{
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: row;
+
+    gap: 35px;
+
+    width: 100%;
+
+    padding: 35px 25px;
+}
+.botoes-header2 button{
+    height: 70px;
+
+    border-radius: 40px;
+
+    border: 4px solid #333;
+
+    background-color: #73002f;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #dcf0d0;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.botoes-resto{
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 35px;
+
+    width: 260px;
+
+    padding: 35px 25px;
+}
+
+.botoes-resto button{
+
+    height: 70px;
+
+    border-radius: 40px;
+
+    border: 4px solid #333;
+
+    background-color: #73002f;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #dcf0d0;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.botoes-resto button:hover{
+
+    transform: scale(1.03);
+
+    background-color: #d4ebc7;
+}
+
+
+
+.conteudo{
+    overflow-y: auto;
+
+    flex: 1;
+    background-color: #f4f4f4;
+    padding: 35px;
+}
+
+
+.cards-area{
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    width: 100%;
+
+
+    justify-content: space-between;
+
+    gap: 35px;
+    row-gap: 35px;
+}
+
+
+.segunda-header{
+    width: 100%;
+    height:min-content;
+
+    padding: 0;
+    margin-bottom: 20px;
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+.pig-background{
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.coluna-esquerda{
+
+    
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 35px;
+}
+
+.coluna-direita{
+
+    flex:1 ;
+}
+
+
+.card{
+
+    background-color: #e8f2df;
+    box-shadow: 5px 3px 7px 1px #7c7c7c;
+
+    border-radius: 30px;
+
+    padding: 25px;
+}
+
+
+
+.saldo-card{
+    background-color: #73002f;
+    grid-row: 1;
+    grid-column: 1;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    height: 100%;
+}
+
+.saldo-card h2{
+
+    font-size: 38px;
+
+    color: white;
+}
+
+.saldo-card h1{
+
+    font-size: 40px;
+
+    color: white;
+
+    margin-top: 10px;
+}
+
+
+.icone-moeda{
+
+    width: 90px;
+
+    height: 90px;
+
+    border: 4px solid #e8f2df;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 50px;
+
+    color: #e8f2df;
+}
+
+.icone-estrela{
+
+    width: 50px;
+
+    height: 50px;
+
+    border: 4px solid #e8f2df;
+
+    border-radius: 50%;
+
+    display:flex;
+    justify-content:start;
+
+
+    font-size: 50px;
+
+    color: #e8f2df;
+}
+
+
+.xp-card{
+    grid-row: 1;
+    grid-column: 2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    height: 100%;
+}
+
+
+.xp-info h2{
+
+    font-size: 38px;
+
+    color: #73002f;
+}
+
+.xp-info h1{
+    font-size: 30px;
+
+    color: #333;
+}
+
+
+.barra-xp{
+
+    width: 260px;
+
+    height: 45px;
+
+    border-radius: 20px;
+
+    border: 6px solid #333;
+
+    overflow: hidden;
+
+    background-color: #d88ea0;
+
+    margin-top: 10px;
+}
+
+.xp-preenchido{
+
+    width: 70%;
+
+    height: 100%;
+
+    background-color: #85d34f;
+}
+
+
+.porquinho{
+
+    width: 350px;
+}
+
+
+.objetivos-card{
+    grid-row: 2;
+    grid-column: 1/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 25px;
+}
+
+.conquistas_gerais {
+    grid-row: 2;
+    grid-column: 3;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    flex-direction: column;
+}
+
+.conquistas_gerais h2{
+
+    font-size: 38px;
+
+    color: #73002f;
+}
+
+.conquistas_gerais span{
+
+    font-size: 30px;
+    color:#333;
+
+    font-weight: bold;
+}
+
+.objetivos-topo{
+
+    display:flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.objetivos-topo h2{
+
+    font-size: 38px;
+
+    color: #73002f;
+}
+
+.objetivos-topo span{
+
+    font-size: 45px;
+
+    color: #73002f;
+
+    font-weight: bold;
+}
+
+
+
+.objetivo{
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 20px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.objetivo p,
+.objetivo span{
+
+    font-size: 26px;
+
+    color: #73002f;
+
+    font-weight: bold;
+}
+
+.conquista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
+}
+
+.conquista .val {
+    font-size: 15px;
+    font-weight: 900;
+    color: #73002f;
+}
+
+.resumo-card {
+    grid-row: 1;
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;   
+    gap: 12px;
+    height: 100%;
+}
+
+.resumo-card h2{
+
+    
+    text-align: center;
+    font-size: 38px;    
+
+    color: #73002f;
+    margin-bottom: 25px;
+
+    
+}
+
+
+.resumo-box{
+    background: white;
+    border-radius: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    padding: 20px;
+}
+
+.legenda{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.item-legenda{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+
+.grafico-pizza{
+
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 50%;
+
+    margin: auto;
+
+    background: conic-gradient(
+
+        #73002f 0% 55%,
+        #8bd05a 55% 80%,
+        #bf4778 80% 95%,
+        #ffffff 95% 100%
+
+    );
+}
+
+.objetivo-acoes {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: nowrap;
+}
+
+.btn-concluir {
+    background-color: #85d34f; 
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-concluir:hover {
+    background-color: #72b542; 
+    transform: scale(1.05);
+}

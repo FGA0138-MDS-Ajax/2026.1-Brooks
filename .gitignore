@@ -7,3 +7,5 @@ node_modules
 # Arquivos de log e sistema
 npm-debug.log
 .DS_Store
+
+package-lock.json

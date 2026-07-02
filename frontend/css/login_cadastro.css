@@ -19,21 +19,23 @@ body{
 
 nav{
   width:100%;
-  height:110px;
+  height:auto;
 
   display:flex;
   align-items:center;
   justify-content:space-between;
 
-  padding:0 50px;
+  padding:14px 32px;
 
   background:white;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
 .logo-area img{
-  width:230px;
-  margin-left:-30px;
-  margin-top:10px;
+  width:140px;
+  margin-left:0;
+  margin-top:0;
 
   transition:.3s ease;
 }
@@ -45,30 +47,31 @@ nav{
 .nav-right{
   display:flex;
   align-items:center;
-  gap:40px;
+  gap:20px;
 }
 .create-account{
-  margin-right:-50px;
+  margin-right:0;
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
   align-items:center;
-  gap:5px;
+  gap:14px;
 }
 
 .create-account span{
   font-size:15px;
   font-weight:700;
-  color:#222;
+  color:#333;
 }
 
 .create-account button{
-  width:270px;
-  height:48px;
+  height:44px;
+  padding:0 24px;
 
-  border-radius:999px;
-  border:3px solid #333;
-  background:#d8e7c9;
-  font-size:18px;
+  border-radius:40px;
+  border:2px solid var(--burgundy);
+  background:white;
+  color:var(--burgundy);
+  font-size:16px;
   font-weight:800;
   cursor:pointer;
 
@@ -76,14 +79,22 @@ nav{
 }
 
 .create-account button:hover{
-  transform:translateY(-2px);
+  background:var(--burgundy);
+  color:white;
+  transform:translateY(-1px);
 }
+
 .home-icon img{
-  margin-right:-60px;
+  width:40px;
+  height:auto;
+  margin-right:0;
   cursor:pointer;
+  transition:.2s;
 }
 
-
+.home-icon img:hover{
+  transform:scale(1.08);
+}
 main{
   position:relative;
 
@@ -221,23 +232,72 @@ main{
   }
 
 }
-@media(max-width:700px){
 
-  nav{
-    padding:0 20px;
-  }
-  .logo-area img{
-    width:170px;
-  }
-  .create-account button{
-    width:180px;
-    font-size:15px;
-  }
-  .home-icon{
-    display:none;
-  }
-  .auth-box{
-    width:90%;
-  }
 
+@media (max-width: 768px) {
+
+    nav {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+
+    .logo-area img{
+      width:110px;
+      margin-left: 0;
+    }
+
+    .nav-right{
+      gap:10px;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .create-account{
+      gap: 8px;
+    }
+
+    .create-account button{
+      height: 36px;
+      padding: 0 14px;
+
+      font-size:13px;
+      margin-right: 0;
+      margin-left: 20px;
+    }
+
+    .create-account span{
+      padding-right: 0;
+      font-size: 12px;
+    }
+
+    .home-icon img {
+        width: 78px;
+        height: auto;
+        margin-right: 0;
+    }
+
+    main {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .auth-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding-left: 10px;
+    }
+
+    .auth-box {
+        width: 100%;
+        max-width: 340px;
+        padding: 20px;
+        padding-bottom: 80px;
+    }
+
+    .btn-main{
+      font-size: 19px;
+    }
 }

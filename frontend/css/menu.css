@@ -2,12 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 
 
 body{
 
+    height: 100vh;
     background-color: #f4f4f4;
 
     font-family: Arial, Helvetica, sans-serif;
@@ -33,6 +35,12 @@ header{
     border-bottom-right-radius: 35px;
 }
 
+
+header h2 {
+     font-size: 38px;
+
+    color: #73002f;
+}
 
 .porco-logo{
 
@@ -85,13 +93,46 @@ header{
 
 
 .dashboard{
-
+    height: calc(100vh - 120px);
     display: flex;
+    background-color: white;
+}
+
+.botoes-header2{
+    display: flex;
+
+    flex-direction: row;
+
+    gap: 35px;
+
+    width: 100%;
+
+    padding: 35px 25px;
+}
+.botoes-header2 button{
+    height: 100%;
+    padding: 10px;
+
+    border-radius: 40px;
+
+    border: 4px solid #333;
+
+    background-color: #73002f;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #dcf0d0;
+
+    cursor: pointer;
+
+    transition: 0.3s;
 }
 
 
-
 .botoes-resto{
+    height: 100%;
 
     display: flex;
 
@@ -112,18 +153,152 @@ header{
 
     border: 4px solid #333;
 
-    background-color: #dcf0d0;
+    background-color: #73002f;
 
     font-size: 22px;
 
     font-weight: bold;
 
-    color: #73002f;
+    color: #dcf0d0;
 
     cursor: pointer;
 
     transition: 0.3s;
 }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f7ec;
+        }
+
+     
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ffffff;
+            padding: 14px 32px;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+
+
+        .menu-direita {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu-direita h2 {
+            font-size: 22px;
+            color: #333;
+            margin: 0;
+        }
+
+        .botao-inicio button {
+            height: 44px;
+            padding: 0 24px;
+            border-radius: 40px;
+            border: 2px solid #73002f;
+            background: white;
+            color: #73002f;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .botao-inicio button:hover {
+            background: #73002f;
+            color: white;
+        }
+
+        .icone_conta img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+    
+        .dashboard {
+            display: flex;
+            height: calc(100vh - 99px);
+        }
+
+
+        aside.botoes-resto {
+            width: 260px;
+            min-width: 260px;
+            background-color: #f0f7ec;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-right: 1px solid #dde8d6;
+        }
+
+        aside.botoes-resto button {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 40px;
+            border: none;
+            background-color: #73002f;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.2s, transform 0.15s;
+        }
+
+        aside.botoes-resto button:hover {
+            background-color: #5c0f27;
+            transform: scale(1.02);
+        }
+
+        aside.botoes-resto button .sidebar-icon {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        aside.botoes-resto button .sidebar-icon img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        aside.botoes-resto button .sidebar-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        aside.botoes-resto .btn-sair {
+            background-color: transparent;
+            border: 2px solid #bbb;
+            color: #666;
+            margin-top: auto;
+        }
+
+        aside.botoes-resto .btn-sair:hover {
+            background-color: #e8e8e8;
+            transform: none;
+            color: #333;
+        }
+
 
 .botoes-resto button:hover{
 
@@ -135,24 +310,61 @@ header{
 
 
 .conteudo{
+    overflow-y: auto;
 
-    width: 100%;
-
-    padding: 35px;
+    flex: 1;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 
-.cards-area{
+.cards-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 100%;
+    gap: 15px;
+    flex: 1;
+    min-height: 0;
+}
 
+
+.segunda-header{
+    width: 100%;
+    background-color: #f8fbf5;
+    border-radius: 20px;
+    padding: 15px 30px;
+    margin-bottom: 15px;
     display: flex;
 
-    gap: 35px;
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-shrink: 0;
 }
 
+.segunda-header h1 {
+    color: #73002f;
+    font-size: 26px; 
+}
+
+.segunda-header h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+.pig-background{
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
 
 .coluna-esquerda{
 
-    width: 50%;
+    
 
     display: flex;
 
@@ -163,22 +375,25 @@ header{
 
 .coluna-direita{
 
-    width: 50%;
+    flex:1 ;
 }
 
 
-.card{
-
+.card {
     background-color: #e8f2df;
-
-    border-radius: 30px;
-
-    padding: 25px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.15); 
+    border-radius: 20px;
+    padding: 15px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-
 
 
 .saldo-card{
+    background-color: #73002f;
+    grid-row: 1;
+    grid-column: 1;
 
     display: flex;
 
@@ -186,21 +401,45 @@ header{
 
     align-items: center;
 
-    height: 180px;
+    height: 100%;
+}
+
+.porquinho-card{
+    background-color: #deffe1;
+    grid-row: 2;
+    grid-column: 3;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    height: 100%;
+}
+
+
+.porquinho-card h2{
+    
+    font-size: 40px;
+
+    color: #73002f;
+
+    margin-top: 10px;
 }
 
 .saldo-card h2{
 
     font-size: 38px;
 
-    color: #73002f;
+    color: white;
 }
 
 .saldo-card h1{
 
     font-size: 40px;
 
-    color: #73002f;
+    color: white;
 
     margin-top: 10px;
 }
@@ -212,7 +451,7 @@ header{
 
     height: 90px;
 
-    border: 4px solid #73002f;
+    border: 4px solid #e8f2df;
 
     border-radius: 50%;
 
@@ -224,32 +463,60 @@ header{
 
     font-size: 50px;
 
-    color: #73002f;
+    color: #e8f2df;
 }
 
 
 
 .xp-card{
+    grid-row: 1;
+    grid-column: 2;
 
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
+    flex-direction: column;
 
-    height: 200px;
+    height: 100%;
 }
 
-
-.xp-info h2{
+.xp-card h2{
 
     font-size: 38px;
 
     color: #73002f;
 }
 
-.xp-info h1{
+.xp-card h1{
     font-size: 30px;
+
+    color: #333;
+}
+
+.xp-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.xp-textos {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+}
+
+.xp-info h2{
+
+    font-size: 22px;
+
+    color: #73002f;
+}
+
+.xp-info h1{
+    font-size: 18px;
 
     color: #333;
 }
@@ -257,11 +524,11 @@ header{
 
 .barra-xp{
 
-    width: 260px;
+    width: 100%;
 
     height: 45px;
 
-    border-radius: 20px;
+    border-radius: 15px;
 
     border: 6px solid #333;
 
@@ -273,8 +540,6 @@ header{
 }
 
 .xp-preenchido{
-
-    width: 70%;
 
     height: 100%;
 
@@ -288,6 +553,15 @@ header{
 }
 
 
+.objetivos-card{
+    grid-row: 2;
+    grid-column: 1/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+}
 
 .objetivos-topo{
 
@@ -327,6 +601,7 @@ header{
     align-items: center;
 
     margin-top: 20px;
+    margin-bottom: 25px;
 }
 
 .objetivo p,
@@ -339,56 +614,266 @@ header{
     font-weight: bold;
 }
 
-
-
-.resumo-card{
-
-    height: 100%;
+.conquista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #555;
 }
 
-.resumo-card h2{
-
-    text-align: center;
-
-    font-size: 38px;
-
+.conquista .val {
+    font-size: 15px;
+    font-weight: 900;
     color: #73002f;
-
-    margin-bottom: 25px;
 }
 
+.resumo-card {
+    background-color: #e8f2df; 
+    grid-row: 1;
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px; 
+}
 
-.resumo-box{
+.categorias-titulo h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #73002f;
+    white-space: nowrap; 
+}
 
-    width: 100%;
-
-    height: 160px;
-
+.categorias-conteudo {
     background-color: white;
-
-    border-radius: 30px;
-
-    margin-bottom: 30px;
+    border-radius: 20px;
+    padding: 15px; 
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
 }
 
+.legenda {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-legenda {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.item-legenda .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.item-legenda .nome {
+    flex: 1;
+    font-size: 13px;
+    color: #333;
+}
+
+.item-legenda .valor {
+    font-size: 12px;
+    color: #555;
+    font-weight: 600;
+    white-space: nowrap; 
+}
 
 
 .grafico-pizza{
 
-    width: 300px;
+width:120px;
+height:120px;
 
-    height: 300px;
+border-radius:50%;
 
-    border-radius: 50%;
+}
 
-    margin: auto;
 
-    background: conic-gradient(
+@media (max-width: 768px) {
 
-        #73002f 0% 55%,
-        #8bd05a 55% 80%,
-        #bf4778 80% 95%,
-        #ffffff 95% 100%
+  html, body {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 
-    );
+  /* Header mais compacto */
+  header {
+    flex-direction: column;
+    padding: 10px 16px;
+    row-gap: 10px;
+  }
+
+  .porco-logo {
+    width: 130px;
+  }
+
+  .menu-direita {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .menu-direita h2 {
+    font-size: 16px;
+  }
+
+  .botao-inicio button {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .icone_conta img {
+    width: 34px;
+    height: 34px;
+  }
+
+
+  .dashboard {
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+ 
+  aside.botoes-resto {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    width: 100%;
+    min-width: 0;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    gap: 8px;
+    padding: 10px 8px;
+
+    border-right: none;
+    border-bottom: 1px solid #dde8d6;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  aside.botoes-resto button {
+    width: auto;
+    flex-shrink: 0;
+
+    padding: 10px 14px;
+    font-size: 0; 
+    gap: 0;
+    justify-content: center;
+  }
+
+  aside.botoes-resto button .sidebar-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+
+  aside.botoes-resto .btn-sair {
+    margin-top: 0;
+    margin-left: auto;
+  }
+
+
+  .conteudo {
+    flex: none;
+    overflow-y: visible;
+    height: auto;
+    padding: 14px;
+    padding-bottom: 40px; 
+  }
+
+  .segunda-header {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 18px;
+  }
+
+  .segunda-header > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .segunda-header h1,
+  .segunda-header h2 {
+    text-align: center;
+  }
+
+  .segunda-header h1 {
+    font-size: 20px;
+  }
+
+  .segunda-header h2 {
+    font-size: 16px;
+  }
+
+  .botoes-header2 {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0 0 0;
+  }
+
+  .botoes-header2 button {
+    width: 100%;
+    max-width: 320px;
+    font-size: 16px;
+  }
+
+  .pig-background {
+    display: none; 
+  }
+
+
+  .cards-area {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+    min-height: 0;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .saldo-card,
+  .xp-card,
+  .objetivos-card,
+  .porquinho-card,
+  .resumo-card {
+    grid-row: auto;
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .porquinho {
+    width: 140px;
+  }
+
+  .icone-moeda {
+    width: 60px;
+    height: 60px;
+    font-size: 32px;
+  }
 }

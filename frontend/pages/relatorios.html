@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Relatórios - PiggyMe</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/relatorios.css">
+
+</head>
+
+
+<body>
+
+
+    <header>
+
+        <img src="../images/piggyme_logo2.png" class="porco-logo">
+
+        <div class="menu-direita">
+
+            <h2 id="saudacao">Olá!</h2>
+
+            <div class="botao-inicio">
+                <button onclick="window.location.href='/menu'">
+                    <strong>Início</strong>
+                </button>
+            </div>
+
+
+            <div class="icone_conta">
+                <img src="../images/icone_conta.png">
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="dashboard">
+
+
+        <aside class="botoes-resto">
+
+            <button onclick="window.location.href='/'">
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </span>
+                Menu
+            </button>
+
+            <button onclick="window.location.href='add_gastos'">
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 7H3a1 1 0 00-1 1v12a2 2 0 002 2h16a2 2 0 002-2V8a1 1 0 00-1-1zm-1 12H4V9h16v10zM3 5h15a1 1 0 000-2H3a1 1 0 000 2z"/>
+                    </svg>
+                </span>
+                Gastos
+            </button>
+
+            <button onclick="window.location.href='/metas'">
+                <span class="sidebar-icon">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </span>
+                Metas
+            </button>
+
+            <button onclick="window.location.href='/relatorios'">
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M5 12H3v9h2v-9zm4-5H7v14h2V7zm4-4h-2v18h2V3zm4 8h-2v10h2v-10zm4-4h-2v14h2V7z"/>
+                    </svg>
+                </span>
+                Relatórios
+            </button>
+
+            <button onclick="window.location.href='/cursos'">
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+                    </svg>
+                </span>
+                Cursos
+            </button>
+
+
+            <button onclick="window.location.href='/historico'">
+        <span class="sidebar-icon">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-13h-2v6l5.25 3.15L17 12.23l-4-2.37V7z"/>
+            </svg>
+        </span>
+        Histórico
+        </button>
+
+            <button onclick="window.location.href='dashboard'">
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 19h18v2H3zm2-4 4-4 4 3 6-8 2 1.5-7.5 10-4-3-3.5 3.5z"/>
+                    </svg>
+                </span>
+                Dashboard
+            </button>
+
+            <button class="btn-sair" onclick="sair()">
+                <span class="sidebar-icon">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" color="#666">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                </span>
+                Sair
+            </button>
+
+            
+
+        </aside>
+
+
+
+
+        <section class="conteudo">
+
+
+            <div class="titulo">
+
+                <div>
+
+                    <h1>Relatórios</h1>
+                    <p>
+                        Analise seus hábitos financeiros com gráficos e relatórios inteligentes.
+                    </p>
+                    <aside class="botoes-header2">
+                        <button onclick="window.location.href='/historico'">Ver Extrato</button>
+                    </aside>
+
+                </div>
+
+
+                <img class="pig-background" src="../images/tela_icon_relatorios.png">
+
+            </div>
+
+
+
+
+
+            <div class="cards">
+
+
+                <div class="card resumo">
+
+                    <h2>Resumo do mês</h2>
+
+                    <p>Você gastou</p>
+
+                    <h1 id="totalMes">R$ 0,00</h1>
+
+                    <span id="comparacaoMes">
+                    </span>
+
+                </div>
+
+
+
+
+
+                <div class="card">
+
+                    <h2>Maior gasto</h2>
+
+                    <h3 id="maiorCategoria">---</h3>
+
+                    <h1 id="maiorValor">
+                        R$ 0,00
+                    </h1>
+
+                    <p id="maiorPercentual">
+                        0% do total
+                    </p>
+
+                </div>
+
+
+
+
+
+                <div class="card">
+
+                    <h2>Menor gasto</h2>
+
+                    <h3 id="menorCategoria">---</h3>
+
+                    <h1 id="menorValor">
+                        R$ 0,00
+                    </h1>
+
+                    <p id="menorPercentual">
+                        0% do total
+                    </p>
+
+                </div>
+
+
+
+
+
+
+                <div class="card top">
+
+                    <h2>Top 3 gastos</h2>
+
+
+                    <div class="linha">
+
+                        <div class="info-gasto">
+
+                            <span id="top1Nome"></span>
+
+                            <small id="top1Valor"></small>
+
+                        </div>
+
+
+                        <div class="barra-container">
+
+                            <div id="top1Barra"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="linha">
+
+                        <div class="info-gasto">
+
+                            <span id="top2Nome"></span>
+
+                            <small id="top2Valor"></small>
+
+                        </div>
+
+
+                        <div class="barra-container">
+
+                            <div id="top2Barra"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="linha">
+
+                        <div class="info-gasto">
+
+                            <span id="top3Nome"></span>
+
+                            <small id="top3Valor"></small>
+
+                        </div>
+
+
+                        <div class="barra-container">
+
+                            <div id="top3Barra"></div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+                <div class="card grafico">
+
+
+                    <h2>Gastos por dia da semana</h2>
+
+
+                    <div class="barras">
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorSeg"></div>
+
+                            <div class="barra" id="seg"></div>
+
+                            <span>Segunda</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorTer"></div>
+
+                            <div class="barra" id="ter"></div>
+
+                            <span>Terça</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorQua"></div>
+
+                            <div class="barra" id="qua"></div>
+
+                            <span>Quarta</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorQui"></div>
+
+                            <div class="barra" id="qui"></div>
+
+                            <span>Quinta</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorSex"></div>
+
+                            <div class="barra" id="sex"></div>
+
+                            <span>Sexta</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorSab"></div>
+
+                            <div class="barra" id="sab"></div>
+
+                            <span>Sábado</span>
+
+                        </div>
+
+
+
+                        <div class="barra-dia">
+
+                            <div class="valor-dia" id="valorDom"></div>
+
+                            <div class="barra" id="dom"></div>
+
+                            <span>Domingo</span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <script>
+
+        const usuario =
+            JSON.parse(localStorage.getItem('usuario') || '{}');
+
+
+        if (usuario.nome) {
+
+            document.getElementById('saudacao').textContent =
+                `Olá, ${usuario.nome}!`;
+
+        }
+    </script>
+    <script src="../js/relatorios.js"></script>
+
+
+
+</body>
+
+</html>
