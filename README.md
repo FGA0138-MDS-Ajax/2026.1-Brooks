@@ -88,6 +88,19 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
 </table>
 
 
+---
+ 
+## ✨ Funcionalidades
+ 
+- Cadastro e login de usuários com autenticação JWT
+- Registro de receitas e despesas com categorias personalizadas
+- Edição e exclusão de registros financeiros
+- Definição e acompanhamento de metas financeiras
+- Sistema de gamificação com XP e níveis
+- Dashboard com resumo financeiro e gráficos
+- Histórico de transações por categoria
+- Recuperação de senha por e-mail
+---
 
 ---
 
@@ -109,17 +122,18 @@ O PiggyMe é uma plataforma de educação financeira que auxilia usuários no co
 
 ```text
 ├── frontend/
-│   ├── pages/
-│   ├── css/
-│   ├── js/
-│   └── images/
+│   ├── pages/       # Telas HTML
+│   ├── css/         # Estilos
+│   ├── js/          # Lógica de interface
+│   └── images/      # Assets visuais
 ├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── services/
-│   ├── middlewares/
-│   └── database/
+│   ├── controllers/ # Intermediação entre rotas e models
+│   ├── models/      # Acesso e operações no banco de dados
+│   ├── routes/      # Endpoints da API
+│   ├── services/    # Regras de negócio
+│   ├── middlewares/ # Autenticação e validação
+│   ├── database/    # Configuração e scripts SQL
+│   └── scripts/     # Scripts utilitários
 └── package.json
 ```
 
@@ -145,45 +159,45 @@ npm install mysql2 bcrypt jsonwebtoken dotenv nodemailer
 ```
 ---
 
+## 🚀 Como rodar localmente
+ 
 ### Pré-requisitos
-
+ 
 - Node.js instalado
 - MySQL rodando localmente
-- Banco de dados criado conforme os scripts em `database/`
-
 ### Passos
-
+ 
 ```bash
 # 1. Clone o repositório
-git clone <url-do-repositorio>
-
-# 2. Acesse a pasta do backend
+git clone https://github.com/FGA0138-MDS-Ajax/2026.1-T03-Brooks.git
+cd 2026.1-T03-Brooks
+ 
+# 2. Instale as dependências
 cd backend
-
-# 3. Instale as dependências
 npm install
-
-# 4. Configure as variáveis de ambiente
-# Crie um arquivo .env com base no modelo fornecido
-
-# 5. Execute os scripts SQL para criar as tabelas
-# (consulte os arquivos em database/)
-
-# 6. [Apenas uma vez] Popule as categorias padrão para usuários existentes
+ 
+# 3. Configure as variáveis de ambiente
+# Crie um arquivo .env na pasta backend com:
+# DB_HOST=localhost
+# DB_USER=seu_usuario
+# DB_PASSWORD=sua_senha
+# DB_NAME=piggyme
+# JWT_SECRET=seu_secret
+# EMAIL_USER=seu_email
+# EMAIL_PASS=sua_senha_email
+ 
+# 4. Execute o script SQL para criar as tabelas
+# Importe o arquivo backend/database/piggyme.sql no seu MySQL
+ 
+# 5. [Apenas uma vez] Popule as categorias padrão
 node scripts/seedCategoryExistentes.js
-```
-
----
-
-## 🚀 Como rodar localmente
-
-```bash
-cd backend
+ 
+# 6. Inicie o servidor
 node server.js
 ```
-Acesse a aplicação em: [http://localhost:3000](http://localhost:3000)
-
-
+ 
+Acesse em: [http://localhost:3000](http://localhost:3000)
+ 
 ---
 
 ## 🔀 Branches
@@ -195,52 +209,7 @@ Acesse a aplicação em: [http://localhost:3000](http://localhost:3000)
 | `testes` | Ambiente de testes |
 | `docs` | Documentação do projeto |
 
----
 
-## ✨ Funcionalidades
-
-- Cadastro e login de usuários com autenticação JWT
-- Registro de receitas e despesas
-- Definição e acompanhamento de metas financeiras
-- Sistema de gamificação com XP e níveis
-- Dashboard com resumo financeiro e gráficos
-- Histórico de transações por categoria
-
----
-
-## Módulos Implementados
-
-### Sprint 1 — Cadastro de Usuário
-
-| Arquivo | Localização | Responsabilidade |
-|---------|-------------|------------------|
-| `userController.js` | `controllers/` | Recebe os dados do usuário, valida a senha e verifica duplicidade de e-mail |
-| `User.js` | `models/` | Verifica e-mail, criptografa senha e insere o usuário no banco |
-| `userRoutes.js` | `routes/` | Define o endpoint de registro (`POST /register`) |
-| `server.js` | `services/` | Inicializa o servidor Node.js |
-| `config.js` | `database/` | Configura e establece a conexão com o MySQL |
-
----
-
-### Sprint 3 — Categorias Personalizadas
-
-| Arquivo | Localização | Responsabilidade |
-|---------|-------------|------------------|
-| `categoryController.js` | `controllers/` | Gerencia criação e listagem de categorias por usuário |
-| `Category.js` | `models/` | Operações de banco relacionadas às categorias |
-| `categoryRoutes.js` | `routes/` | Define os endpoints de categorias |
-| `seedCategoryExistentes.js` | `scripts/` | Popula categorias padrão para usuários já cadastrados |
-
-#### Setup necessário (Sprint 3)
-
-1. Execute o script SQL de criação da tabela `categorias` (disponível em `database/`).
-2. Rode o seed **uma única vez** para usuários pré-existentes:
-
-```bash
-node backend/scripts/seedCategoryExistentes.js
-```
-
----
 
 ## Regras de Negócio
 
@@ -264,7 +233,6 @@ git commit -m "tipo(escopo): breve descrição"
 git push
 ```
 
----
 ---
 ## 📄 Licença
 
