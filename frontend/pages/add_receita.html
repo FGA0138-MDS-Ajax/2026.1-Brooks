@@ -16,10 +16,8 @@
     <header>
         <img src="../images/piggyme_logo2.png" class="porco-logo" alt="Logo PiggyMe">
         <div class="menu-direita">
-            <h2 id="saudacao">Olá, fulano! 👋</h2>
             <div class="header-icones">
                 <button class="icone-btn">
-                   
                 </button>
                 <button class="icone-btn icone-casa" onclick="window.location.href='menu'">
                     <svg fill="currentColor" viewBox="0 0 24 24">
@@ -72,16 +70,14 @@
                 Relatórios
             </button>
 
-
-
             <button onclick="window.location.href='/historico'">
-        <span class="sidebar-icon">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-13h-2v6l5.25 3.15L17 12.23l-4-2.37V7z"/>
-            </svg>
-        </span>
-        Histórico
-        </button>
+                <span class="sidebar-icon">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-13h-2v6l5.25 3.15L17 12.23l-4-2.37V7z"/>
+                    </svg>
+                </span>
+                Histórico
+            </button>
 
             <button onclick="window.location.href='dashboard'">
                 <span class="sidebar-icon">
@@ -102,18 +98,13 @@
                 Sair
             </button>
 
-            
-
         </aside>
 
         <section class="conteudo">
 
             <div class="hero-banner">
                 <div class="hero-icone">
-                    <svg fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
-                    </svg>
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" /></svg>
                 </div>
                 <div class="hero-texto">
                     <h1>Registrar receita</h1>
@@ -142,7 +133,7 @@
                             <select id="categoria">
                                 <option value="">Selecione uma categoria</option>
                             </select>
-                            <span class="erro-categoria" id="erroCategoria">Selecione uma categoria.</span>
+                            <span class="erro-categoria" id="erroCategoria"></span>
                         </div>
 
                         <div class="campo-grupo">
@@ -164,20 +155,13 @@
 
                     <div class="campo-grupo">
                         <label for="meta">Destinar para meta</label>
-
                         <select id="meta">
-                            <option value="">
-                                Não vincular a uma meta
-                            </option>
+                            <option value="">Não vincular a uma meta</option>
                         </select>
                     </div>
 
-
                     <div class="campo-grupo">
-                        <label for="valorMeta">
-                            Valor para meta (R$)
-                        </label>
-
+                        <label for="valorMeta">Valor para meta (R$)</label>
                         <input type="number" id="valorMeta" placeholder="0,00" min="0" step="0.01">
                     </div>
 
@@ -185,8 +169,6 @@
                         <button class="btn-salvar" onclick="salvar()">Salvar receita</button>
                         <a class="btn-cancelar" href="menu">Cancelar</a>
                     </div>
-
-
                 </div>
 
                 <div class="card-resumo">
@@ -210,31 +192,9 @@
 
             </div>
 
-            <div class="card-historico">
-                <div class="historico-cabecalho">
-                    <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                        <path
-                            d="M13 3a9 9 0 10.001 18.001A9 9 0 0013 3zm0 16a7 7 0 110-14 7 7 0 010 14zm.5-11H12v6l5.25 3.15.75-1.23-4.5-2.67V8z" />
-                    </svg>
-
-                </div>
-
         </section>
 
     </main>
-
-    <div class="modal-overlay" id="modalCategoria">
-        <div class="modal-box">
-            <h3>Nova categoria</h3>
-            <input type="text" id="novaCategoriaInput" placeholder="Ex: Bônus, Investimentos…" maxlength="50">
-            <div class="modal-botoes">
-                <button onclick="fecharModalCategoria()">Cancelar</button>
-                <button class="btn-confirmar" onclick="confirmarNovaCategoria()">Criar</button>
-            </div>
-        </div>
-    </div>
-
-
 
     <script src="../js/gamification.js"></script>
     <script src="../js/add_receita.js"></script>
@@ -245,5 +205,4 @@
         }
     </script>
 </body>
-
 </html>

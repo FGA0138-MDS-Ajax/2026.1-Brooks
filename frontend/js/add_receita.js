@@ -52,39 +52,13 @@ async function carregarCategorias(selecionada = '') {
             sel.appendChild(opt);
         });
 
-        if (!document.getElementById('btnNovaCategoria')) {
-            const btn = document.createElement('button');
-            btn.id = 'btnNovaCategoria';
-            btn.type = 'button';
-            btn.className = 'btn-nova-cat';
-            btn.textContent = '+ Nova categoria';
-            btn.onclick = abrirModalCategoria;
-            sel.parentElement.appendChild(btn);
-        }
+       
     } catch { /* silencioso */ }
 }
 
-function abrirModalCategoria() { document.getElementById('modalCategoria').classList.add('ativo'); }
-function fecharModalCategoria() { document.getElementById('modalCategoria').classList.remove('ativo'); }
 
-async function confirmarNovaCategoria() {
-    const nome = document.getElementById('novaCategoriaInput').value.trim();
-    if (!nome) return;
-    try {
-        await fetch(`${API}/categorias`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify({ nome, tipo: 'receita' })
-        });
-        fecharModalCategoria();
-        document.getElementById('novaCategoriaInput').value = '';
-        await carregarCategorias(nome);
-        document.getElementById('categoria').value = nome;
-    } catch { alert('Erro ao criar categoria.'); }
-}
+
+
 
 /* ── limpar formulário ── */
 function limparForm() {
