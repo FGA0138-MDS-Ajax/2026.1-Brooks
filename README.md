@@ -218,6 +218,10 @@ Acesse em: [http://localhost:3000](http://localhost:3000)
 - Toda **categoria** pertence a um usuário específico e possui um tipo: `receita` ou `despesa`.
 - Ao **registrar uma transação**, a categoria informada deve existir para aquele usuário e corresponder ao tipo correto.
 - Transações com categorias inválidas ou inexistentes **são recusadas pelo backend**.
+- Não é permitido cadastrar campos obrigatórios vazios.
+- Apenas usuários autenticados podem acessar o sistema.
+- O usuário deve possuir e-mail único.
+- O sistema deve manter a consistência dos dados, garantindo que todas as informações armazenadas estejam relacionadas corretamente aos seus respectivos usuários.
 
 ---
 ## Versionamento
